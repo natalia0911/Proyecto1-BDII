@@ -1,5 +1,6 @@
 SELECT * FROM categoria;
 SELECT * FROM Subcategoria order by ID;
+SELECT * FROM USUARIO;
 
 DROP TABLE HistorialVendedor;
 DROP TABLE HistorialComprador;
