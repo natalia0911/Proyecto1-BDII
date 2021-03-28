@@ -1,0 +1,1156 @@
+--------------------------------------------------------
+-- Archivo creado  - sábado-marzo-27-2021   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table CATEGORIA
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."CATEGORIA" 
+   (	"ID" NUMBER(*,0), 
+	"NOMBRE" NVARCHAR2(128)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table HISTORIALCOMPRADOR
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."HISTORIALCOMPRADOR" 
+   (	"IDCOMPRADOR" NUMBER(*,0), 
+	"IDVENDEDOR" NUMBER(*,0), 
+	"IDSUBASTA" NUMBER(*,0), 
+	"COMENTARIO" NVARCHAR2(128), 
+	"CALIFICACION" NUMBER(*,0)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table HISTORIALVENDEDOR
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."HISTORIALVENDEDOR" 
+   (	"IDVENDEDOR" NUMBER(*,0), 
+	"IDCOMPRADOR" NUMBER(*,0), 
+	"IDSUBASTA" NUMBER(*,0), 
+	"COMENTARIO" NVARCHAR2(128), 
+	"CALIFICACION" NUMBER(*,0)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table PUJAS
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."PUJAS" 
+   (	"ID" NUMBER(*,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"COMPRADORID" NUMBER(*,0), 
+	"SUBASTAID" NUMBER(*,0), 
+	"PRECIO" NUMBER(*,0), 
+	"FECHA" DATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table SUBASTA
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."SUBASTA" 
+   (	"ID" NUMBER(*,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"USUARIOID" NUMBER(*,0), 
+	"SUBCATEGORIAID" NUMBER(*,0), 
+	"FOTOITEM" NVARCHAR2(128), 
+	"PRECIOINICIAL" NUMBER(*,0), 
+	"PRECIOFINAL" NUMBER(*,0), 
+	"DETALLESENTREGA" NVARCHAR2(128), 
+	"FECHAINICIO" DATE, 
+	"FECHAFIN" DATE, 
+	"ACTIVA" NUMBER(*,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table SUBCATEGORIA
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."SUBCATEGORIA" 
+   (	"ID" NUMBER(*,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"NOMBRE" NVARCHAR2(128), 
+	"CATEGORIAID" NUMBER(*,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table TELEFONO
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."TELEFONO" 
+   (	"ID" NUMBER(*,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"NUMERO" NUMBER(*,0), 
+	"USUARIO" NUMBER(*,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table USUARIO
+--------------------------------------------------------
+
+  CREATE TABLE "NATALIA"."USUARIO" 
+   (	"ID" NUMBER(*,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"NOMBRE" NVARCHAR2(128), 
+	"CEDULA" NUMBER(*,0), 
+	"DIRECCION" NVARCHAR2(128), 
+	"CORREO" NVARCHAR2(128), 
+	"ESADMIN" NUMBER(*,0), 
+	"ALIAS" NVARCHAR2(128), 
+	"CONTRASENNIA" NVARCHAR2(128)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into NATALIA.CATEGORIA
+SET DEFINE OFF;
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('1','Antigüedades');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('2','Arte');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('3','Bebés');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('4','Libros');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('5','Equipo y maquinaria industrial');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('6','Cámaras y fotografía');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('7','Teléfonos celulares y accesorios');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('8','Ropa, zapatos y accesorios');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('9','Monedas y billetes');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('10','Artículos de colección');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('11','Computadoras, tablets y redes');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('12','Artículos electrónicos');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('13','Artesanías');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('14','Muñecas y osos');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('15','Películas y DVD');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('16','Vehículos');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('17','Memorabilia de entretenimiento');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('18','Tarjetas de regalo y cupones');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('19','Belleza y salud');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('20','Casa y jardín');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('21','Joyería y relojes');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('22','Música');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('23','Instrumentos y equipos musicales');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('24','Productos para mascotas');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('25','Cerámica y vidrio');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('26','Bienes raíces');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('27','Servicios especiales');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('28','Artículos deportivos');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('29','Memorabilia de deporte, tarjetas, fans');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('30','Estampillas');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('31','Boletos y experiencias');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('32','Juguetes y pasatiempos');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('33','Viaje');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('34','Videojuegos y consolas');
+Insert into NATALIA.CATEGORIA (ID,NOMBRE) values ('35','Todo lo demás');
+REM INSERTING into NATALIA.HISTORIALCOMPRADOR
+SET DEFINE OFF;
+REM INSERTING into NATALIA.HISTORIALVENDEDOR
+SET DEFINE OFF;
+REM INSERTING into NATALIA.PUJAS
+SET DEFINE OFF;
+Insert into NATALIA.PUJAS (ID,COMPRADORID,SUBASTAID,PRECIO,FECHA) values ('1','6','2','7000',to_date('06/07/21','DD/MM/RR'));
+REM INSERTING into NATALIA.SUBASTA
+SET DEFINE OFF;
+Insert into NATALIA.SUBASTA (ID,USUARIOID,SUBCATEGORIAID,FOTOITEM,PRECIOINICIAL,PRECIOFINAL,DETALLESENTREGA,FECHAINICIO,FECHAFIN,ACTIVA) values ('1','4','1',null,'5000','0','Se entrega en el parque',to_date('02/03/21','DD/MM/RR'),to_date('06/03/21','DD/MM/RR'),'1');
+Insert into NATALIA.SUBASTA (ID,USUARIOID,SUBCATEGORIAID,FOTOITEM,PRECIOINICIAL,PRECIOFINAL,DETALLESENTREGA,FECHAINICIO,FECHAFIN,ACTIVA) values ('2','4','1',null,'5000','0','Se entrega en el parque',to_date('02/07/21','DD/MM/RR'),to_date('06/07/21','DD/MM/RR'),'1');
+REM INSERTING into NATALIA.SUBCATEGORIA
+SET DEFINE OFF;
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('401','Modelos de ferrocarriles y trenes','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('402','Modelos y juegos','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('403','Juguetes y estructuras para exterior','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('404','Juguetes preescolares y juegos de roles','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('405','Rompecabezas','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('406','Control por radio y mando','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('407','Robots, monstruos y juguetes del espacio','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('408','Automóviles con ranuras','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('409','Animales de peluche','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('410','Soldados de juguete','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('411','Juegos de cartas intercambiables','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('412','Juguetes de personajes, TV y películas','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('413','Juguetes antiguos','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('414','Línea aérea','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('415','Camping y casas rodantes','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('416','Alquiler de automóviles','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('417','Cruceros','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('418','Alojamiento','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('419','Equipaje','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('420','Accesorios para equipaje','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('421','Mapas','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('422','Ferrocarril','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('423','Accesorios de viaje','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('424','Paquetes de vacaciones','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('425','Otros','33');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('426','Videojuegos','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('427','Consolas de videojuego','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('428','Accesorios de videojuegos','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('429','Tarjetas de juego prepagadas','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('430','Piezas y herramientas de repuesto','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('431','Guías de estrategia y trampas','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('432','Productos de videojuegos','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('433','Otros','34');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('434','Solo para adultos','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('435','Desarrollo profesional y educación','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('436','Ofertas especiales de eBay','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('437','Herramientas de usuario de eBay','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('438','Funeral y cementerio','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('439','Genealogía','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('440','Productos de información','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('441','Metafísica','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('442','Desarrollo personal','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('443','Seguridad personal','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('444','Productos y suministros religiosos','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('445','Programa de puntos e incentivos','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('446','Artículos extraños','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('447','Otros','35');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('1','Antigüedades','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('2','Arquitectónico y jardín','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('3','Antigüedades de Asia','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('4','Libros y manuscritos','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('5','Artes decorativas','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('6','Etnográfico','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('7','Muebles','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('8','Hogar y chimeneas','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('9','Linos y textiles (antes de 1930)','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('10','Mapas, atlas y globos terráqueos','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('11','Marítimo','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('12','Mercantil, comercio y fábricas','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('13','Instrumentos musicales (antes de 1930)','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('14','Épocas y estilos','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('15','Primitivos','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('16','Restauración y cuidado','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('17','Alfombras y tapetes','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('18','Ciencia y medicina (antes de 1930)','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('19','Costura (antes de 1930)','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('20','Plateado','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('21','Réplicas de antigüedades','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('22','Otros','1');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('23','Directo del artista','2');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('24','Arte de anticuarios y revendedores','2');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('25','Lotes al por mayor','2');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('26','Artículos para bebé','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('27','Seguridad y salud del bebé','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('28','Baño y aseo','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('29','Asientos de seguridad para autos','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('30','Pañales','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('31','Alimentación','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('32','Recuerdos y anuncios de nacimiento','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('33','Ropa de cama para niños','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('34','Decoración de habitaciones de bebé','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('35','Muebles para bebés','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('36','Dejar los pañales','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('37','Coches para bebés','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('38','Accesorios para coches','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('39','Juguetes para bebés','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('40','Otros','3');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('41','Accesorios','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('42','Antigüedades y piezas de colección','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('43','Libro en audio','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('44','Catálogos','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('45','Niños y adultos jóvenes','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('46','Libros de cocina','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('47','Ficción y literatura','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('48','Publicaciones anteriores de revistas','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('49','No ficción','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('50','Libros de textos, educación','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('51','Otros','4');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('52','Agricultura y silvicultura','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('53','Construcción','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('54','Equipo eléctrico y de prueba','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('55','Combustible y energía','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('56','Cuidado de salud y laboratorio','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('57','Equipo pesado','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('58','Accesorios de equipo pesado','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('59','Piezas y accesorios de equipo pesado','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('60','Equipo ligero y herramientas','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('61','Manufactura y metalurgia','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('62','Suministro industrial y MRO','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('63','Oficina','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('64','Empaque y envío','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('65','Artes gráficas y de impresión','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('66','Restaurante y catering','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('67','Sitios en internet y negocios en venta','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('68','Otros','5');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('69','Binoculares y telescopios','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('70','Drones con cámaras','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('71','Cámara de video','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('72','Cámaras digitales','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('73','Accesorios de cámaras y fotografía','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('74','Marcos de fotos digitales','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('75','Fotografía de película','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('76','Flashes y accesorios','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('77','Lentes y filtros','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('78','Iluminación y estudio','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('79','Manuales y guías','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('80','Piezas y herramientas de repuesto','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('81','Trípodes y soportes','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('82','Edición y producción de video','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('83','Fotografías y películas vintage','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('84','Lotes al por mayor','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('85','Otros','6');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('86','Celulares y smartphones','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('87','Relojes inteligentes','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('88','Accesorios para teléfonos celulares','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('89','Teléfonos con display','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('90','Tarjetas SIM y tarjetas telefónicas','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('91','Piezas y herramientas de repuesto','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('92','Otros','7');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('93','Ropa de infantes y bebés','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('94','Vestuario, zapatos y accesorios de niños','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('95','Disfraces, representación, teatro','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('96','Ropa étnica y cultural','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('97','Trajes de baile','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('98','Accesorios para hombre','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('99','Ropa para hombre','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('100','Zapatos para hombres','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('101','Uniformes y ropa de trabajo','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('102','Vestuario, zapatos y accesorios unisex','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('103','Boda y ocasión formal','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('104','Accesorios para mujer','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('105','Ropa para mujer','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('106','Carteras y bolsos de mujer','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('107','Calzado de mujer','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('108','Vintage','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('109','Lotes grandes y pequeños al por mayor','8');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('110','En lingotes','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('111','Monedas: EE. UU.','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('112','Monedas: Canadá','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('113','Monedas: antiguas','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('114','Monedas: Edad Media','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('115','Monedas: del mundo','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('116','Objetos numismáticos','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('117','Billetes: EE. UU.','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('118','Billetes del mundo','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('119','Publicaciones y suministros','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('120','Acciones y bonos, escripofilia','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('121','Divisa virtual','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('122','Otros','9');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('123','Publicidad','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('124','Animales','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('125','Dibujos animados y personajes','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('126','Salas de juegos, rocolas y pinball','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('127','Autógrafos','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('128','Bancos, registros y ventas','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('129','Artículos de bar','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('130','Cuentas','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('131','Botellas y aisladores','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('132','Breweriana, cerveza','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('133','Casino','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('134','Relojes','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('135','Cómics','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('136','Culturas y etnias','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('137','Adornos de colección','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('138','Disneyana','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('139','Fantasía, míticos y magia','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('140','Memorabilia histórica','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('141','Festivo y de temporada','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('142','Cocina y hogar','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('143','Cuchillos, espadas y cuchillas','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('144','Lámparas, luces','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('145','Ropa blanca y telas (1930 - presente)','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('146','Objetos de metal','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('147','Militaria','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('148','Papel','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('149','Bolígrafos e instrumentos para escribir','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('150','Pez, llaveros, vasos promocionales','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('151','Imágenes fotográficas','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('152','Prendedores, cabezones, loncheras','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('153','Postales','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('154','Radio, fonógrafo, televisión, teléfono','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('155','Religión y espiritualidad','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('156','Rocas, fósiles y minerales','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('157','Ciencia ficción y horror','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('158','Ciencia y medicina (1930 - presente)','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('159','Costura (1930 - presente)','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('160','Recuerdos y memorabilia de viajes','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('161','Productos relacionados con el tabaco','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('162','Herramientas y cerraduras','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('163','Tarjetas de colección','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('164','Transporte','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('165','Tocador, perfume y productos de afeitar','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('166','Vintage, retro, de mediados de siglo','10');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('167','iPads, tablets y lectores electrónicos','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('168','Accesorios para iPad/Tableta/eBook','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('169','Tablet & eBook Reader Parts','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('170','Laptops y netbooks','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('171','Computadoras y todo en uno','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('172','Accs. para laptops y comp. de escritorio','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('173','Cables y conectores','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('174','Partes y componentes de computadora','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('175','Unidades de disco, almacenamiento y discos en blanco','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('176','Redes y servidores empresariales','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('177','Red y conectividad doméstica','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('178','Teclados, mouses y punteros','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('179','Monitores, proyectores y accesorios','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('180','Protección, distribución de alimentación','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('181','Impresoras, escáneres y suministros','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('182','Software','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('183','Manuales y recursos','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('184','Informática vintage','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('185','Otros','11');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('186','Audio portátil y audífonos','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('187','Televisor, video y audio para el hogar','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('188','Sistemas electrónicos del vehículo y GPS','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('189','Sistemas de automatización (domótica)','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('190','Vigilancia residencial','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('191','Teléfonos para el hogar','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('192','Baterías y energías multiusos','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('193','Comunicación por radio','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('194','Artefactos y otros sistemas electrónicos','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('195','Sistemas electrónicos vintage','12');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('196','Materiales para arte','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('197','Cuentas y fabricación de joyas','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('198','Vidrio y mosaicos','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('199','Piezas de artesanía y acabadas','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('200','Artes y artesanías para el hogar','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('201','Artesanías infantiles','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('202','Materiales multiusos para artesanía','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('203','Artesanías con agujas e hilos','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('204','Colec. de recortes y artesanías de papel','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('205','Costura y tela','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('206','Timbres y gofrados','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('207','Otras artesanías','13');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('208','Materiales para hacer osos','14');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('209','Osos','14');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('210','Muñecas','14');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('211','Miniaturas para casas de muñeca','14');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('212','Muñecas de papel','14');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('213','DVD y Blu-ray','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('214','Película fotográfica','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('215','Discos láser','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('216','UMD','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('217','Cintas VHS','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('218','Otros formatos','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('219','Almacenamiento y accesorios para videos','15');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('220','Vehículos y camionetas','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('221','Motocicletas','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('222','Otros vehículos y remolques','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('223','Botes','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('224','Vehículos de aventura, recreativos','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('225','Partes y accesorios','16');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('226','Autógrafos-original','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('227','Autógrafos-reimpresos','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('228','Memorabilia de películas','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('229','Memorabilia de música','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('230','Memorabilia de televisión','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('231','Memorabilia de teatro','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('232','Memorabilia de juegos de video','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('233','Otros','17');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('234','Tarjetas de regalo','18');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('235','Tarjetas de regalo de eBay','18');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('236','Certificados de regalo','18');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('237','Cupones','18');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('238','Productos digitales','18');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('239','Cuerpo y baño','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('240','Suplementos alimenticios, nutrición','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('241','Fragancias','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('242','Cuidado del cabello y peinado','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('243','Cuidado de la salud','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('244','Maquillaje','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('245','Masaje','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('246','Medicina, movilidad y discapacidad','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('247','Cuidado de las uñas, manicure y pedicure','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('248','Remedios naturales y homeopáticos','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('249','Higiene bucal','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('250','Medicamentos de venta libre','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('251','Equipo de spa y salón','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('252','Afeitado y depilación','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('253','Cuidado de la piel','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('254','Protección solar y bronceador','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('255','Tatuajes y arte corporal','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('256','Cuidado de la vista','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('257','Control de peso','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('258','Lotes al por mayor','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('259','Otros','19');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('260','Baño','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('261','Ropa de cama','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('262','Comida y bebidas','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('263','Flores naturales y suministros','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('264','Muebles','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('265','Tarjetas y suministros para fiestas','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('266','Decoración festiva y de temporada','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('267','Decoración para el hogar','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('268','Artículos para mejoras del hogar','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('269','Materiales de limpieza para el hogar','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('270','Niños y adolescentes','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('271','Cocina, comedor y bar','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('272','Lámparas, luces y ventiladores de techo','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('273','Electrodomésticos grandes','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('274','Alfombras y tapetes','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('275','Herramientas','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('276','Suministros para soldadura','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('277','Decoración y herrajes para ventanas','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('278','Patio, jardín y espacios abiertos','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('279','Lotes al por mayor','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('280','Otros','20');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('281','Joyas infantiles','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('282','Compromiso y boda','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('283','Étnicos, regionales y tribales','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('284','Joyas de moda','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('285','Joyería fina','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('286','Joyas artesanales, hechas a mano','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('287','Joyeros y organizadores de joyas','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('288','Diseño y reparación de joyas','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('289','Cuentas sueltas','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('290','Diamantes y gemas sueltos','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('291','Joyas para hombres','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('292','Joyas vintage y antiguas','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('293','Relojes','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('294','Otros','21');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('295','Casetes','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('296','CD','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('297','Discos','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('298','Otros formatos','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('299','Almacenamiento y accesorios para videos','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('300','Lotes al por mayor','22');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('301','Acordeones y concertinas','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('302','Latón','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('303','Equipo','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('304','Guitarra','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('305','Armónica','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('306','Libros, CD y videos de instrucciones','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('307','Karaoke','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('308','Percusión','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('309','Pianos, órganos y teclados','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('310','Equipo de audio profesional','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('311','Partituras y cancioneros','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('312','Iluminación y efectos de escenario','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('313','Cuerdas','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('314','Instrumentos de viento-madera','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('315','Lotes al por mayor','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('316','Otros','23');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('317','Aves de corral','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('318','Aves','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('319','Gatos','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('320','Perros','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('321','Peces y acuarios','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('322','Caballos','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('323','Reptiles','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('324','Animales pequeños','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('325','Lápidas y urnas','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('326','Otros','24');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('327','Vidrio','25');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('328','Cerámica y porcelana','25');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('329','Comerciales','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('330','Terreno','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('331','Casas prefabricadas','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('332','Residenciales','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('333','Tiempos compartidos a la venta','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('334','Otros bienes raíces','26');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('335','Servicios artísticos','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('336','Ropa y joyería a la medida','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('337','Servicios de subastas de eBay','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('338','Diseño gráfico y de logotipos','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('339','Servicios para mejoras del hogar','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('340','Servicios basados en artículos','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('341','Edición y duplicado de medios','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('342','Impresión y personalización','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('343','Restauración y reparación','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('344','Servicios Web e informáticos','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('345','Otros servicios','27');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('346','Boxeo, artes marciales y artes marciales mixtas (MMA)','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('347','Ciclismo','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('348','Pesca','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('349','Fitness, running y yoga','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('350','Golf','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('351','Cacería','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('352','Juegos en interiores','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('353','Deportes al aire libre','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('354','Deportes de equipo','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('355','Tenis y deportes con raqueta','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('356','Deportes acuáticos','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('357','Deportes de invierno','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('358','Otros','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('359','Lotes al por mayor','28');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('360','Autógrafos (original)','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('361','Autógrafos (reimpresos)','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('362','Tarjetas','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('363','Ropa para aficionados y recuerdos','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('364','Memorabilia de juegos usada','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('365','Autenticada por el fabricante','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('366','Memorabilia de deportes antigua','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('367','Lotes al por mayor','29');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('368','Estados Unidos','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('369','Canadá','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('370','Gran Bretaña','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('371','África','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('372','Asia','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('373','Australia y Oceanía','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('374','Colonias británicas y territorios','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('375','Caribe','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('376','Europa','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('377','Latinoamérica','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('378','Oriente Medio','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('379','Mundiales','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('380','Estampillas tropicales','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('381','Filatelia especializada','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('382','Publicaciones y suministros','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('383','Otros','30');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('384','Boletos para deportes','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('385','Boletos para conciertos','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('386','Boletos para el teatro','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('387','Pases para parques temáticos y clubes','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('388','Pases de estacionamiento','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('389','Experiencias especiales','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('390','Otros','31');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('391','Figuras de acción','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('392','Afelpados con pelotas de semillas','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('393','Juguetes de construcción','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('394','Juguetes clásicos','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('395','Vehículos de presofusión y de juguete','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('396','Educativos','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('397','Electrónicos, baterías y a cuerda','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('398','Juguetes de comida rápida y cereales','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('399','Juegos','32');
+Insert into NATALIA.SUBCATEGORIA (ID,NOMBRE,CATEGORIAID) values ('400','Canicas','32');
+REM INSERTING into NATALIA.TELEFONO
+SET DEFINE OFF;
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('1','83462967','1');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('2','84818935','2');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('3','61992683','3');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('4','84396536','4');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('5','60676016','5');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('6','83273025','6');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('7','87799157','7');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('8','84934609','8');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('9','67228161','9');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('10','72122496','10');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('11','23653849','4');
+Insert into NATALIA.TELEFONO (ID,NUMERO,USUARIO) values ('12','27035238','4');
+REM INSERTING into NATALIA.USUARIO
+SET DEFINE OFF;
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('1','Anatolio Ruvalcaba Quesada','11769800','San Ramón','arq@ic43.com','1','admin1','admin1pw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('2','Betina Guardado Samaniego','47480966','Liberia','bgs@ic43.com','1','admin2','admin2pw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('3','Wenceslao Treviño Carrasco','11812030','Sarapiquí','wtc@ic43.com','1','admin3','admin3pw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('4','Selena Huerta Alcalá','12234678','Quepos','sha@ic43.com','0','selen','selenpw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('5','Cesario Briones Madrigal','45674534','Pococí','cbm@gustr.com','0','cesar','cesarpw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('6','Basileo Mata Cardona','67894322','Moravia','bmc@ic43.com','0','basil','basilpw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('7','Julia Carvajal Robles','22345695','Cañas','jcr@ic43.com','0','julia','juliapw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('8','Oscar Henríquez Robledo','56786432','Orotina','ohr@gustr.com','0','oscar','oscarpw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('9','Ligia Toledo Soto','34567890','Limón','lts@gustr.com','0','ligia','ligiapw');
+Insert into NATALIA.USUARIO (ID,NOMBRE,CEDULA,DIRECCION,CORREO,ESADMIN,ALIAS,CONTRASENNIA) values ('10','Elena Abeyta Monroy','23457854','Barranca','eam@ic43.com','0','elena','elenapw');
+--------------------------------------------------------
+--  DDL for Index ID_CATEGORIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_CATEGORIA_PK" ON "NATALIA"."CATEGORIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_PUJA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_PUJA_PK" ON "NATALIA"."PUJAS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_SUBASTA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_SUBASTA_PK" ON "NATALIA"."SUBASTA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_SUBCATEGORIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_SUBCATEGORIA_PK" ON "NATALIA"."SUBCATEGORIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_TELEFONO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_TELEFONO_PK" ON "NATALIA"."TELEFONO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_USUARIO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_USUARIO_PK" ON "NATALIA"."USUARIO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index UQ_CEDULA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."UQ_CEDULA" ON "NATALIA"."USUARIO" ("CEDULA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_CATEGORIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_CATEGORIA_PK" ON "NATALIA"."CATEGORIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_PUJA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_PUJA_PK" ON "NATALIA"."PUJAS" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_SUBASTA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_SUBASTA_PK" ON "NATALIA"."SUBASTA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_SUBCATEGORIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_SUBCATEGORIA_PK" ON "NATALIA"."SUBCATEGORIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_TELEFONO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_TELEFONO_PK" ON "NATALIA"."TELEFONO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ID_USUARIO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."ID_USUARIO_PK" ON "NATALIA"."USUARIO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index UQ_CEDULA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NATALIA"."UQ_CEDULA" ON "NATALIA"."USUARIO" ("CEDULA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Procedure SP_INSERTAUCTION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_INSERTAUCTION" (
+       pUsuarioId IN SUBASTA.ID%TYPE,
+       pSubCatId IN SUBASTA.SUBCATEGORIAID%TYPE,
+       pFoto IN SUBASTA.FOTOITEM%TYPE,
+       pPrecioInicial IN SUBASTA.PRECIOINICIAL%TYPE,
+       pDetalle IN SUBASTA.DETALLESENTREGA%TYPE,
+       pFechaInicio IN SUBASTA.FECHAINICIO%TYPE,
+       pFechaFin IN SUBASTA.FECHAFIN%TYPE)
+IS
+BEGIN
+
+  INSERT INTO SUBASTA 
+  (
+        "USUARIOID"
+       ,"SUBCATEGORIAID"
+       ,"FOTOITEM"
+       ,"PRECIOINICIAL"
+       ,"PRECIOFINAL"
+       ,"DETALLESENTREGA"
+       ,"FECHAINICIO"
+       ,"FECHAFIN"
+       ,"ACTIVA"
+  ) 
+  VALUES 
+  (
+        pUsuarioId
+       ,pSubCatId
+       ,pFoto
+       ,pPrecioInicial
+       ,0                        --PrecioFinal aun no se sabe
+       ,pDetalle
+       ,pFechaInicio
+       ,pFechaFin
+       ,1                        --Empieza estando activa
+  );
+
+  COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_INSERTUSER
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_INSERTUSER" (
+       pNombre IN USUARIO.NOMBRE%TYPE,
+       pCedula IN USUARIO.CEDULA%TYPE,
+       pDireccion IN USUARIO.DIRECCION%TYPE,
+       pCorreo IN USUARIO.CORREO%TYPE,
+       pEsAdmin IN USUARIO.ESADMIN%TYPE,
+       pAlias IN USUARIO.ALIAS%TYPE,
+       pContrasennia IN USUARIO.CONTRASENNIA%TYPE)
+IS
+BEGIN
+
+  INSERT INTO USUARIO 
+  (
+        "NOMBRE"
+       ,"CEDULA"
+       ,"DIRECCION"
+       ,"CORREO"
+       ,"ESADMIN"
+       ,"ALIAS"
+       ,"CONTRASENNIA"
+  ) 
+  VALUES 
+  (
+        pNombre
+       ,pCedula
+       ,pDireccion
+       ,pCorreo
+       ,pEsAdmin
+       ,pAlias
+       ,pContrasennia
+  );
+
+  COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_SELECTPUJAS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_SELECTPUJAS" (
+       pSubastaId IN PUJAS.SUBASTAID%TYPE,
+       cursor OUT SYS_REFCURSOR)
+       
+IS
+BEGIN
+    OPEN cursor FOR
+    SELECT 
+        "ID"
+       ,"COMPRADORID"
+       ,"SUBASTAID"
+       ,"PRECIO"
+       ,"FECHA"
+
+   FROM PUJAS P
+   WHERE P.SUBASTAID = pSubastaId
+   ORDER BY P.FECHA DESC;
+
+COMMIT;
+
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_SELECTUSERS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_SELECTUSERS" (
+       pAlias IN USUARIO.ALIAS%TYPE,
+       pContrasennia IN USUARIO.CONTRASENNIA%TYPE,
+       cursor OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN cursor FOR
+    SELECT 
+        "ID"
+       ,"NOMBRE"
+       ,"CEDULA"
+       ,"DIRECCION"
+       ,"CORREO"
+       ,"ESADMIN"
+       ,"ALIAS"
+       ,"CONTRASENNIA"
+    FROM USUARIO U
+    WHERE U.ALIAS = pAlias AND U.CONTRASENNIA = pContrasennia;
+COMMIT;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_UPDATEAUCTION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_UPDATEAUCTION" (
+       pId IN SUBASTA.ID%TYPE,
+       pPrecioFinal IN SUBASTA.PRECIOFINAL%TYPE)
+IS
+BEGIN
+    UPDATE SUBASTA 
+    SET
+            PRECIOFINAL = pPrecioFinal
+           ,ACTIVA = 0
+    WHERE ID = pId;
+COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_UPDATEUSER
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_UPDATEUSER" (
+       pNombre IN USUARIO.NOMBRE%TYPE,
+       pCedula IN USUARIO.CEDULA%TYPE,
+       pDireccion IN USUARIO.DIRECCION%TYPE,
+       pCorreo IN USUARIO.CORREO%TYPE,
+       pAlias IN USUARIO.ALIAS%TYPE,
+       pContrasennia IN USUARIO.CONTRASENNIA%TYPE)
+IS
+BEGIN
+    UPDATE USUARIO 
+    SET
+            NOMBRE = pNombre
+           ,DIRECCION = pDireccion
+           ,CORREO = pCorreo
+           ,ALIAS = pAlias
+           ,CONTRASENNIA = pContrasennia
+    WHERE CEDULA = pCedula;
+COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
+--  Constraints for Table CATEGORIA
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."CATEGORIA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."CATEGORIA" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."CATEGORIA" ADD CONSTRAINT "ID_CATEGORIA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table HISTORIALCOMPRADOR
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" MODIFY ("IDCOMPRADOR" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" MODIFY ("IDVENDEDOR" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" MODIFY ("IDSUBASTA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" MODIFY ("COMENTARIO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" MODIFY ("CALIFICACION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table HISTORIALVENDEDOR
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" MODIFY ("IDVENDEDOR" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" MODIFY ("IDCOMPRADOR" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" MODIFY ("IDSUBASTA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" MODIFY ("COMENTARIO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" MODIFY ("CALIFICACION" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PUJAS
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."PUJAS" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."PUJAS" MODIFY ("COMPRADORID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."PUJAS" MODIFY ("SUBASTAID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."PUJAS" MODIFY ("PRECIO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."PUJAS" MODIFY ("FECHA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."PUJAS" ADD CONSTRAINT "ID_PUJA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SUBASTA
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("USUARIOID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("SUBCATEGORIAID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("PRECIOINICIAL" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("PRECIOFINAL" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("DETALLESENTREGA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("FECHAINICIO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" MODIFY ("FECHAFIN" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBASTA" ADD CHECK (Activa in (0,1)) ENABLE;
+  ALTER TABLE "NATALIA"."SUBASTA" ADD CONSTRAINT "ID_SUBASTA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SUBCATEGORIA
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."SUBCATEGORIA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBCATEGORIA" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBCATEGORIA" MODIFY ("CATEGORIAID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."SUBCATEGORIA" ADD CONSTRAINT "ID_SUBCATEGORIA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table TELEFONO
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."TELEFONO" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."TELEFONO" MODIFY ("NUMERO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."TELEFONO" MODIFY ("USUARIO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."TELEFONO" ADD CONSTRAINT "ID_TELEFONO_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table USUARIO
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("CEDULA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("DIRECCION" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("CORREO" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("ALIAS" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" MODIFY ("CONTRASENNIA" NOT NULL ENABLE);
+  ALTER TABLE "NATALIA"."USUARIO" ADD CHECK (EsAdmin in (0,1)) ENABLE;
+  ALTER TABLE "NATALIA"."USUARIO" ADD CONSTRAINT "ID_USUARIO_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "NATALIA"."USUARIO" ADD CONSTRAINT "UQ_CEDULA" UNIQUE ("CEDULA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HISTORIALCOMPRADOR
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" ADD CONSTRAINT "ID_USUARIO_COMPARDOR_EN_HISTCOMPRADOR_FK" FOREIGN KEY ("IDCOMPRADOR")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" ADD CONSTRAINT "ID_USUARIO_VENDEDOR_EN_HISTCOMPRADOR_FK" FOREIGN KEY ("IDVENDEDOR")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."HISTORIALCOMPRADOR" ADD CONSTRAINT "ID_SUBASTA_EN_HISTCOMPRADOR_FK" FOREIGN KEY ("IDSUBASTA")
+	  REFERENCES "NATALIA"."SUBASTA" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HISTORIALVENDEDOR
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" ADD CONSTRAINT "ID_USUARIO_VENDEDOR_EN_HISTVENDEDOR_FK" FOREIGN KEY ("IDVENDEDOR")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" ADD CONSTRAINT "ID_USUARIO_COMPARDOR_EN_HISTVENDEDOR_FK" FOREIGN KEY ("IDCOMPRADOR")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."HISTORIALVENDEDOR" ADD CONSTRAINT "ID_SUBASTA_EN_HISTVENDEDOR_FK" FOREIGN KEY ("IDSUBASTA")
+	  REFERENCES "NATALIA"."SUBASTA" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PUJAS
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."PUJAS" ADD CONSTRAINT "ID_USUARIO_COMPRADOR_FK" FOREIGN KEY ("COMPRADORID")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."PUJAS" ADD CONSTRAINT "ID_SUBASTA_FK" FOREIGN KEY ("SUBASTAID")
+	  REFERENCES "NATALIA"."SUBASTA" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SUBASTA
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."SUBASTA" ADD CONSTRAINT "ID_USUARIO_VENDEDOR_FK" FOREIGN KEY ("USUARIOID")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;
+  ALTER TABLE "NATALIA"."SUBASTA" ADD CONSTRAINT "ID_SUBCATEGORIA_FK" FOREIGN KEY ("SUBCATEGORIAID")
+	  REFERENCES "NATALIA"."SUBCATEGORIA" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TELEFONO
+--------------------------------------------------------
+
+  ALTER TABLE "NATALIA"."TELEFONO" ADD CONSTRAINT "ID_USUARIO_FK" FOREIGN KEY ("USUARIO")
+	  REFERENCES "NATALIA"."USUARIO" ("ID") ENABLE;

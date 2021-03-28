@@ -1,6 +1,4 @@
 
-
-
 -------------------------------------------------------------------------
 --- Creado por: Natalia Vargas
 --- Fecha creación: 21/03/2021
@@ -8,25 +6,27 @@
 --------------------------------------------------------------------------
 
 CREATE OR REPLACE PROCEDURE SP_SelectPujas(
-       pSubastaId IN PUJAS.SUBASTAID%TYPE)
+       pSubastaId IN PUJAS.SUBASTAID%TYPE,
+       cursor OUT SYS_REFCURSOR)
        
 IS
 BEGIN
-
-   SELECT 
+    OPEN cursor FOR
+    SELECT 
         "ID"
        ,"COMPRADORID"
        ,"SUBASTAID"
        ,"PRECIO"
-       ,"PRECIOFINAL"
        ,"FECHA"
 
-  FROM PUJAS P
-  WHERE P.SUBASTAID = pSubastaId
-  ORDER BY S.FECHA DESC;
+   FROM PUJAS P
+   WHERE P.SUBASTAID = pSubastaId
+   ORDER BY P.FECHA DESC;
   
 COMMIT;
 
 
 END;
 /
+
+

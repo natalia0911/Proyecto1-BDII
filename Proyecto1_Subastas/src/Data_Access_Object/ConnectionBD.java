@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Dell
+ * @author Natalia
  */
 public class ConnectionBD {
     
@@ -26,13 +26,14 @@ public class ConnectionBD {
     
     public ConnectionBD() throws SQLException{
        
-        objConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "Natalia", "Hola1234");
+        objConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "Natalia", "Hola1234"); //CONECTA LA BASE
+        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); //CARGA EL DRIVER DE ORACLE
     }
     
     
     public static ConnectionBD estate() throws SQLException
     {
-        if (con== null)
+        if (con == null)
         {
             con =  new ConnectionBD();
         }
