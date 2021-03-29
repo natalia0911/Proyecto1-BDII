@@ -16,22 +16,31 @@ public class Usuario {
     private String direccion;
     private boolean esAdmin;
     private String alias;
-    private String contraseña;
+    private String contrasennia;
     private String correo;
     
     public Usuario() {}
 
-    public Usuario(double id, int cedula, String nombre, String direccion, boolean esAdmin, String alias, String contraseña, String correo) {
+    public Usuario(double id, int cedula, String nombre, String direccion, boolean esAdmin, String alias, String contrasennia, String correo) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.direccion = direccion;
         this.esAdmin = esAdmin;
         this.alias = alias;
-        this.contraseña = contraseña;
+        this.contrasennia = contrasennia;
         this.correo = correo;
     }
 
+    public Usuario(int cedula, String nombre, String direccion, boolean esAdmin, String alias, String contrasennia, String correo) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.esAdmin = esAdmin;
+        this.alias = alias;
+        this.contrasennia = contrasennia;
+        this.correo = correo;
+    }
 
     public double getId() {
         return id;
@@ -57,7 +66,7 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public boolean isEsAdmin() {
+    public boolean isAdmin() {
         return esAdmin;
     }
 
@@ -73,12 +82,12 @@ public class Usuario {
         this.alias = alias;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasennia() {
+        return contrasennia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasennia(String contrasennia) {
+        this.contrasennia = contrasennia;
     }
 
     public String getNombre() {

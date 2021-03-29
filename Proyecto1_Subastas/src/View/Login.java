@@ -9,6 +9,7 @@ import Controller.UsuarioController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,7 +122,23 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText());
+        if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
+            if(userController.getTipoUsuario()){
+                AdminPrincipal ventana = null;
+                try {
+                    ventana = new AdminPrincipal();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ventana.setVisible(true);
+            }
+            else{
+                System.out.println("Mostrar ventana de usuario normal");
+            }
+        }
+        else{
+              JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+        }
        
 
     }//GEN-LAST:event_btnIngresarActionPerformed

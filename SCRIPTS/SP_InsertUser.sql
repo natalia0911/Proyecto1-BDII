@@ -46,8 +46,8 @@ END;
 /
 
 
---SET SERVEROUTPUT ON;
---EXECUTE SP_InsertAdmin('Gustavo',678120700,'Colorado,Guanacaste','gustavobobo@gmail.com',1,'Freuk','FreukBobo123');
+SET SERVEROUTPUT ON;
+EXECUTE SP_InsertUser('nata',117656633,'Pital','nata@gmail.com',1,'nat','nat123');
 
 
 

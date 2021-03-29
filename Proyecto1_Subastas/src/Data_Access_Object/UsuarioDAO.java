@@ -31,7 +31,7 @@ public class UsuarioDAO {
          * Entradas: Alias y contrasennia 
          * Salidas: Un objeto usuario
          */
-        Usuario user = new Usuario();
+    
         try {
             
             // Llamada al procedimiento almacenado
@@ -47,15 +47,16 @@ public class UsuarioDAO {
             // Se obtienen la salida del procedimineto almacenado
             // result contiene las filas que vienen de la BD
             ResultSet result = ((OracleCallableStatement)cst).getCursor(3);  
+            Usuario user = new Usuario();
             while(result.next()){
-                user.setId(Integer.parseInt(result.getString(1)));
+                user.setId(result.getInt(1));
                 user.setNombre(result.getString(2));
-                user.setCedula(Integer.parseInt(result.getString(3)));
+                user.setCedula(result.getInt(3));
                 user.setDireccion(result.getString(4));
                 user.setCorreo(result.getString(5));
-                user.setEsAdmin(Boolean.valueOf(result.getString(6)));
+                user.setEsAdmin(result.getBoolean(6));
                 user.setAlias(result.getString(7));
-                user.setContraseña(result.getString(8));
+                user.setContrasennia(result.getString(8));
 
             }
             return user;
@@ -64,7 +65,46 @@ public class UsuarioDAO {
         } finally {
             con.closeConnection();
         }
-        return user;
+        return null;
+        
+    }
+    
+    
+     public boolean insertarUsuario(Usuario user){
+        /**
+         * Funcion: Toma el usuario correspondiente de la BD
+         * Entradas: Alias y contrasennia 
+         * Salidas: Un objeto usuario
+         */
+    
+        try {
+            System.out.println("En el try del dao 1");
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertUser (?,?,?,?,?,?,?)}");
+           
+             //se definen los parametros de entrada y salida
+            cst.setString(1, user.getNombre());
+            cst.setDouble(2, user.getCedula());
+            cst.setString(3, user.getDireccion());
+            cst.setString(4, user.getCorreo());
+            
+            System.out.println(Integer.valueOf(String.valueOf(user.isAdmin())));
+            
+            cst.setInt(5, Integer.valueOf(String.valueOf(user.isAdmin())));
+            cst.setString(6, user.getAlias());
+            cst.setString(7, user.getContrasennia());
+            
+            // Ejecuta el procedimiento almacenado
+            int respuesta = cst.executeUpdate();
+            return respuesta==1;  //t si insertó,f si no.
+
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+             System.out.println("En el cath dao >:c");
+        } finally {
+            con.closeConnection();
+        }
+        return false;
         
     }
     
