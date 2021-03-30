@@ -8,3 +8,5 @@ https://www.youtube.com/watch?v=3xbZJ-CVJt8&list=PLG1l7S-453CaejaQyy3VtWdxVnBNQU
 http://www.sqlines.com/oracle-to-postgresql/return_sys_refcursor Procedure que retorna cursor
 
 https://www.youtube.com/watch?v=U7klL6Mq6Dc Jobs en oracle
+
+https://www.tutorialspoint.com/how-to-insert-an-image-in-to-oracle-database-using-java-program Insertar imagenes en oracle
