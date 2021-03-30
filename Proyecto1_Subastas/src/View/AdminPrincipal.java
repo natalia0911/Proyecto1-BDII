@@ -6,9 +6,12 @@
 package View;
 
 import Controller.UsuarioController;
+import Model.Usuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +22,7 @@ public class AdminPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form AdminPrincipal
      */
+    DefaultTableModel modelo;
     private UsuarioController userController;
     
     public AdminPrincipal() throws SQLException {
@@ -26,6 +30,9 @@ public class AdminPrincipal extends javax.swing.JFrame {
         buttonGroupEsAdmin.add(rdbAdmi);
         buttonGroupEsAdmin.add(rdbNormal);
         userController = new UsuarioController();
+        modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) jTableModiificar.getModel();
+       // llenarJTable();
     }
 
     /**
@@ -59,6 +66,26 @@ public class AdminPrincipal extends javax.swing.JFrame {
         txtContrasennia = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jPanelModificar = new javax.swing.JPanel();
+        jPanelRegistrarBordeM = new javax.swing.JPanel();
+        lblNombre1 = new javax.swing.JLabel();
+        lblCedula1 = new javax.swing.JLabel();
+        lblDireccion1 = new javax.swing.JLabel();
+        lblCorreo1 = new javax.swing.JLabel();
+        lblAlias1 = new javax.swing.JLabel();
+        lblContrasennia1 = new javax.swing.JLabel();
+        lblEsAdmin1 = new javax.swing.JLabel();
+        jPanelRadios1 = new javax.swing.JPanel();
+        rdbAdmiM = new javax.swing.JRadioButton();
+        rdbNormalM = new javax.swing.JRadioButton();
+        txtNombreM = new javax.swing.JTextField();
+        txtCedulaM = new javax.swing.JTextField();
+        txtDireccionM = new javax.swing.JTextField();
+        txtCorreoM = new javax.swing.JTextField();
+        txtAliasM = new javax.swing.JTextField();
+        txtContrasenniaM = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        jScrollPaneModificar = new javax.swing.JScrollPane();
+        jTableModiificar = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,12 +173,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(btnRegistrar)))
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addContainerGap(695, Short.MAX_VALUE))
         );
         jPanelRegistrarBordeLayout.setVerticalGroup(
             jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,29 +219,185 @@ public class AdminPrincipal extends javax.swing.JFrame {
         jPanelRegistrarLayout.setHorizontalGroup(
             jPanelRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(20, 20, 20)
                 .addComponent(jPanelRegistrarBorde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanelRegistrarLayout.setVerticalGroup(
             jPanelRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(14, 14, 14)
                 .addComponent(jPanelRegistrarBorde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         tabModificar.addTab("Registrar", jPanelRegistrar);
+
+        jPanelRegistrarBordeM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        lblNombre1.setText("Nombre");
+
+        lblCedula1.setText("Cédula");
+
+        lblDireccion1.setText("Dirección");
+
+        lblCorreo1.setText("Correo");
+
+        lblAlias1.setText("Alias");
+
+        lblContrasennia1.setText("Contraseña");
+
+        lblEsAdmin1.setText("Tipo Usuario");
+
+        jPanelRadios1.setBackground(new java.awt.Color(0, 255, 204));
+
+        rdbAdmiM.setText("Administrador");
+
+        rdbNormalM.setText("Usuario común");
+
+        javax.swing.GroupLayout jPanelRadios1Layout = new javax.swing.GroupLayout(jPanelRadios1);
+        jPanelRadios1.setLayout(jPanelRadios1Layout);
+        jPanelRadios1Layout.setHorizontalGroup(
+            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRadios1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rdbAdmiM)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rdbNormalM)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelRadios1Layout.setVerticalGroup(
+            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRadios1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbAdmiM)
+                    .addComponent(rdbNormalM))
+                .addContainerGap())
+        );
+
+        txtCorreoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoMActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        jTableModiificar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Cédula", "Direccion", "Correo", "Tipo usuario", "Alias", "Contraseña"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPaneModificar.setViewportView(jTableModiificar);
+
+        javax.swing.GroupLayout jPanelRegistrarBordeMLayout = new javax.swing.GroupLayout(jPanelRegistrarBordeM);
+        jPanelRegistrarBordeM.setLayout(jPanelRegistrarBordeMLayout);
+        jPanelRegistrarBordeMLayout.setHorizontalGroup(
+            jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
+                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAlias1)
+                            .addComponent(lblEsAdmin1)
+                            .addComponent(lblNombre1)
+                            .addComponent(lblCedula1)
+                            .addComponent(lblCorreo1)
+                            .addComponent(lblDireccion1)
+                            .addComponent(lblContrasennia1))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelRadios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDireccionM)
+                            .addComponent(txtCedulaM)
+                            .addComponent(txtNombreM)
+                            .addComponent(txtAliasM)
+                            .addComponent(txtContrasenniaM)
+                            .addComponent(txtCorreoM)))
+                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(btnModificar)))
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanelRegistrarBordeMLayout.setVerticalGroup(
+            jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre1)
+                            .addComponent(txtNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCedula1)
+                            .addComponent(txtCedulaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDireccion1)
+                            .addComponent(txtDireccionM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCorreo1)
+                            .addComponent(txtCorreoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                                .addComponent(lblEsAdmin1)
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblAlias1)
+                                    .addComponent(txtAliasM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblContrasennia1)
+                                    .addComponent(txtContrasenniaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                                .addComponent(jPanelRadios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127)))
+                        .addComponent(btnModificar)
+                        .addGap(54, 54, 54))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))))
+        );
 
         javax.swing.GroupLayout jPanelModificarLayout = new javax.swing.GroupLayout(jPanelModificar);
         jPanelModificar.setLayout(jPanelModificarLayout);
         jPanelModificarLayout.setHorizontalGroup(
             jPanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 889, Short.MAX_VALUE)
+            .addGroup(jPanelModificarLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanelRegistrarBordeM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanelModificarLayout.setVerticalGroup(
             jPanelModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 659, Short.MAX_VALUE)
+            .addGroup(jPanelModificarLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jPanelRegistrarBordeM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         tabModificar.addTab("Modificar", jPanelModificar);
@@ -225,15 +408,15 @@ public class AdminPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(tabModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(tabModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(tabModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(tabModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,6 +437,36 @@ public class AdminPrincipal extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void txtCorreoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoMActionPerformed
+
+    
+    
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int posicion = jTableModiificar.getSelectedRow(); 
+        System.out.println(posicion);
+
+        boolean tipo = true;
+        if(rdbNormalM.isSelected()){
+           tipo = false;
+        }
+        userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
+                                   txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
+        //userController.insertarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
+                        ///            txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    
+    private void llenarJTable(){
+        ArrayList<Usuario> lista = userController.getAllUser();
+                
+        for (int i = 0; i < lista.size(); i++){
+                modelo.addRow(new Object[]{lista.get(i).getNombre(),lista.get(i).getCedula(),lista.get(i).getDireccion(),
+                    lista.get(i).getCorreo(),lista.get(i).isAdmin(),lista.get(i).getAlias(),lista.get(i).getContrasennia()});
+                jTableModiificar.setModel(modelo);
+            }
+    }
     /**
      * @param args the command line arguments
      */
@@ -294,27 +507,47 @@ public class AdminPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.ButtonGroup buttonGroupEsAdmin;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelRadios;
+    private javax.swing.JPanel jPanelRadios1;
     private javax.swing.JPanel jPanelRegistrar;
     private javax.swing.JPanel jPanelRegistrarBorde;
+    private javax.swing.JPanel jPanelRegistrarBordeM;
+    private javax.swing.JScrollPane jScrollPaneModificar;
+    private javax.swing.JTable jTableModiificar;
     private javax.swing.JLabel lblAlias;
+    private javax.swing.JLabel lblAlias1;
     private javax.swing.JLabel lblCedula;
+    private javax.swing.JLabel lblCedula1;
     private javax.swing.JLabel lblContrasennia;
+    private javax.swing.JLabel lblContrasennia1;
     private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblCorreo1;
     private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblDireccion1;
     private javax.swing.JLabel lblEsAdmin;
+    private javax.swing.JLabel lblEsAdmin1;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre1;
     private javax.swing.JRadioButton rdbAdmi;
+    private javax.swing.JRadioButton rdbAdmiM;
     private javax.swing.JRadioButton rdbNormal;
+    private javax.swing.JRadioButton rdbNormalM;
     private javax.swing.JTabbedPane tabModificar;
     private javax.swing.JTextField txtAlias;
+    private javax.swing.JTextField txtAliasM;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCedulaM;
     private javax.swing.JTextField txtContrasennia;
+    private javax.swing.JTextField txtContrasenniaM;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtCorreoM;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDireccionM;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreM;
     // End of variables declaration//GEN-END:variables
 }

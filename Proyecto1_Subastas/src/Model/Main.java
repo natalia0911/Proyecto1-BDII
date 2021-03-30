@@ -20,8 +20,7 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
         UsuarioDAO connectionUser = new UsuarioDAO();
-        connectionUser.getUsuario("admin1", "admin1pw");
-       
+       // connectionUser.modificarUsuario(new Usuario(12363,"Vane","Pital SC",true,"nat","nat","nat"));
         
         //PujaDAO connectionPuja = new PujaDAO();
         //connectionPuja.listarPujas(2);\

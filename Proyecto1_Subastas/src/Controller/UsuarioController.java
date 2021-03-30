@@ -9,6 +9,7 @@ import Data_Access_Object.UsuarioDAO;
 import Model.Usuario;
 import Model.Usuario_Singleton;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -41,6 +42,7 @@ public class UsuarioController {
     }
     
     public boolean insertarUsuario(String nombre, int cedula, String direccion,String correo, boolean esAdmin, String alias,String contrasennia){
+
         Usuario user = new Usuario(cedula,nombre,direccion,esAdmin,alias,contrasennia,correo);
         if (usuarioDao.insertarUsuario(user)){
             System.out.println("Se insertó");
@@ -49,7 +51,23 @@ public class UsuarioController {
         else{
             return false;
         }
-        
     }
+    
+    public boolean modificarUsuario(String nombre, int cedula, String direccion,String correo, boolean esAdmin, String alias,String contrasennia){
+
+        Usuario user = new Usuario(cedula,nombre,direccion,esAdmin,alias,contrasennia,correo);
+        if (usuarioDao.modificarUsuario(user)){
+            System.out.println("Se modificó");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public ArrayList<Usuario> getAllUser(){
+        return usuarioDao.getAllUsers();
+    }
+    
     
 }
