@@ -32,7 +32,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
         userController = new UsuarioController();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
-       // llenarJTable();
+        llenarJTable();
+        
     }
 
     /**
@@ -88,6 +89,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
         jTableModiificar = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tabModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabModificarMouseClicked(evt);
+            }
+        });
 
         jPanelRegistrarBorde.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -234,6 +241,11 @@ public class AdminPrincipal extends javax.swing.JFrame {
         tabModificar.addTab("Registrar", jPanelRegistrar);
 
         jPanelRegistrarBordeM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanelRegistrarBordeM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanelRegistrarBordeMFocusGained(evt);
+            }
+        });
 
         lblNombre1.setText("Nombre");
 
@@ -456,6 +468,15 @@ public class AdminPrincipal extends javax.swing.JFrame {
         //userController.insertarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
                         ///            txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void tabModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabModificarMouseClicked
+       
+        
+    }//GEN-LAST:event_tabModificarMouseClicked
+
+    private void jPanelRegistrarBordeMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanelRegistrarBordeMFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelRegistrarBordeMFocusGained
 
     
     private void llenarJTable(){

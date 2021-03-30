@@ -29,7 +29,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
         tabSubastas = new javax.swing.JTabbedPane();
         jPanelSubastar = new javax.swing.JPanel();
-        jPanelRegistrarBorde = new javax.swing.JPanel();
+        jPanelRegistrarSubasta = new javax.swing.JPanel();
         lblProducto = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         lblCategoria = new javax.swing.JLabel();
@@ -40,10 +40,14 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         txtPrecio = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jPanelListarSubasta = new javax.swing.JPanel();
+        jPanelListado = new javax.swing.JPanel();
+        btnRegistrar1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanelRegistrarBorde.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanelRegistrarSubasta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar subasta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         lblProducto.setText("Prodcuto");
 
@@ -64,15 +68,15 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanelRegistrarBordeLayout = new javax.swing.GroupLayout(jPanelRegistrarBorde);
-        jPanelRegistrarBorde.setLayout(jPanelRegistrarBordeLayout);
-        jPanelRegistrarBordeLayout.setHorizontalGroup(
-            jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
-                .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelRegistrarSubastaLayout = new javax.swing.GroupLayout(jPanelRegistrarSubasta);
+        jPanelRegistrarSubasta.setLayout(jPanelRegistrarSubastaLayout);
+        jPanelRegistrarSubastaLayout.setHorizontalGroup(
+            jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblImagen)
                             .addComponent(lblProducto)
                             .addComponent(lblFecha)
@@ -80,19 +84,19 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                             .addComponent(lblCategoria)
                             .addComponent(lblPrecioInicial))
                         .addGap(37, 37, 37)
-                        .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                             .addComponent(txtPrecio)))
-                    .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
+                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(btnRegistrar)))
                 .addContainerGap(689, Short.MAX_VALUE))
         );
-        jPanelRegistrarBordeLayout.setVerticalGroup(
-            jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRegistrarBordeLayout.createSequentialGroup()
+        jPanelRegistrarSubastaLayout.setVerticalGroup(
+            jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
                 .addContainerGap(113, Short.MAX_VALUE)
-                .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProducto)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -104,7 +108,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(lblImagen)
                 .addGap(78, 78, 78)
-                .addGroup(jPanelRegistrarBordeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecioInicial)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
@@ -118,29 +122,80 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             jPanelSubastarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSubastarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanelRegistrarBorde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelRegistrarSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanelSubastarLayout.setVerticalGroup(
             jPanelSubastarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSubastarLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jPanelRegistrarBorde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelRegistrarSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 
         tabSubastas.addTab("Subastar", jPanelSubastar);
 
+        jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        btnRegistrar1.setText("PUJAR");
+        btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrar1ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
+        jPanelListado.setLayout(jPanelListadoLayout);
+        jPanelListadoLayout.setHorizontalGroup(
+            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListadoLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrar1))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        jPanelListadoLayout.setVerticalGroup(
+            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btnRegistrar1)
+                .addGap(21, 21, 21))
+        );
+
         javax.swing.GroupLayout jPanelListarSubastaLayout = new javax.swing.GroupLayout(jPanelListarSubasta);
         jPanelListarSubasta.setLayout(jPanelListarSubastaLayout);
         jPanelListarSubastaLayout.setHorizontalGroup(
             jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1151, Short.MAX_VALUE)
+            .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanelListarSubastaLayout.setVerticalGroup(
             jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
+
+        jPanelListado.getAccessibleContext().setAccessibleName("Listado de subastas activas");
 
         tabSubastas.addTab("Listar", jPanelListarSubasta);
 
@@ -164,6 +219,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
         System.out.println("Just a dummy button");
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,9 +261,13 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegistrar1;
+    private javax.swing.JPanel jPanelListado;
     private javax.swing.JPanel jPanelListarSubasta;
-    private javax.swing.JPanel jPanelRegistrarBorde;
+    private javax.swing.JPanel jPanelRegistrarSubasta;
     private javax.swing.JPanel jPanelSubastar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblImagen;

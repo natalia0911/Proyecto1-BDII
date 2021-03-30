@@ -6,6 +6,7 @@
 package View;
 
 import Controller.UsuarioController;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +46,11 @@ public class Login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContrasenniaKeyPressed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -55,6 +61,12 @@ public class Login extends javax.swing.JFrame {
 
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
+
+        txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContrasenniaKeyPressed(evt);
+            }
+        });
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,10 +155,33 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+    private void txtContrasenniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenniaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
+                if(userController.getTipoUsuario()){
+                    AdminPrincipal ventana = null;
+                    try {
+                        ventana = new AdminPrincipal();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    ventana.setVisible(true);
+                }
+                else{
+                    System.out.println("Mostrar ventana de usuario normal");
+                }
+            }
+            else{
+                  JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            }
+        }
+    }//GEN-LAST:event_txtContrasenniaKeyPressed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

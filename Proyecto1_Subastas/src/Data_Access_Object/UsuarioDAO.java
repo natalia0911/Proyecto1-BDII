@@ -26,6 +26,10 @@ public class UsuarioDAO {
         con = ConnectionBD.estate();
     }
     
+    public void close(){
+    con.closeConnection();
+    };
+    
     public Usuario getUsuario(String alias,String contrasennia){
         /**
          * Funcion: Toma el usuario correspondiente de la BD
@@ -64,7 +68,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
-            con.closeConnection();
+            //con.closeConnection();
         }
         return null;
         
@@ -106,7 +110,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
-            con.closeConnection();
+           // con.closeConnection();
         }
         return usuarios;
         
@@ -138,7 +142,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());           
         } finally {
-            con.closeConnection();
+            //con.closeConnection();
         }
         return false;
         
@@ -177,7 +181,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
-            con.closeConnection();
+            //con.closeConnection();
         }
         return false;
         

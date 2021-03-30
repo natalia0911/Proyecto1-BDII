@@ -69,5 +69,10 @@ public class UsuarioController {
         return usuarioDao.getAllUsers();
     }
     
+    public void close(){
+        usuarioDao.close();
+    };
+   
+    
     
 }
