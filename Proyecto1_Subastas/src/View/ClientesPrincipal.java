@@ -162,12 +162,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        boolean tipo = true;
-        if(rdbNormal.isSelected()){
-            tipo = false;
-        }
-        userController.insertarUsuario(txtProducto.getText(),Integer.valueOf(txtCedula.getText()),txtDireccion.getText(),
-            txtCorreo.getText(), tipo, txtAlias.getText(),txtPrecio.getText());
+        System.out.println("Just a dummy button");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
