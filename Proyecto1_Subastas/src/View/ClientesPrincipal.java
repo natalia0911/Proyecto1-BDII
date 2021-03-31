@@ -41,9 +41,11 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         jPanelListarSubasta = new javax.swing.JPanel();
         jPanelListado = new javax.swing.JPanel();
-        btnRegistrar1 = new javax.swing.JButton();
+        btnDetallesSubasta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnHistorial = new javax.swing.JButton();
+        btnPujar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,11 +103,11 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(lblFecha)
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
                 .addComponent(lblCategoria)
-                .addGap(43, 43, 43)
+                .addGap(45, 45, 45)
                 .addComponent(lblSubCategoria)
-                .addGap(65, 65, 65)
+                .addGap(57, 57, 57)
                 .addComponent(lblImagen)
                 .addGap(78, 78, 78)
                 .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,35 +139,59 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
         jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        btnRegistrar1.setText("PUJAR");
-        btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+        btnDetallesSubasta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnDetallesSubasta.setText("Detalles");
+        btnDetallesSubasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrar1ActionPerformed(evt);
+                btnDetallesSubastaActionPerformed(evt);
             }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Precio", "Categoría", "Subcategoría", "Vendedor"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        btnHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnHistorial.setText("Historial");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
+
+        btnPujar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPujar.setText("PUJAR");
+        btnPujar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPujarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
         jPanelListado.setLayout(jPanelListadoLayout);
         jPanelListadoLayout.setHorizontalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar1))
+                    .addGroup(jPanelListadoLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelListadoLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(150, 150, 150)
+                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170)
+                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanelListadoLayout.setVerticalGroup(
@@ -173,9 +199,12 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelListadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btnRegistrar1)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout jPanelListarSubastaLayout = new javax.swing.GroupLayout(jPanelListarSubasta);
@@ -194,8 +223,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
-
-        jPanelListado.getAccessibleContext().setAccessibleName("Listado de subastas activas");
 
         tabSubastas.addTab("Listar", jPanelListarSubasta);
 
@@ -220,9 +247,17 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         System.out.println("Just a dummy button");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
+    private void btnDetallesSubastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesSubastaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrar1ActionPerformed
+    }//GEN-LAST:event_btnDetallesSubastaActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPujarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,8 +295,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDetallesSubasta;
+    private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnPujar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton btnRegistrar1;
     private javax.swing.JPanel jPanelListado;
     private javax.swing.JPanel jPanelListarSubasta;
     private javax.swing.JPanel jPanelRegistrarSubasta;
