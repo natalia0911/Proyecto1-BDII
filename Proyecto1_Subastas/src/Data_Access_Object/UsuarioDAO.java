@@ -27,8 +27,8 @@ public class UsuarioDAO {
     }
     
     public void close(){
-    con.closeConnection();
-    };
+        con.closeConnection();
+    }
     
     public Usuario getUsuario(String alias,String contrasennia){
         /**
@@ -74,7 +74,7 @@ public class UsuarioDAO {
         
     }
     
-      public ArrayList<Usuario> getAllUsers(){
+    public ArrayList<Usuario> getAllUsers(){
         /**
          * Funcion: Toma el usuario correspondiente de la BD
          * Entradas: Alias y contrasennia 
@@ -125,13 +125,14 @@ public class UsuarioDAO {
     
         try {
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertUser (?,?,?,?,?,?)}");
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertUser (?,?,?,?,?,?,?)}");
            
              //se definen los parametros de entrada y salida            
             cst.setString(1, user.getNombre());
             cst.setDouble(2, user.getCedula());
             cst.setString(3, user.getDireccion());
             cst.setString(4, user.getCorreo());
+            cst.setBoolean(5,user.isAdmin());
             cst.setString(6, user.getAlias());
             cst.setString(7, user.getContrasennia());
             
@@ -157,7 +158,6 @@ public class UsuarioDAO {
          */
     
         try {
-            System.out.println("En el try del dao modificra  1");
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateUser (?,?,?,?,?,?)}");
            
@@ -167,14 +167,12 @@ public class UsuarioDAO {
             cst.setDouble(2, user.getCedula());
             cst.setString(3, user.getDireccion());
             cst.setString(4, user.getCorreo());
-            System.out.println("En el try del dao modificra  2");
             //cst.setBoolean(5,user.isAdmin());
             cst.setString(5, user.getAlias());
             cst.setString(6, user.getContrasennia());
             
             // Ejecuta el procedimiento almacenado
             int respuesta = cst.executeUpdate();
-            System.out.println("En el try del dao modificra  3");
             return respuesta==1;  //t si insertó,f si no. 
            
             

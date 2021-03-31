@@ -40,6 +40,19 @@ public class Categoria {
     public void setNombreCategoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
     }
+
+    public ArrayList<SubCategoria> getSubcategorias() {
+        return subcategorias;
+    }
+
+    public void setSubcategorias(ArrayList<SubCategoria> subcategorias) {
+        this.subcategorias = subcategorias;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombreCategoria;
+    }
    
     
 }

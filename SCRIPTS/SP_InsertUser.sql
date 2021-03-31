@@ -2,7 +2,7 @@
 -------------------------------------------------------------------------
 --- Creado por: Natalia Vargas
 --- Fecha creación: 21/03/2021
---- Descripción: Inserta un nuevo administrador
+--- Descripción: Inserta un nuevo usuario
 --------------------------------------------------------------------------
 
 CREATE OR REPLACE PROCEDURE SP_InsertUser(
@@ -47,7 +47,7 @@ END;
 
 
 SET SERVEROUTPUT ON;
-EXECUTE SP_InsertUser('nata',117656633,'Pital','nata@gmail.com',1,'nat','nat123');
+--EXECUTE SP_InsertUser('nata',117656633,'Pital','nata@gmail.com',1,'nat','nat123');
 
 
 

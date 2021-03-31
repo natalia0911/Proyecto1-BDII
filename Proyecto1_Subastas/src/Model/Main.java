@@ -5,9 +5,11 @@
  */
 package Model;
 
+import Data_Access_Object.CategoriaDAO;
 import Data_Access_Object.PujaDAO;
 import Data_Access_Object.UsuarioDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,18 +21,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        UsuarioDAO connectionUser = new UsuarioDAO();
-       // connectionUser.modificarUsuario(new Usuario(12363,"Vane","Pital SC",true,"nat","nat","nat"));
-        
-        //PujaDAO connectionPuja = new PujaDAO();
-        //connectionPuja.listarPujas(2);\
-        
-      //  Usuario_Singleton user = Usuario_Singleton.UsuarioSingleton().setUsuario(usuario);
-               
-        
 
-        
-  
+
     }
     
 }

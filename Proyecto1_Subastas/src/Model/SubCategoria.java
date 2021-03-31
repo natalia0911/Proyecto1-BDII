@@ -37,5 +37,10 @@ public class SubCategoria {
     public void setNombreSubCat(String nombreSubCat) {
         this.nombreSubCat = nombreSubCat;
     }
+
+    @Override
+    public String toString() {
+        return this.nombreSubCat;
+    }
     
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -55,7 +55,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jPanelRegistrarSubasta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -98,6 +98,8 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="txtProducto" alignment="0" pref="221" max="32767" attributes="0"/>
                                       <Component id="txtPrecio" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cbxSubcategoria" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cbxCategoria" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -119,11 +121,17 @@
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="lblFecha" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="lblCategoria" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="lblSubCategoria" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbxCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblSubCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbxSubcategoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="lblImagen" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -140,7 +148,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblProducto">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Prodcuto"/>
+                    <Property name="text" type="java.lang.String" value="Producto"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblFecha">
@@ -165,7 +173,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPrecioInicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="PrecioInicial"/>
+                    <Property name="text" type="java.lang.String" value="Precio propuesto"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtProducto">
@@ -179,6 +187,23 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cbxCategoria">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbxCategoriaMouseClicked"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxCategoriaActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cbxSubcategoria">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbxSubcategoriaMouseClicked"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
