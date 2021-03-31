@@ -35,6 +35,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         modeloSubcat =  new DefaultComboBoxModel();
         modeloSubcat = (DefaultComboBoxModel)cbxSubcategoria.getModel();
         llenarComboCategorias();
+        createSubCat(cbxCategoria.getSelectedIndex()+1);
     }
 
     /**
@@ -91,6 +92,16 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
+        cbxCategoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCategoriaItemStateChanged(evt);
+            }
+        });
+        cbxCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxCategoriaFocusLost(evt);
+            }
+        });
         cbxCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbxCategoriaMouseClicked(evt);
@@ -309,12 +320,20 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCategoriaActionPerformed
 
     private void cbxSubcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoriaMouseClicked
-
+        
     }//GEN-LAST:event_cbxSubcategoriaMouseClicked
 
     private void cbxCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoriaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCategoriaMouseClicked
+
+    private void cbxCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoriaItemStateChanged
+        createSubCat(cbxCategoria.getSelectedIndex()+1);
+    }//GEN-LAST:event_cbxCategoriaItemStateChanged
+
+    private void cbxCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoriaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoriaFocusLost
 
     /**
      * @param args the command line arguments
@@ -380,6 +399,16 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         }
        
     }
+    
+public void createSubCat(double catID){
+    ArrayList<SubCategoria> lista = categoriaController.devolverSubCategorias(catID);
+    cbxSubcategoria.removeAllItems();
+    modeloSubcat.removeAllElements();
+    for (int i = 0; i < lista.size(); i++){
+            modeloSubcat.addElement(lista.get(i));
+        }
+    cbxSubcategoria.setModel(modeloSubcat);
+}
     
     
     

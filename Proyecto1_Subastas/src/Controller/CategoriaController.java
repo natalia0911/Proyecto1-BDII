@@ -7,6 +7,7 @@ package Controller;
 
 import Data_Access_Object.CategoriaDAO;
 import Model.Categoria;
+import Model.SubCategoria;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,4 +26,12 @@ public class CategoriaController {
      public ArrayList<Categoria> devolverCategorias(){
          return categoriaDao.getCategorias();
      }
+     
+     public ArrayList<SubCategoria> devolverSubCategorias(double catID){
+         return categoriaDao.getSubCategorias(catID);
+     }
+
+    public ArrayList<SubCategoria> devolverSubCategorias() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

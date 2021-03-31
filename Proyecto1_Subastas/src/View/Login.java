@@ -145,7 +145,13 @@ public class Login extends javax.swing.JFrame {
                 ventana.setVisible(true);
             }
             else{
-                System.out.println("Mostrar ventana de usuario normal");
+                try {
+                    ClientesPrincipal ventanaUser = new ClientesPrincipal();
+                    ventanaUser.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         }
         else{
@@ -168,7 +174,12 @@ public class Login extends javax.swing.JFrame {
                     ventana.setVisible(true);
                 }
                 else{
-                    System.out.println("Mostrar ventana de usuario normal");
+                    try {
+                    ClientesPrincipal ventanaUser = new ClientesPrincipal();
+                    ventanaUser.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
             }
             else{
