@@ -7,6 +7,7 @@ SELECT * FROM Telefono;
 SELECT * FROM Subasta;
 --Para tomar la fecha y hora
 select to_char(S.FECHAINICIO, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;
+select to_char(s.fechafin, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;
 SELECT * FROM Pujas;
 SELECT * FROM HistorialComprador;
 SELECT * FROM HistorialVendedor;
@@ -50,8 +51,12 @@ ALTER TABLE HistorialVendedor MODIFY(ID GENERATED AS IDENTITY (START WITH 1));
 --Cambiar campo a permitir null
 alter table Subasta modify FOTOITEM null;
 
+--Borrar campo de tabla
+alter table Subasta drop column FOTOITEM;
+
+
 --Insertar datos prueba
---Subastas
+---Subastas
 INSERT INTO SUBASTA (USUARIOID,SUBCATEGORIAID,PRECIOINICIAL,PRECIOFINAL,DETALLESENTREGA,FECHAINICIO,FECHAFIN,ACTIVA) 
 VALUES(4,1,5000,0,'Se entrega en el parque',TO_DATE('02-07-2021 12:01','DD-MM-YYYY HH:MI'),TO_DATE('06-07-2021 12:50','DD-MM-YYYY HH:MI'),1);
 --Pujas

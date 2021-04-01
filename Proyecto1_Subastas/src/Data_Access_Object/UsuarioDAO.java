@@ -76,9 +76,9 @@ public class UsuarioDAO {
     
     public ArrayList<Usuario> getAllUsers(){
         /**
-         * Funcion: Toma el usuario correspondiente de la BD
-         * Entradas: Alias y contrasennia 
-         * Salidas: Un objeto usuario
+         * Funcion: Lista los usuarios existentes
+         * Entradas: Ninguna
+         * Salidas: Una lista de usuarios
          */
         ArrayList<Usuario> usuarios = new ArrayList();
         try {

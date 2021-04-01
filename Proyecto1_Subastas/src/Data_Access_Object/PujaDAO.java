@@ -5,9 +5,11 @@
  */
 package Data_Access_Object;
 
+import Model.Puja;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -22,8 +24,9 @@ public class PujaDAO {
         con = ConnectionBD.estate();
     }
     
-    public void listarPujas(double subastaId){
-    
+    public ArrayList<Puja> listarPujas(double subastaId){
+        
+        ArrayList<Puja> pujas = new ArrayList();
         try {
             
             // Llamada al procedimiento almacenado
@@ -38,20 +41,20 @@ public class PujaDAO {
             ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  //Tiene las filas que vienen de la BD
          
             while(result.next()){
-                //Usuario u = new Usuario();
-                System.out.println("-------------------------------------------");
-                System.out.println(result.getString(1));
-                System.out.println(result.getString(2));
-                System.out.println(result.getString(3));
-                System.out.println(result.getString(4));
-                System.out.println(result.getString(5));
+                Puja puja = new Puja();
+                puja.setId(result.getDouble(1));
+                puja.setCompradorId(result.getDouble(2));
+                puja.setSubastaId(result.getDouble(3));
+                puja.setPrecio(result.getDouble(4));
+                puja.setFecha(result.getDate(5));
+                pujas.add(puja);
             }
-          
+            return pujas;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
-            con.closeConnection();
+            //con.closeConnection();
         }
-        
+        return pujas;
     }
 }

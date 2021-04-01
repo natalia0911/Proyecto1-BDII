@@ -48,7 +48,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtContrasenniaKeyPressed(evt);
+                formKeyPressed(evt);
             }
         });
 
@@ -59,9 +59,12 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
 
+        txtUsuario.setText("selen");
+
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
 
+        txtContrasennia.setText("selenpw");
         txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenniaKeyPressed(evt);
@@ -217,13 +220,11 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Login().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new Login().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

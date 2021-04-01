@@ -5,7 +5,11 @@
  */
 package Model;
 
-import java.sql.Date;
+import java.util.Date;
+
+
+
+
 
 
 
@@ -23,16 +27,28 @@ public class Subasta {
     private String detallesEntrega;
     private Date fechaInicio;
     private Date fechaFin;
+    private boolean activa;
     
     public Subasta() {}
     
-    public Subasta(double id, double usuarioId, double subcategoriaId, String foto, double precioInicial, double precioFinal, String detallesEntrega, Date fechaInicio, Date fechaFin) {
+    public Subasta(double id, double usuarioId, double subcategoriaId, String foto, double precioInicial, double precioFinal, String detallesEntrega, Date fechaInicio, Date fechaFin, boolean activa) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.subcategoriaId = subcategoriaId;
         this.foto = foto;
         this.precioInicial = precioInicial;
         this.precioFinal = precioFinal;
+        this.detallesEntrega = detallesEntrega;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.activa = activa;
+    }
+
+
+    public Subasta(double usuarioId, double subcategoriaId,double precioInicial,String detallesEntrega,Date fechaInicio, Date fechaFin) {
+        this.usuarioId = usuarioId;
+        this.subcategoriaId = subcategoriaId;
+        this.precioInicial = precioInicial;
         this.detallesEntrega = detallesEntrega;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -108,6 +124,19 @@ public class Subasta {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    @Override
+    public String toString() {
+        return "Subasta{" + "id=" + id + ", usuarioId=" + usuarioId + ", subcategoriaId=" + subcategoriaId + ", foto=" + foto + ", precioInicial=" + precioInicial + ", precioFinal=" + precioFinal + ", detallesEntrega=" + detallesEntrega + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activa=" + activa + '}';
     }
 
     

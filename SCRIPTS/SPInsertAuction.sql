@@ -9,7 +9,6 @@
 CREATE OR REPLACE PROCEDURE SP_InsertAuction(
        pUsuarioId IN SUBASTA.ID%TYPE,
        pSubCatId IN SUBASTA.SUBCATEGORIAID%TYPE,
-       pFoto IN SUBASTA.FOTOITEM%TYPE,
        pPrecioInicial IN SUBASTA.PRECIOINICIAL%TYPE,
        pDetalle IN SUBASTA.DETALLESENTREGA%TYPE,
        pFechaInicio IN SUBASTA.FECHAINICIO%TYPE,
@@ -21,7 +20,6 @@ BEGIN
   (
         "USUARIOID"
        ,"SUBCATEGORIAID"
-       ,"FOTOITEM"
        ,"PRECIOINICIAL"
        ,"PRECIOFINAL"
        ,"DETALLESENTREGA"
@@ -33,7 +31,6 @@ BEGIN
   (
         pUsuarioId
        ,pSubCatId
-       ,pFoto
        ,pPrecioInicial
        ,0                        --PrecioFinal aun no se sabe
        ,pDetalle

@@ -23,15 +23,9 @@ public class CategoriaController {
         categoriaDao = new CategoriaDAO();
     }
     
-     public ArrayList<Categoria> devolverCategorias(){
+    public ArrayList<Categoria> devolverCategorias(){
          return categoriaDao.getCategorias();
-     }
-     
-     public ArrayList<SubCategoria> devolverSubCategorias(double catID){
-         return categoriaDao.getSubCategorias(catID);
-     }
-
-    public ArrayList<SubCategoria> devolverSubCategorias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+     
+   
 }

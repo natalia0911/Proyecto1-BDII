@@ -6,13 +6,19 @@
 package View;
 
 import Controller.CategoriaController;
+import Controller.SubastaController;
 import Model.Categoria;
+import Model.FormatosUtilitaria;
 import Model.SubCategoria;
+import Model.Subasta;
+import Model.TextPrompt;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,17 +31,30 @@ public class ClientesPrincipal extends javax.swing.JFrame {
      */
     DefaultComboBoxModel modeloCat;
     DefaultComboBoxModel modeloSubcat;
+    DefaultComboBoxModel modeloCat2;
+    DefaultComboBoxModel modeloSubcat2;
+    DefaultTableModel modelo;
     private CategoriaController categoriaController;
+    private SubastaController subastaController;
     
     public ClientesPrincipal() throws SQLException {
         initComponents();
         categoriaController = new CategoriaController();
+        subastaController = new SubastaController();
         modeloCat =  new DefaultComboBoxModel();
         modeloCat = (DefaultComboBoxModel)cbxCategoria.getModel();
         modeloSubcat =  new DefaultComboBoxModel();
         modeloSubcat = (DefaultComboBoxModel)cbxSubcategoria.getModel();
+        modeloCat2 =  new DefaultComboBoxModel();
+        modeloCat2 = (DefaultComboBoxModel)cbxCategoria2.getModel();
+        modeloSubcat2 =  new DefaultComboBoxModel();
+        modeloSubcat2 = (DefaultComboBoxModel)cbxSubcategoria2.getModel();
+        modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) jTableSubastas.getModel();
         llenarComboCategorias();
-        createSubCat(cbxCategoria.getSelectedIndex()+1);
+        llenarComboCategorias2();
+        placeHolder();
+      
     }
 
     /**
@@ -56,34 +75,49 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         lblSubCategoria = new javax.swing.JLabel();
         lblImagen = new javax.swing.JLabel();
         lblPrecioInicial = new javax.swing.JLabel();
-        txtProducto = new javax.swing.JTextField();
+        txtDetalles = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         cbxCategoria = new javax.swing.JComboBox<>();
         cbxSubcategoria = new javax.swing.JComboBox<>();
+        jDateChooserSubasta = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        txtFHora = new javax.swing.JFormattedTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanelListarSubasta = new javax.swing.JPanel();
         jPanelListado = new javax.swing.JPanel();
         btnDetallesSubasta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableSubastas = new javax.swing.JTable();
         btnHistorial = new javax.swing.JButton();
         btnPujar = new javax.swing.JButton();
+        lblCategoria1 = new javax.swing.JLabel();
+        lblSubCategoria1 = new javax.swing.JLabel();
+        cbxCategoria2 = new javax.swing.JComboBox<>();
+        cbxSubcategoria2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelRegistrarSubasta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registrar subasta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        lblProducto.setText("Producto");
+        lblProducto.setText("Detalles de entrega");
 
-        lblFecha.setText("Fecha");
+        lblFecha.setText("Fecha de cierre");
 
         lblCategoria.setText("Categoria");
 
         lblSubCategoria.setText("SubCategoria");
 
-        lblImagen.setText("Imagen");
+        lblImagen.setText("Imagen del producto");
 
         lblPrecioInicial.setText("Precio propuesto");
+
+        txtPrecio.setText("12000");
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,58 +153,93 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Hora");
+
+        txtFHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        txtFHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFHoraActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("algo para guardar imagen,");
+
         javax.swing.GroupLayout jPanelRegistrarSubastaLayout = new javax.swing.GroupLayout(jPanelRegistrarSubasta);
         jPanelRegistrarSubasta.setLayout(jPanelRegistrarSubastaLayout);
         jPanelRegistrarSubastaLayout.setHorizontalGroup(
             jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSubCategoria)
+                    .addComponent(lblCategoria)
+                    .addComponent(lblPrecioInicial)
+                    .addComponent(lblProducto))
                 .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblImagen)
-                            .addComponent(lblProducto)
-                            .addComponent(lblFecha)
-                            .addComponent(lblSubCategoria)
-                            .addComponent(lblCategoria)
-                            .addComponent(lblPrecioInicial))
                         .addGap(37, 37, 37)
-                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(txtPrecio)
-                            .addComponent(cbxSubcategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnRegistrar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(btnRegistrar)))
-                .addContainerGap(689, Short.MAX_VALUE))
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarSubastaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxSubcategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                        .addComponent(txtFHora)))))
+                        .addGap(58, 58, 58))))
         );
         jPanelRegistrarSubastaLayout.setVerticalGroup(
             jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
-                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProducto)
-                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(lblFecha)
-                .addGap(32, 32, 32)
-                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategoria)
-                    .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSubCategoria)
-                    .addComponent(cbxSubcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategoria)
+                            .addComponent(lblFecha))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxSubcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSubCategoria)
+                            .addComponent(jLabel1)
+                            .addComponent(txtFHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblProducto)
+                            .addComponent(txtDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImagen))))
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrecioInicial)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
-                .addComponent(lblImagen)
-                .addGap(78, 78, 78)
-                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrecioInicial)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
                 .addComponent(btnRegistrar)
-                .addGap(54, 54, 54))
+                .addGap(133, 133, 133))
         );
 
         javax.swing.GroupLayout jPanelSubastarLayout = new javax.swing.GroupLayout(jPanelSubastar);
@@ -187,7 +256,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelSubastarLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jPanelRegistrarSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         tabSubastas.addTab("Subastar", jPanelSubastar);
@@ -202,18 +271,15 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSubastas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Producto", "Precio", "Categoría", "Subcategoría", "Vendedor"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableSubastas);
 
         btnHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnHistorial.setText("Historial");
@@ -231,35 +297,91 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblCategoria1.setText("Categoria");
+
+        lblSubCategoria1.setText("SubCategoria");
+
+        cbxCategoria2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCategoria2ItemStateChanged(evt);
+            }
+        });
+        cbxCategoria2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxCategoria2FocusLost(evt);
+            }
+        });
+        cbxCategoria2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxCategoria2MouseClicked(evt);
+            }
+        });
+        cbxCategoria2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCategoria2ActionPerformed(evt);
+            }
+        });
+
+        cbxSubcategoria2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxSubcategoria2ItemStateChanged(evt);
+            }
+        });
+        cbxSubcategoria2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxSubcategoria2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
         jPanelListado.setLayout(jPanelListadoLayout);
         jPanelListadoLayout.setHorizontalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListadoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSubCategoria1)
+                    .addComponent(lblCategoria1))
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addComponent(cbxCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxSubcategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(83, 83, 83)
+                        .addGap(6, 6, 6)
                         .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
+                        .addGap(158, 158, 158)
                         .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(170, 170, 170)
-                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                        .addGap(175, 175, 175)
+                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         jPanelListadoLayout.setVerticalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(btnDetallesSubasta)
+                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPujar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
+            .addGroup(jPanelListadoLayout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategoria1))
+                .addGap(46, 46, 46)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxSubcategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSubCategoria1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelListarSubastaLayout = new javax.swing.GroupLayout(jPanelListarSubasta);
@@ -268,15 +390,15 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, 1115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelListarSubastaLayout.setVerticalGroup(
             jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         tabSubastas.addTab("Listar", jPanelListarSubasta);
@@ -285,7 +407,9 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabSubastas, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabSubastas, javax.swing.GroupLayout.PREFERRED_SIZE, 1151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,10 +422,78 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
-        System.out.println("Just a dummy button");
+        /**
+         * Funcion: Registra una nueva subasta
+         */
+        //System.out.println();
+        String fechaFin = FormatosUtilitaria.formatoFecha(jDateChooserSubasta.getDate())+" "+txtFHora.getText();
+        SubCategoria subcat = (SubCategoria) modeloSubcat.getSelectedItem();
+        
+        try {
+            subastaController.insertarSubasta(subcat.getId(),Double.parseDouble(txtPrecio.getText()),txtDetalles.getText(),fechaFin);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
+    
+    public void llenarComboCategorias(){
+        /**
+         * Funcion: Llenar el cbx con objetos de tipo categoria
+         * Entradas: Ninguna
+         * Salidas: Ninguna
+         */
+        ArrayList<Categoria> lista = categoriaController.devolverCategorias();
 
+        for (int i = 0; i < lista.size(); i++){
+            modeloCat.addElement(lista.get(i));
+            cbxCategoria.setModel(modeloCat);
+        }
+       
+    }
+    
+    public void llenarComboCategorias2(){
+        /**
+         * Funcion: Llenar el cbx con objetos de tipo categoria
+         * Entradas: Ninguna
+         * Salidas: Ninguna
+         */
+        ArrayList<Categoria> lista = categoriaController.devolverCategorias();
+
+        for (int i = 0; i < lista.size(); i++){
+            modeloCat2.addElement(lista.get(i));
+            cbxCategoria2.setModel(modeloCat2);
+        }
+       
+    }
+    
+    public void createSubCat(Categoria cat){
+        ArrayList<SubCategoria> lista = cat.getSubcategorias();
+        modeloSubcat.removeAllElements();
+        for (int i = 0; i < lista.size(); i++){
+                modeloSubcat.addElement(lista.get(i));
+            }
+        cbxSubcategoria.setModel(modeloSubcat);
+    }
+    
+    public void createSubCat2(Categoria cat){
+        ArrayList<SubCategoria> lista = cat.getSubcategorias();
+        modeloSubcat2.removeAllElements();
+        for (int i = 0; i < lista.size(); i++){
+                modeloSubcat2.addElement(lista.get(i));
+            }
+        cbxSubcategoria2.setModel(modeloSubcat2);
+    }
+    
+    
+    private void llenarJTable(double idSubcat){
+        ArrayList<Subasta> lista = subastaController.listarSubastas(idSubcat);
+                
+        for (int i = 0; i < lista.size(); i++){
+                modelo.addRow(new Object[]{lista.get(i)});  //Poner acá los datos en orden a poner en la fila
+                jTableSubastas.setModel(modelo);
+            }
+    }
     private void btnDetallesSubastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesSubastaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDetallesSubastaActionPerformed
@@ -315,8 +507,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPujarActionPerformed
 
     private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
-        System.out.println(modeloCat.getSelectedItem());
-                //cbxCategoria
+
     }//GEN-LAST:event_cbxCategoriaActionPerformed
 
     private void cbxSubcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoriaMouseClicked
@@ -328,12 +519,60 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxCategoriaMouseClicked
 
     private void cbxCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoriaItemStateChanged
-        createSubCat(cbxCategoria.getSelectedIndex()+1);
+        /**
+         * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al 
+         * hacer click en el cbx de categorias.
+         * Entradas: Ninguna
+         * Salidas: Ninguna
+         */
+        Categoria cat = (Categoria) modeloCat.getSelectedItem();
+        createSubCat(cat);
+        
     }//GEN-LAST:event_cbxCategoriaItemStateChanged
 
     private void cbxCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoriaFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCategoriaFocusLost
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtFHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFHoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFHoraActionPerformed
+
+    private void cbxCategoria2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoria2ItemStateChanged
+        /**
+         * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al 
+         * hacer click en el cbx de categorias.
+         * Entradas: Ninguna
+         * Salidas: Ninguna
+         */
+        Categoria cat = (Categoria) modeloCat2.getSelectedItem();
+        createSubCat2(cat);
+    }//GEN-LAST:event_cbxCategoria2ItemStateChanged
+
+    private void cbxCategoria2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoria2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoria2FocusLost
+
+    private void cbxCategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoria2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoria2MouseClicked
+
+    private void cbxCategoria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoria2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoria2ActionPerformed
+
+    private void cbxSubcategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxSubcategoria2MouseClicked
+
+    private void cbxSubcategoria2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria2ItemStateChanged
+        SubCategoria subcat = (SubCategoria) modeloSubcat2.getSelectedItem();
+        llenarJTable(subcat.getId());  //Ponerlo en otra funcion
+    }//GEN-LAST:event_cbxSubcategoria2ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -371,46 +610,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void llenarComboCategorias(){
-        /**
-         * Funcion: Llenar el cbx con objetos de tipo categoria
-         * Entradas: Ninguna
-         * Salidas: Ninguna
-         */
-        ArrayList<Categoria> lista = categoriaController.devolverCategorias();
-        /*
-        PRUEBA
-        ArrayList<Categoria> categorias = categoriaController.devolverCategorias();
-        System.out.println(categorias);
-        
-        for(int i = 0 ; i<categorias.size() ; i++){
-            System.out.println("------------------------------------------------------");
-            System.out.println(categorias.get(i).getNombreCategoria()); 
-            ArrayList<SubCategoria> subcategorias = categorias.get(i).getSubcategorias();
-            for(int j = 0 ; j<subcategorias.size() ; j++){
-                System.out.println(subcategorias.get(j).getNombreSubCat()); 
-            }
-        }
-        */
-        for (int i = 0; i < lista.size(); i++){
-            modeloCat.addElement(lista.get(i));
-            cbxCategoria.setModel(modeloCat);
-        }
-       
+    public void placeHolder(){
+      TextPrompt prueba = new TextPrompt("HH:mm:ss", txtFHora);
+      TextPrompt detalle = new TextPrompt("Detalles", txtDetalles);
     }
-    
-public void createSubCat(double catID){
-    ArrayList<SubCategoria> lista = categoriaController.devolverSubCategorias(catID);
-    cbxSubcategoria.removeAllItems();
-    modeloSubcat.removeAllElements();
-    for (int i = 0; i < lista.size(); i++){
-            modeloSubcat.addElement(lista.get(i));
-        }
-    cbxSubcategoria.setModel(modeloSubcat);
-}
-    
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetallesSubasta;
@@ -418,21 +621,29 @@ public void createSubCat(double catID){
     private javax.swing.JButton btnPujar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbxCategoria;
+    private javax.swing.JComboBox<String> cbxCategoria2;
     private javax.swing.JComboBox<String> cbxSubcategoria;
+    private javax.swing.JComboBox<String> cbxSubcategoria2;
+    private com.toedter.calendar.JDateChooser jDateChooserSubasta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanelListado;
     private javax.swing.JPanel jPanelListarSubasta;
     private javax.swing.JPanel jPanelRegistrarSubasta;
     private javax.swing.JPanel jPanelSubastar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableSubastas;
     private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblCategoria1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPrecioInicial;
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblSubCategoria;
+    private javax.swing.JLabel lblSubCategoria1;
     private javax.swing.JTabbedPane tabSubastas;
+    private javax.swing.JTextField txtDetalles;
+    private javax.swing.JFormattedTextField txtFHora;
     private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }

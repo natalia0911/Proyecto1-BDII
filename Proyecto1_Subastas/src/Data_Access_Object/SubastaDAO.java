@@ -5,9 +5,12 @@
  */
 package Data_Access_Object;
 
+import Model.Subasta;
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -23,32 +26,82 @@ public class SubastaDAO {
     }
     
         
-    public void listarSubastas(){
+    public boolean InsertarSubastas(Subasta auction){
+    
+        /**
+         * Funcion: Inserta una subasta a la BD
+         * Entradas: Objeto subasta
+         * Salidas: booleano
+         */
     
         try {
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
+            System.out.println("Hello word 1");
+            java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
+            System.out.println(sqlStartDate);
+             //se definen los parametros de entrada y salida            
+            cst.setDouble(1, auction.getUsuarioId());
+            cst.setDouble(2, auction.getSubcategoriaId());
+            cst.setDouble(3, auction.getPrecioInicial());
+            cst.setString(4, auction.getDetallesEntrega());
+            cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
+            cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
             
-            // Llamada al procedimiento almacenado 
-            CallableStatement cst = con.getConnection().prepareCall("{call ObtenerDatosAlumno2 (?)}");
+            // Ejecuta el procedimiento almacenado
+            int respuesta = cst.executeUpdate();
+            System.out.println("Hello word 2");
+            return respuesta==1;  //t si insertó,f si no. 
+            
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());           
+        } finally {
+            //con.closeConnection();
+        }
+        return false;
+        
+    }
+    
+    public ArrayList<Subasta> getSubastas(double idSubCat){
+        /**
+         * Funcion: Lista las subastas que cierta subcategoria
+         * Entradas: Id de la subcategoria
+         * Salidas: lista de subastas
+         */
+        ArrayList<Subasta> subastas = new ArrayList();
+        try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuction (?,?)}");
            
-             // Definimos los tipos de los parametros de salida del procedimiento almacenado
-            cst.registerOutParameter(1, OracleTypes.CURSOR);
-
+             //se definen los parametros de entrada y salida
+            cst.setDouble(1, idSubCat);
+            cst.registerOutParameter(2, OracleTypes.CURSOR);
+            
             // Ejecuta el procedimiento almacenado
             cst.execute();
             // Se obtienen la salida del procedimineto almacenado
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(1);  //Tiene las filas que vienen de la BD
-
+            // result contiene las filas que vienen de la BD
+            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
             while(result.next()){
-                System.out.println(result.getString(1));
-                System.out.println(result.getString(2));
-                System.out.println(result.getString(3));
+                Subasta subasta = new Subasta();
+                subasta.setId(result.getInt(1));
+                subasta.setUsuarioId(result.getDouble(2));
+                subasta.setSubcategoriaId(result.getInt(3));
+                subasta.setPrecioInicial(result.getDouble(4));
+                subasta.setPrecioFinal(result.getDouble(5));
+                subasta.setDetallesEntrega(result.getString(6));
+                subasta.setFechaInicio(result.getDate(7));
+                subasta.setFechaFin(result.getDate(8));
+                subastas.add(subasta);
             }
-
+            return subastas;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         } finally {
-            con.closeConnection();
+           // con.closeConnection();
         }
+        return subastas;
         
     }
     
