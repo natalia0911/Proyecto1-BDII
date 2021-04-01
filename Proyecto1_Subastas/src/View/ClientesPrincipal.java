@@ -6,18 +6,22 @@
 package View;
 
 import Controller.CategoriaController;
+import Controller.ImageChooser;
 import Controller.SubastaController;
 import Model.Categoria;
 import Model.FormatosUtilitaria;
 import Model.SubCategoria;
 import Model.Subasta;
 import Model.TextPrompt;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -66,6 +70,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         tabSubastas = new javax.swing.JTabbedPane();
         jPanelSubastar = new javax.swing.JPanel();
         jPanelRegistrarSubasta = new javax.swing.JPanel();
@@ -83,7 +88,8 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         jDateChooserSubasta = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         txtFHora = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
+        btnImage = new javax.swing.JButton();
+        lblImage = new javax.swing.JLabel();
         jPanelListarSubasta = new javax.swing.JPanel();
         jPanelListado = new javax.swing.JPanel();
         btnDetallesSubasta = new javax.swing.JButton();
@@ -95,6 +101,17 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         lblSubCategoria1 = new javax.swing.JLabel();
         cbxCategoria2 = new javax.swing.JComboBox<>();
         cbxSubcategoria2 = new javax.swing.JComboBox<>();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,7 +179,14 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("algo para guardar imagen,");
+        btnImage.setText("Cargar");
+        btnImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImageActionPerformed(evt);
+            }
+        });
+
+        lblImage.setText("image none");
 
         javax.swing.GroupLayout jPanelRegistrarSubastaLayout = new javax.swing.GroupLayout(jPanelRegistrarSubasta);
         jPanelRegistrarSubasta.setLayout(jPanelRegistrarSubastaLayout);
@@ -199,12 +223,16 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                                     .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
                                 .addGap(43, 43, 43)
-                                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                        .addComponent(txtFHora)))))
-                        .addGap(58, 58, 58))))
+                                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(txtFHora))))
+                        .addGap(86, 86, 86))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarSubastaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnImage)
+                            .addComponent(lblImage))
+                        .addGap(165, 165, 165))))
         );
         jPanelRegistrarSubastaLayout.setVerticalGroup(
             jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,18 +256,17 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                             .addComponent(lblProducto)
                             .addComponent(txtDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblImagen))))
-                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrecioInicial)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
+                .addGap(51, 51, 51)
+                .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioInicial)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(lblImage)
+                .addGap(68, 68, 68)
                 .addComponent(btnRegistrar)
-                .addGap(133, 133, 133))
+                .addGap(73, 73, 73)
+                .addComponent(btnImage)
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout jPanelSubastarLayout = new javax.swing.GroupLayout(jPanelSubastar);
@@ -249,7 +276,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelSubastarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanelRegistrarSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanelSubastarLayout.setVerticalGroup(
             jPanelSubastarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,6 +601,14 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         llenarJTable(subcat.getId());  //Ponerlo en otra funcion
     }//GEN-LAST:event_cbxSubcategoria2ItemStateChanged
 
+    private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        try {
+            lblImage.setIcon(new ImageIcon(ImageChooser.ChooseImage()));
+        } catch (IOException ex) {
+            System.out.println("No es una imagen lo cargado");
+        }
+    }//GEN-LAST:event_btnImageActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -618,6 +653,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetallesSubasta;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnImage;
     private javax.swing.JButton btnPujar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbxCategoria;
@@ -625,8 +661,8 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxSubcategoria;
     private javax.swing.JComboBox<String> cbxSubcategoria2;
     private com.toedter.calendar.JDateChooser jDateChooserSubasta;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanelListado;
     private javax.swing.JPanel jPanelListarSubasta;
     private javax.swing.JPanel jPanelRegistrarSubasta;
@@ -636,6 +672,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCategoria1;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPrecioInicial;
     private javax.swing.JLabel lblProducto;
