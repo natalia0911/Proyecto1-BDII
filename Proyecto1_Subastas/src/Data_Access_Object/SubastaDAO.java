@@ -62,6 +62,44 @@ public class SubastaDAO {
         
     }
     
+    public boolean InsertarImgSubastas(Subasta auction){
+    
+        /**
+         * Funcion: Inserta una subasta a la BD
+         * Entradas: Objeto subasta
+         * Salidas: booleano
+         */
+    
+        try {
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
+            System.out.println("Hello word 1");
+            java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
+            System.out.println(sqlStartDate);
+             //se definen los parametros de entrada y salida            
+            cst.setDouble(1, auction.getUsuarioId());
+            cst.setDouble(2, auction.getSubcategoriaId());
+            cst.setDouble(3, auction.getPrecioInicial());
+            cst.setString(4, auction.getDetallesEntrega());
+            cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
+            cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
+            
+            // Ejecuta el procedimiento almacenado
+            int respuesta = cst.executeUpdate();
+            System.out.println("Hello word 2");
+            return respuesta==1;  //t si insertó,f si no. 
+            
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());           
+        } finally {
+            //con.closeConnection();
+        }
+        return false;
+        
+    }
+    
+    
+    
     public ArrayList<Subasta> getSubastas(double idSubCat){
         /**
          * Funcion: Lista las subastas que cierta subcategoria
