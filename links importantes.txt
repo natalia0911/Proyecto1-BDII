@@ -14,3 +14,7 @@ https://www.tutorialspoint.com/how-to-insert-an-image-in-to-oracle-database-usin
 https://www.youtube.com/watch?v=jl2wyij2mdg&list=PLNjWMbvTJAIjTbwDMv1muZ6blTVOArNyG&index=24 campo de telefono en java
 
 https://www.youtube.com/watch?v=v1Xa34tKGdw imagen en java
+
+
+
+https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/ Crear usuarios con funciones
