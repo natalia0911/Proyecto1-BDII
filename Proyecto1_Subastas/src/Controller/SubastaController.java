@@ -12,6 +12,7 @@ import Model.Usuario_Singleton;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.swing.Icon;
 
 /**
  *
@@ -44,6 +45,16 @@ public class SubastaController {
         }
        // return false;
     }
+    
+    public boolean insertarImagenSubasta (Icon img){
+        if(subastaDao.InsertarImgSubastas(img)){
+            System.out.println("Se insertó la imagen");
+            return true;
+        }
+        else{
+            return false;
+        }
+     }
     
     public ArrayList<Subasta> listarSubastas(double idSubcat){
         return subastaDao.getSubastas(idSubcat);

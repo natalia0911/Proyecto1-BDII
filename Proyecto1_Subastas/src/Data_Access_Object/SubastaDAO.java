@@ -6,11 +6,13 @@
 package Data_Access_Object;
 
 import Model.Subasta;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.Icon;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -37,7 +39,7 @@ public class SubastaDAO {
         try {
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
-            System.out.println("Hello word 1");
+            
             java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
             System.out.println(sqlStartDate);
              //se definen los parametros de entrada y salida            
@@ -50,7 +52,6 @@ public class SubastaDAO {
             
             // Ejecuta el procedimiento almacenado
             int respuesta = cst.executeUpdate();
-            System.out.println("Hello word 2");
             return respuesta==1;  //t si insertó,f si no. 
             
         } catch (SQLException ex) {
@@ -62,31 +63,21 @@ public class SubastaDAO {
         
     }
     
-    public boolean InsertarImgSubastas(Subasta auction){
+    public boolean InsertarImgSubastas(Icon img){
     
         /**
-         * Funcion: Inserta una subasta a la BD
-         * Entradas: Objeto subasta
+         * Funcion: Insertar una imagen a la ultims subasta
+         * Entradas: Objeto Icon
          * Salidas: booleano
          */
     
         try {
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
-            System.out.println("Hello word 1");
-            java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
-            System.out.println(sqlStartDate);
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_INSERTIMAGE (?)}");
              //se definen los parametros de entrada y salida            
-            cst.setDouble(1, auction.getUsuarioId());
-            cst.setDouble(2, auction.getSubcategoriaId());
-            cst.setDouble(3, auction.getPrecioInicial());
-            cst.setString(4, auction.getDetallesEntrega());
-            cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
-            cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
-            
+            cst.setBlob(1, (Blob) img);
             // Ejecuta el procedimiento almacenado
             int respuesta = cst.executeUpdate();
-            System.out.println("Hello word 2");
             return respuesta==1;  //t si insertó,f si no. 
             
         } catch (SQLException ex) {

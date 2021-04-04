@@ -33,11 +33,11 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form ClientesPrincipal
      */
-    DefaultComboBoxModel modeloCat;
-    DefaultComboBoxModel modeloSubcat;
-    DefaultComboBoxModel modeloCat2;
-    DefaultComboBoxModel modeloSubcat2;
-    DefaultTableModel modelo;
+    private DefaultComboBoxModel modeloCat;
+    private DefaultComboBoxModel modeloSubcat;
+    private DefaultComboBoxModel modeloCat2;
+    private DefaultComboBoxModel modeloSubcat2;
+    private DefaultTableModel modelo;
     private CategoriaController categoriaController;
     private SubastaController subastaController;
     
@@ -457,9 +457,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         //System.out.println();
         String fechaFin = FormatosUtilitaria.formatoFecha(jDateChooserSubasta.getDate())+" "+txtFHora.getText();
         SubCategoria subcat = (SubCategoria) modeloSubcat.getSelectedItem();
-        
+
         try {
             subastaController.insertarSubasta(subcat.getId(),Double.parseDouble(txtPrecio.getText()),txtDetalles.getText(),fechaFin);
+            subastaController.insertarImagenSubasta(lblImage.getIcon());
         } catch (ParseException ex) {
             Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

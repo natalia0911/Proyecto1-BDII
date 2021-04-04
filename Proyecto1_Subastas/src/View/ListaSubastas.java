@@ -251,7 +251,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
         */
         Categoria cat = (Categoria) modeloCat3.getSelectedItem();
         System.out.println(cat.getId());
-        //createSubCat2(cat);
+        createSubCat2(cat);
     }//GEN-LAST:event_cbxCategoria3ItemStateChanged
 
     private void cbxCategoria3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoria3FocusLost
@@ -268,8 +268,8 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
     private void cbxSubcategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ItemStateChanged
         SubCategoria subcat = (SubCategoria) modeloSubcat3.getSelectedItem();
-        System.out.println(subcat.getId());
-       // llenarJTable(subcat.getId()); 
+       // System.out.println(subcat.getId());
+        //llenarJTable(subcat.getId()); 
     }//GEN-LAST:event_cbxSubcategoria3ItemStateChanged
 
     private void cbxSubcategoria3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria3MouseClicked
@@ -306,7 +306,9 @@ public final class ListaSubastas extends javax.swing.JFrame {
     
     private void llenarJTable(double idSubcat){
         ArrayList<Subasta> lista = subastaController.listarSubastas(idSubcat);
-           
+       
+        if(idSubcat>0){
+
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                     modelo.addRow(new Object[]{lista.get(i)});  //Poner acá los datos en orden a poner en la fila
@@ -315,6 +317,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
+        }
         }
     }
     /**
