@@ -128,12 +128,14 @@ public class SubastaDAO {
                 Subasta subasta = new Subasta();
                 subasta.setId(result.getInt(1));
                 subasta.setUsuarioId(result.getDouble(2));
-                subasta.setSubcategoriaId(result.getInt(3));
-                subasta.setPrecioInicial(result.getDouble(4));
-                subasta.setPrecioFinal(result.getDouble(5));
-                subasta.setDetallesEntrega(result.getString(6));
-                subasta.setFechaInicio(result.getDate(7));
-                subasta.setFechaFin(result.getDate(8));
+                subasta.setNombreUsuario(result.getString(3));
+                subasta.setSubcategoriaId(result.getInt(4));
+                subasta.setNombreSubcat(result.getString(5));
+                subasta.setPrecioInicial(result.getDouble(6));
+                subasta.setPrecioFinal(result.getDouble(7));
+                subasta.setDetallesEntrega(result.getString(8));
+                subasta.setFechaInicio(result.getDate(9));
+                subasta.setFechaFin(result.getDate(10));
                 subastas.add(subasta);
             }
             return subastas;

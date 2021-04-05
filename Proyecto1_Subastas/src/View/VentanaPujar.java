@@ -14,9 +14,16 @@ public class VentanaPujar extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPujar
      */
-    public VentanaPujar() {
+    public VentanaPujar(double idSubasta) {
         initComponents();
+        System.out.println(idSubasta);
     }
+
+    private VentanaPujar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

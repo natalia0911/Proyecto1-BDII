@@ -150,7 +150,7 @@ public class UsuarioDAO {
     }
     
   
-     public boolean modificarUsuario(Usuario user){
+    public boolean modificarUsuario(Usuario user){
         /**
          * Funcion: Modificar un usuario en la BD
          * Entradas: Objeto usuario

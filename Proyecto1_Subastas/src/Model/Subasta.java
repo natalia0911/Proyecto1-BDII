@@ -20,7 +20,9 @@ import java.util.Date;
 public class Subasta {
     private double id;
     private double usuarioId;
+    private String nombreUsuario;
     private double subcategoriaId;
+    private String nombreSubcat;
     private String foto;
     private double precioInicial;
     private double precioFinal;
@@ -134,6 +136,23 @@ public class Subasta {
         this.activa = activa;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getNombreSubcat() {
+        return nombreSubcat;
+    }
+
+    public void setNombreSubcat(String nombreSubcat) {
+        this.nombreSubcat = nombreSubcat;
+    }
+
+    
     @Override
     public String toString() {
         return "Subasta{" + "id=" + id + ", usuarioId=" + usuarioId + ", subcategoriaId=" + subcategoriaId + ", foto=" + foto + ", precioInicial=" + precioInicial + ", precioFinal=" + precioFinal + ", detallesEntrega=" + detallesEntrega + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", activa=" + activa + '}';

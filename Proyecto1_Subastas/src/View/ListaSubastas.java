@@ -31,9 +31,12 @@ public final class ListaSubastas extends javax.swing.JFrame {
     private CategoriaController categoriaController;
     private SubastaController subastaController;
     private UsuarioController userController;
+    private ArrayList<Subasta> listaSubastas;
+    private int selectedRow;
     
     public ListaSubastas() throws SQLException {
         initComponents();
+        btnPujar.setEnabled(false);
         categoriaController = new CategoriaController();
         subastaController = new SubastaController();
         modeloCat3 =  new DefaultComboBoxModel();
@@ -85,9 +88,22 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Precio", "Categoría", "Subcategoría", "Vendedor"
+                "Nombre", "Subcategoria", "Precio Inicial", "Precio final", "Detalles", "Fecha inicio", "Fecha fin"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableSubastas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableSubastasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableSubastas);
 
         btnHistorialPujas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -193,10 +209,9 @@ public final class ListaSubastas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHistorialVendedor)
-                    .addComponent(btnHistorialPujas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHistorialPujas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistorialVendedor))
                 .addGap(27, 27, 27))
         );
 
@@ -251,8 +266,9 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistorialPujasActionPerformed
 
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
-        
-        VentanaPujar ventanaPujar = new VentanaPujar();
+        double idSubasta = listaSubastas.get(selectedRow).getId();
+        System.out.println();
+        VentanaPujar ventanaPujar = new VentanaPujar(idSubasta);
         ventanaPujar.setVisible(true);
     }//GEN-LAST:event_btnPujarActionPerformed
 
@@ -283,12 +299,18 @@ public final class ListaSubastas extends javax.swing.JFrame {
     private void cbxSubcategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ItemStateChanged
         SubCategoria subcat = (SubCategoria) modeloSubcat3.getSelectedItem();
        // System.out.println(subcat.getId());
-        //llenarJTable(subcat.getId()); 
+        llenarJTable(subcat.getId()); 
     }//GEN-LAST:event_cbxSubcategoria3ItemStateChanged
 
     private void cbxSubcategoria3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria3MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxSubcategoria3MouseClicked
+
+    private void jTableSubastasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSubastasMouseClicked
+        btnPujar.setEnabled(true);
+        int posicion = jTableSubastas.getSelectedRow();
+        selectedRow = posicion;
+    }//GEN-LAST:event_jTableSubastasMouseClicked
 
     
     
@@ -309,6 +331,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }
     
     public void createSubCat2(Categoria cat){
+        
         ArrayList<SubCategoria> lista = cat.getSubcategorias();
         modeloSubcat3.removeAllElements();
         for (int i = 0; i < lista.size(); i++){
@@ -319,13 +342,14 @@ public final class ListaSubastas extends javax.swing.JFrame {
     
     
     private void llenarJTable(double idSubcat){
-        ArrayList<Subasta> lista = subastaController.listarSubastas(idSubcat);
-       
-        if(idSubcat>0){
-
-        if(!lista.isEmpty()){
-            for (int i = 0; i < lista.size(); i++){
-                    modelo.addRow(new Object[]{lista.get(i)});  //Poner acá los datos en orden a poner en la fila
+        
+        listaSubastas = subastaController.listarSubastas(idSubcat);
+        if(idSubcat>0){  //Validar aqui bien
+        if(!listaSubastas.isEmpty()){
+            for (int i = 0; i < listaSubastas.size(); i++){
+                    modelo.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
+                     listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
+                    listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  //Poner acá los datos en orden a poner en la fila
                     jTableSubastas.setModel(modelo);
             }       
         }
@@ -335,14 +359,14 @@ public final class ListaSubastas extends javax.swing.JFrame {
         }
     }
     
+    
     public void mostrarObjetos(){
         
         if(userController.getTipoUsuario()){
             btnPujar.setVisible(false);
         }
     }
-    
-    
+
     
     /**
      * @param args the command line arguments

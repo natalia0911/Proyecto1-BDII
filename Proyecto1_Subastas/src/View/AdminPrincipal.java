@@ -87,6 +87,13 @@ public class AdminPrincipal extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         jScrollPaneModificar = new javax.swing.JScrollPane();
         jTableModiificar = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btnGuardar = new javax.swing.JButton();
+        lblMejora = new javax.swing.JLabel();
+        lblIncremento = new javax.swing.JLabel();
+        txtPorcentaje = new javax.swing.JTextField();
+        txtIncremento = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -412,7 +419,78 @@ public class AdminPrincipal extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        tabModificar.addTab("Modificar", jPanelModificar);
+        tabModificar.addTab("Modificar usuario", jPanelModificar);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cambiar parámetros del sistema", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        btnGuardar.setText("Guardar");
+
+        lblMejora.setText("Porcentaje de mejora");
+
+        lblIncremento.setText("Incremento mínimo");
+
+        txtPorcentaje.setText("5");
+
+        txtIncremento.setText("5000");
+        txtIncremento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIncrementoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMejora)
+                    .addComponent(lblIncremento))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPorcentaje)
+                    .addComponent(txtIncremento, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(btnGuardar)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMejora)
+                    .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIncremento)
+                    .addComponent(txtIncremento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(btnGuardar)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(691, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(438, Short.MAX_VALUE))
+        );
+
+        tabModificar.addTab("Cambiar parametros", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -508,6 +586,10 @@ public class AdminPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanelRegistrarBordeMFocusGained
 
+    private void txtIncrementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIncrementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIncrementoActionPerformed
+
     
     private void llenarJTable(){
         ArrayList<Usuario> lista = userController.getAllUser();
@@ -558,9 +640,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.ButtonGroup buttonGroupEsAdmin;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelRadios;
     private javax.swing.JPanel jPanelRadios1;
@@ -581,6 +666,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblDireccion1;
     private javax.swing.JLabel lblEsAdmin;
     private javax.swing.JLabel lblEsAdmin1;
+    private javax.swing.JLabel lblIncremento;
+    private javax.swing.JLabel lblMejora;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JRadioButton rdbAdmi;
@@ -598,7 +685,9 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreoM;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDireccionM;
+    private javax.swing.JTextField txtIncremento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreM;
+    private javax.swing.JTextField txtPorcentaje;
     // End of variables declaration//GEN-END:variables
 }
