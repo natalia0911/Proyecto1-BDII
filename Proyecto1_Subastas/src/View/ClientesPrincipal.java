@@ -40,6 +40,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private DefaultTableModel modelo;
     private CategoriaController categoriaController;
     private SubastaController subastaController;
+    private Image img;
     
     public ClientesPrincipal() throws SQLException {
         initComponents();
@@ -454,16 +455,20 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         /**
          * Funcion: Registra una nueva subasta
          */
-        //System.out.println();
+       
         String fechaFin = FormatosUtilitaria.formatoFecha(jDateChooserSubasta.getDate())+" "+txtFHora.getText();
         SubCategoria subcat = (SubCategoria) modeloSubcat.getSelectedItem();
 
         try {
             subastaController.insertarSubasta(subcat.getId(),Double.parseDouble(txtPrecio.getText()),txtDetalles.getText(),fechaFin);
-            subastaController.insertarImagenSubasta(lblImage.getIcon());
-        } catch (ParseException ex) {
+            if(!(img==null)){ 
+            subastaController.insertarImagenSubasta(img);
+            }
+        } catch (ParseException | IOException ex) {
             Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
     
@@ -606,7 +611,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
         ImageChooser Selector = new ImageChooser();
-        Image img;
+        //Image img;
         ImageIcon icono = new ImageIcon();
         try {
             img = Selector.elegir(lblImage.getWidth(),lblImage.getHeight());

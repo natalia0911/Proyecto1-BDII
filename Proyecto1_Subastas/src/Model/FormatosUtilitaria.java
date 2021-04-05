@@ -5,9 +5,16 @@
  */
 package Model;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -107,6 +114,32 @@ public class FormatosUtilitaria {
     public static Date devolverFechaSistema() throws ParseException{
         return FormatosUtilitaria.convertirAFechaYHora(pfechaYhora.format(fecha));
     }
+    
+    
+    public static ByteArrayInputStream convertirImagenABlob ( Image img ) throws IOException {
+        /**
+         * Funcion: Convertir la imagen a ByteArrayInputStream 
+         * Entradas: una imagen 
+         * Salidas: ByteArrayInputStream
+         */
+        
+        BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = bi.createGraphics();
+        g2d.drawImage(img, 0, 0, null);
+        g2d.dispose();
+        ByteArrayOutputStream baos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "png", baos);
+        } finally {
+            try {
+                baos.close();
+            } catch (IOException e) {
+            }
+        }
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        return bais;
+   }
          
     
 }

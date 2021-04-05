@@ -465,8 +465,7 @@ public class AdminPrincipal extends javax.swing.JFrame {
         }
         userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
                                    txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
-        //userController.insertarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
-                        ///            txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tabModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabModificarMouseClicked

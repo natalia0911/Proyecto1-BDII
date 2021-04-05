@@ -9,6 +9,8 @@ import Data_Access_Object.SubastaDAO;
 import Model.FormatosUtilitaria;
 import Model.Subasta;
 import Model.Usuario_Singleton;
+import java.awt.Image;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class SubastaController {
        // return false;
     }
     
-    public boolean insertarImagenSubasta (Icon img){
+    public boolean insertarImagenSubasta (Image img) throws IOException{
         if(subastaDao.InsertarImgSubastas(img)){
             System.out.println("Se insertó la imagen");
             return true;

@@ -4,13 +4,14 @@ SELECT * FROM categoria;
 SELECT * FROM Subcategoria order by ID;
 SELECT * FROM USUARIO;
 SELECT * FROM Telefono;
-SELECT * FROM Subasta;
+SELECT * FROM Subasta order by ID;
 --Para tomar la fecha y hora
 select to_char(S.FECHAINICIO, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;
 select to_char(s.fechafin, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;
 SELECT * FROM Pujas;
 SELECT * FROM HistorialComprador;
 SELECT * FROM HistorialVendedor;
+SELECT * FROM IMAGENES;
 
 --ELIMINAR TABLAS
 DROP TABLE HistorialVendedor;

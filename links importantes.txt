@@ -15,6 +15,6 @@ https://www.youtube.com/watch?v=jl2wyij2mdg&list=PLNjWMbvTJAIjTbwDMv1muZ6blTVOAr
 
 https://www.youtube.com/watch?v=v1Xa34tKGdw imagen en java
 
-
-
 https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/ Crear usuarios con funciones
+
+https://stackoverflow.com/questions/20961065/converting-image-in-memory-to-a-blob  Convertir Image a ByteArrayInputStream para guardarlo en blob en la BD
