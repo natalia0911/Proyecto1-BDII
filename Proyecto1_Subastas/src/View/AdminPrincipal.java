@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,7 +34,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
         llenarJTable();
-        
     }
 
     /**
@@ -438,15 +438,35 @@ public class AdminPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
+    private void removeAllRows(){
+        /**
+         * Funcion: Borrar todas las filas de un Jtable
+         */
+        int filas = modelo.getRowCount();
+        System.out.println(filas);
+        for (int i=0;i<filas;i++){
+            modelo.removeRow(0);
+        }
+        
+    }
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-      
+        /**
+        * Funcion: Agrega una usuario a la BD
+        */
+
        boolean tipo = true;
        if(rdbNormal.isSelected()){
            tipo = false;
        }
-       userController.insertarUsuario(txtNombre.getText(),Integer.valueOf(txtCedula.getText()),txtDireccion.getText(),
-                                      txtCorreo.getText(), tipo, txtAlias.getText(),txtContrasennia.getText());
-    
+       if(userController.insertarUsuario(txtNombre.getText(),Integer.valueOf(txtCedula.getText()),txtDireccion.getText(),
+                                      txtCorreo.getText(), tipo, txtAlias.getText(),txtContrasennia.getText())){
+           removeAllRows(); 
+           JOptionPane.showMessageDialog(null, "¡Usuario agregado!");
+       }
+       else{
+            JOptionPane.showMessageDialog(null, "¡No se pudo agregar el usuario!");
+       }
+       llenarJTable();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtCorreoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoMActionPerformed
@@ -456,6 +476,10 @@ public class AdminPrincipal extends javax.swing.JFrame {
     
     
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        /**
+         * Funcion: Modificar un usuario de la BD
+         */
+
         int posicion = jTableModiificar.getSelectedRow(); 
         System.out.println(posicion);
 
@@ -463,8 +487,15 @@ public class AdminPrincipal extends javax.swing.JFrame {
         if(rdbNormalM.isSelected()){
            tipo = false;
         }
-        userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
-                                   txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText());
+        if(userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
+                                   txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText())){
+            removeAllRows();
+            JOptionPane.showMessageDialog(null, "¡Usuario modificado!");
+       }
+       else{
+            JOptionPane.showMessageDialog(null, "¡No se pudo modificar el usuario!");
+       }
+       llenarJTable();
         
     }//GEN-LAST:event_btnModificarActionPerformed
 

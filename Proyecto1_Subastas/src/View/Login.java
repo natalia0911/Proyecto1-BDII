@@ -46,6 +46,11 @@ public class Login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -54,12 +59,12 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
 
-        txtUsuario.setText("selen");
+        txtUsuario.setText("admin1");
 
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
 
-        txtContrasennia.setText("selenpw");
+        txtContrasennia.setText("admin1pw");
         txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenniaKeyPressed(evt);
@@ -132,15 +137,29 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        validarUsuario();
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtContrasenniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenniaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            validarUsuario();
+        }
+    }//GEN-LAST:event_txtContrasenniaKeyPressed
+
+    
+    public void validarUsuario(){
+        /**
+         * Funcion: Verificar si existe el usuario y abrir la ventana correspondiente
+         */
         if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
             if(userController.getTipoUsuario()){
                 AdminPrincipal ventana = null;
                 try {
                     ventana = new AdminPrincipal();
+                    ventana.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ventana.setVisible(true);
+                }  
             }
             else{
                 try {
@@ -148,44 +167,16 @@ public class Login extends javax.swing.JFrame {
                     ventanaUser.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+                } 
             }
         }
         else{
               JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }
-       
-
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void txtContrasenniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenniaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
-                if(userController.getTipoUsuario()){
-                    AdminPrincipal ventana = null;
-                    try {
-                        ventana = new AdminPrincipal();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    ventana.setVisible(true);
-                }
-                else{
-                    try {
-                    ClientesPrincipal ventanaUser = new ClientesPrincipal();
-                    ventanaUser.setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }
-            }
-            else{
-                  JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-            }
-        }
-    }//GEN-LAST:event_txtContrasenniaKeyPressed
-
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

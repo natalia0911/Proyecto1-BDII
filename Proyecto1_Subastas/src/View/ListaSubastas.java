@@ -7,6 +7,7 @@ package View;
 
 import Controller.CategoriaController;
 import Controller.SubastaController;
+import Controller.UsuarioController;
 import Model.Categoria;
 import Model.SubCategoria;
 import Model.Subasta;
@@ -24,11 +25,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class ListaSubastas extends javax.swing.JFrame {
 
-    DefaultComboBoxModel modeloCat3;
-    DefaultComboBoxModel modeloSubcat3;
-    DefaultTableModel modelo;
+    private DefaultComboBoxModel modeloCat3;
+    private DefaultComboBoxModel modeloSubcat3;
+    private DefaultTableModel modelo;
     private CategoriaController categoriaController;
     private SubastaController subastaController;
+    private UsuarioController userController;
     
     public ListaSubastas() throws SQLException {
         initComponents();
@@ -40,7 +42,9 @@ public final class ListaSubastas extends javax.swing.JFrame {
         modeloSubcat3 = (DefaultComboBoxModel)cbxSubcategoria3.getModel();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableSubastas.getModel();
+        userController = new UsuarioController();
         llenarComboCategorias();
+        mostrarObjetos();
     }
 
     /**
@@ -54,10 +58,10 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
         jPanelListarSubasta = new javax.swing.JPanel();
         jPanelListado = new javax.swing.JPanel();
-        btnDetallesSubasta = new javax.swing.JButton();
+        btnHistorialVendedor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSubastas = new javax.swing.JTable();
-        btnHistorial = new javax.swing.JButton();
+        btnHistorialPujas = new javax.swing.JButton();
         btnPujar = new javax.swing.JButton();
         lblCategoria1 = new javax.swing.JLabel();
         lblSubCategoria1 = new javax.swing.JLabel();
@@ -68,11 +72,11 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
         jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        btnDetallesSubasta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnDetallesSubasta.setText("Detalles");
-        btnDetallesSubasta.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorialVendedor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnHistorialVendedor.setText("Ver historial del vendedor");
+        btnHistorialVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetallesSubastaActionPerformed(evt);
+                btnHistorialVendedorActionPerformed(evt);
             }
         });
 
@@ -86,16 +90,16 @@ public final class ListaSubastas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableSubastas);
 
-        btnHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnHistorial.setText("Historial");
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorialPujas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnHistorialPujas.setText("Ver historial pujas");
+        btnHistorialPujas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
+                btnHistorialPujasActionPerformed(evt);
             }
         });
 
         btnPujar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnPujar.setText("PUJAR");
+        btnPujar.setText("Pujar en esta subasta");
         btnPujar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPujarActionPerformed(evt);
@@ -143,50 +147,57 @@ public final class ListaSubastas extends javax.swing.JFrame {
         jPanelListadoLayout.setHorizontalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSubCategoria1)
-                    .addComponent(lblCategoria1))
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSubCategoria1)
+                            .addComponent(lblCategoria1))
+                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelListadoLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanelListadoLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158)
-                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
-                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(106, 106, 106)
+                        .addComponent(btnHistorialVendedor)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnHistorialPujas))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
         jPanelListadoLayout.setVerticalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategoria1))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSubCategoria1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPujar)
+                        .addGap(183, 183, 183))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDetallesSubasta)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPujar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnHistorialVendedor)
+                    .addComponent(btnHistorialPujas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
-            .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCategoria1))
-                .addGap(46, 46, 46)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubCategoria1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelListarSubastaLayout = new javax.swing.GroupLayout(jPanelListarSubasta);
@@ -210,7 +221,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1174, Short.MAX_VALUE)
+            .addGap(0, 1180, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -230,16 +241,19 @@ public final class ListaSubastas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDetallesSubastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesSubastaActionPerformed
+    private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDetallesSubastaActionPerformed
+    }//GEN-LAST:event_btnHistorialVendedorActionPerformed
 
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorialActionPerformed
+    private void btnHistorialPujasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPujasActionPerformed
+        VentanaHistorialPujas ventanaHistorialPujas = new VentanaHistorialPujas();
+        ventanaHistorialPujas.setVisible(true);
+    }//GEN-LAST:event_btnHistorialPujasActionPerformed
 
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
-        // TODO add your handling code here:
+        
+        VentanaPujar ventanaPujar = new VentanaPujar();
+        ventanaPujar.setVisible(true);
     }//GEN-LAST:event_btnPujarActionPerformed
 
     private void cbxCategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoria3ItemStateChanged
@@ -320,6 +334,16 @@ public final class ListaSubastas extends javax.swing.JFrame {
         }
         }
     }
+    
+    public void mostrarObjetos(){
+        
+        if(userController.getTipoUsuario()){
+            btnPujar.setVisible(false);
+        }
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -358,8 +382,8 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDetallesSubasta;
-    private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnHistorialPujas;
+    private javax.swing.JButton btnHistorialVendedor;
     private javax.swing.JButton btnPujar;
     private javax.swing.JComboBox<String> cbxCategoria3;
     private javax.swing.JComboBox<String> cbxSubcategoria3;

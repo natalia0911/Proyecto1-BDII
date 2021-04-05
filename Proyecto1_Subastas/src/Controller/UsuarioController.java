@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class UsuarioController {
     private UsuarioDAO usuarioDao;
+    
    
 
     public UsuarioController() throws SQLException {

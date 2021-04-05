@@ -8,6 +8,7 @@ package View;
 import Controller.CategoriaController;
 import Controller.ImageChooser;
 import Controller.SubastaController;
+import Controller.UsuarioController;
 import Model.Categoria;
 import Model.FormatosUtilitaria;
 import Model.SubCategoria;
@@ -35,13 +36,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
      */
     private DefaultComboBoxModel modeloCat;
     private DefaultComboBoxModel modeloSubcat;
-    private DefaultComboBoxModel modeloCat2;
-    private DefaultComboBoxModel modeloSubcat2;
-    private DefaultTableModel modelo;
     private CategoriaController categoriaController;
     private SubastaController subastaController;
     private Image img;
-    
+
     public ClientesPrincipal() throws SQLException {
         initComponents();
         categoriaController = new CategoriaController();
@@ -50,14 +48,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         modeloCat = (DefaultComboBoxModel)cbxCategoria.getModel();
         modeloSubcat =  new DefaultComboBoxModel();
         modeloSubcat = (DefaultComboBoxModel)cbxSubcategoria.getModel();
-        modeloCat2 =  new DefaultComboBoxModel();
-        modeloCat2 = (DefaultComboBoxModel)cbxCategoria2.getModel();
-        modeloSubcat2 =  new DefaultComboBoxModel();
-        modeloSubcat2 = (DefaultComboBoxModel)cbxSubcategoria2.getModel();
-        modelo = new DefaultTableModel();
-        modelo = (DefaultTableModel) jTableSubastas.getModel();
         llenarComboCategorias();
-        llenarComboCategorias2();
         placeHolder();
       
     }
@@ -91,17 +82,8 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         txtFHora = new javax.swing.JFormattedTextField();
         btnImage = new javax.swing.JButton();
         lblImage = new javax.swing.JLabel();
-        jPanelListarSubasta = new javax.swing.JPanel();
-        jPanelListado = new javax.swing.JPanel();
-        btnDetallesSubasta = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSubastas = new javax.swing.JTable();
-        btnHistorial = new javax.swing.JButton();
-        btnPujar = new javax.swing.JButton();
-        lblCategoria1 = new javax.swing.JLabel();
-        lblSubCategoria1 = new javax.swing.JLabel();
-        cbxCategoria2 = new javax.swing.JComboBox<>();
-        cbxSubcategoria2 = new javax.swing.JComboBox<>();
+        btnVerSubastas = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -193,6 +175,15 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         lblImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblImage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        btnVerSubastas.setText("Ver subastas");
+        btnVerSubastas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerSubastasActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("No sé donde poner este boton XD");
+
         javax.swing.GroupLayout jPanelRegistrarSubastaLayout = new javax.swing.GroupLayout(jPanelRegistrarSubasta);
         jPanelRegistrarSubasta.setLayout(jPanelRegistrarSubastaLayout);
         jPanelRegistrarSubastaLayout.setHorizontalGroup(
@@ -216,7 +207,9 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                                     .addComponent(cbxSubcategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnVerSubastas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,6 +229,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                                 .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                                 .addComponent(txtFHora)))))
                 .addGap(86, 86, 86))
+            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelRegistrarSubastaLayout.setVerticalGroup(
             jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +268,11 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(88, 88, 88))
+                .addGap(1, 1, 1)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVerSubastas)
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout jPanelSubastarLayout = new javax.swing.GroupLayout(jPanelSubastar);
@@ -281,7 +282,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelSubastarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanelRegistrarSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanelSubastarLayout.setVerticalGroup(
             jPanelSubastarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,148 +293,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         );
 
         tabSubastas.addTab("Subastar", jPanelSubastar);
-
-        jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        btnDetallesSubasta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnDetallesSubasta.setText("Detalles");
-        btnDetallesSubasta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetallesSubastaActionPerformed(evt);
-            }
-        });
-
-        jTableSubastas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Producto", "Precio", "Categoría", "Subcategoría", "Vendedor"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableSubastas);
-
-        btnHistorial.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnHistorial.setText("Historial");
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
-            }
-        });
-
-        btnPujar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnPujar.setText("PUJAR");
-        btnPujar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPujarActionPerformed(evt);
-            }
-        });
-
-        lblCategoria1.setText("Categoria");
-
-        lblSubCategoria1.setText("SubCategoria");
-
-        cbxCategoria2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCategoria2ItemStateChanged(evt);
-            }
-        });
-        cbxCategoria2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbxCategoria2FocusLost(evt);
-            }
-        });
-        cbxCategoria2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbxCategoria2MouseClicked(evt);
-            }
-        });
-        cbxCategoria2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCategoria2ActionPerformed(evt);
-            }
-        });
-
-        cbxSubcategoria2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxSubcategoria2ItemStateChanged(evt);
-            }
-        });
-        cbxSubcategoria2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbxSubcategoria2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
-        jPanelListado.setLayout(jPanelListadoLayout);
-        jPanelListadoLayout.setHorizontalGroup(
-            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSubCategoria1)
-                    .addComponent(lblCategoria1))
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(cbxCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxSubcategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDetallesSubasta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158)
-                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
-                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
-        );
-        jPanelListadoLayout.setVerticalGroup(
-            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDetallesSubasta)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPujar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
-            .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCategoria1))
-                .addGap(46, 46, 46)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxSubcategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubCategoria1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelListarSubastaLayout = new javax.swing.GroupLayout(jPanelListarSubasta);
-        jPanelListarSubasta.setLayout(jPanelListarSubastaLayout);
-        jPanelListarSubastaLayout.setHorizontalGroup(
-            jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, 1115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        jPanelListarSubastaLayout.setVerticalGroup(
-            jPanelListarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListarSubastaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-
-        tabSubastas.addTab("Listar", jPanelListarSubasta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -451,26 +310,87 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        ImageChooser Selector = new ImageChooser();
+        //Image img;
+        ImageIcon icono = new ImageIcon();
+        try {
+            img = Selector.elegir(lblImage.getWidth(),lblImage.getHeight());
+            if(img != null){
+                icono.setImage(img);
+                lblImage.setIcon(icono);
+            }
+
+        } catch (IOException ex) {
+            System.out.println("No es una imagen");
+            lblImage.setText("Imagen colocada correctamente");
+        }
+    }//GEN-LAST:event_btnImageActionPerformed
+
+    private void txtFHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFHoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFHoraActionPerformed
+
+    private void cbxSubcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoriaMouseClicked
+
+    }//GEN-LAST:event_cbxSubcategoriaMouseClicked
+
+    private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
+
+    }//GEN-LAST:event_cbxCategoriaActionPerformed
+
+    private void cbxCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoriaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoriaMouseClicked
+
+    private void cbxCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoriaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCategoriaFocusLost
+
+    private void cbxCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoriaItemStateChanged
+        /**
+        * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al
+        * hacer click en el cbx de categorias.
+        * Entradas: Ninguna
+        * Salidas: Ninguna
+        */
+        Categoria cat = (Categoria) modeloCat.getSelectedItem();
+        createSubCat(cat);
+
+    }//GEN-LAST:event_cbxCategoriaItemStateChanged
+
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         /**
-         * Funcion: Registra una nueva subasta
-         */
-       
+        * Funcion: Registra una nueva subasta
+        */
+
         String fechaFin = FormatosUtilitaria.formatoFecha(jDateChooserSubasta.getDate())+" "+txtFHora.getText();
         SubCategoria subcat = (SubCategoria) modeloSubcat.getSelectedItem();
 
         try {
             subastaController.insertarSubasta(subcat.getId(),Double.parseDouble(txtPrecio.getText()),txtDetalles.getText(),fechaFin);
-            if(!(img==null)){ 
-            subastaController.insertarImagenSubasta(img);
+            if(!(img==null)){
+                subastaController.insertarImagenSubasta(img);
             }
         } catch (ParseException | IOException ex) {
             Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void btnVerSubastasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSubastasActionPerformed
+       
+        try {
+            ListaSubastas ventanaSubastas = new ListaSubastas();
+            ventanaSubastas.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVerSubastasActionPerformed
     
     public void llenarComboCategorias(){
         /**
@@ -487,20 +407,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
        
     }
     
-    public void llenarComboCategorias2(){
-        /**
-         * Funcion: Llenar el cbx con objetos de tipo categoria
-         * Entradas: Ninguna
-         * Salidas: Ninguna
-         */
-        ArrayList<Categoria> lista = categoriaController.devolverCategorias();
-
-        for (int i = 0; i < lista.size(); i++){
-            modeloCat2.addElement(lista.get(i));
-            cbxCategoria2.setModel(modeloCat2);
-        }
-       
-    }
+   
     
     public void createSubCat(Categoria cat){
         ArrayList<SubCategoria> lista = cat.getSubcategorias();
@@ -511,121 +418,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         cbxSubcategoria.setModel(modeloSubcat);
     }
     
-    public void createSubCat2(Categoria cat){
-        ArrayList<SubCategoria> lista = cat.getSubcategorias();
-        modeloSubcat2.removeAllElements();
-        for (int i = 0; i < lista.size(); i++){
-                modeloSubcat2.addElement(lista.get(i));
-            }
-        cbxSubcategoria2.setModel(modeloSubcat2);
-    }
     
-    
-    private void llenarJTable(double idSubcat){
-        ArrayList<Subasta> lista = subastaController.listarSubastas(idSubcat);
-                
-        for (int i = 0; i < lista.size(); i++){
-                modelo.addRow(new Object[]{lista.get(i)});  //Poner acá los datos en orden a poner en la fila
-                jTableSubastas.setModel(modelo);
-            }
-    }
-    private void btnDetallesSubastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesSubastaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDetallesSubastaActionPerformed
-
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorialActionPerformed
-
-    private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPujarActionPerformed
-
-    private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
-
-    }//GEN-LAST:event_cbxCategoriaActionPerformed
-
-    private void cbxSubcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoriaMouseClicked
-        
-    }//GEN-LAST:event_cbxSubcategoriaMouseClicked
-
-    private void cbxCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoriaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoriaMouseClicked
-
-    private void cbxCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoriaItemStateChanged
-        /**
-         * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al 
-         * hacer click en el cbx de categorias.
-         * Entradas: Ninguna
-         * Salidas: Ninguna
-         */
-        Categoria cat = (Categoria) modeloCat.getSelectedItem();
-        createSubCat(cat);
-        
-    }//GEN-LAST:event_cbxCategoriaItemStateChanged
-
-    private void cbxCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoriaFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoriaFocusLost
-
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
-    private void txtFHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFHoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFHoraActionPerformed
-
-    private void cbxCategoria2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoria2ItemStateChanged
-        /**
-         * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al 
-         * hacer click en el cbx de categorias.
-         * Entradas: Ninguna
-         * Salidas: Ninguna
-         */
-        Categoria cat = (Categoria) modeloCat2.getSelectedItem();
-        createSubCat2(cat);
-    }//GEN-LAST:event_cbxCategoria2ItemStateChanged
-
-    private void cbxCategoria2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoria2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria2FocusLost
-
-    private void cbxCategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoria2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria2MouseClicked
-
-    private void cbxCategoria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoria2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria2ActionPerformed
-
-    private void cbxSubcategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxSubcategoria2MouseClicked
-
-    private void cbxSubcategoria2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria2ItemStateChanged
-        SubCategoria subcat = (SubCategoria) modeloSubcat2.getSelectedItem();
-        llenarJTable(subcat.getId());  //Ponerlo en otra funcion
-    }//GEN-LAST:event_cbxSubcategoria2ItemStateChanged
-
-    private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
-        ImageChooser Selector = new ImageChooser();
-        //Image img;
-        ImageIcon icono = new ImageIcon();
-        try {
-            img = Selector.elegir(lblImage.getWidth(),lblImage.getHeight());
-            if(img != null){
-                icono.setImage(img);
-                lblImage.setIcon(icono);
-            }
-            
-        } catch (IOException ex) {
-            System.out.println("No es una imagen");
-            lblImage.setText("Imagen colocada correctamente");
-        }
-    }//GEN-LAST:event_btnImageActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -668,33 +461,24 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDetallesSubasta;
-    private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnImage;
-    private javax.swing.JButton btnPujar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVerSubastas;
     private javax.swing.JComboBox<String> cbxCategoria;
-    private javax.swing.JComboBox<String> cbxCategoria2;
     private javax.swing.JComboBox<String> cbxSubcategoria;
-    private javax.swing.JComboBox<String> cbxSubcategoria2;
     private com.toedter.calendar.JDateChooser jDateChooserSubasta;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanelListado;
-    private javax.swing.JPanel jPanelListarSubasta;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanelRegistrarSubasta;
     private javax.swing.JPanel jPanelSubastar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableSubastas;
     private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblCategoria1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPrecioInicial;
     private javax.swing.JLabel lblProducto;
     private javax.swing.JLabel lblSubCategoria;
-    private javax.swing.JLabel lblSubCategoria1;
     private javax.swing.JTabbedPane tabSubastas;
     private javax.swing.JTextField txtDetalles;
     private javax.swing.JFormattedTextField txtFHora;
