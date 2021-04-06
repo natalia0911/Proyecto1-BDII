@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author Dell
+ * @author Natalia
  */
 public class Parametro {
     private String codParameter;

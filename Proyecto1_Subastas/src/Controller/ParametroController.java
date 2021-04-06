@@ -7,6 +7,8 @@ package Controller;
 
 import Data_Access_Object.ParametrosDAO;
 import Model.Parametro;
+import Model.Parametros_Singleton;
+import static Model.Parametros_Singleton.getPorcentaje;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,6 +21,13 @@ public class ParametroController {
 
     public ParametroController() throws SQLException {
         this.parametrosDao = new ParametrosDAO();
+    }
+    
+    public void setParametrosPorcentaje(Parametro porcentaje){
+        Parametros_Singleton.Parametros().setPorcentaje(porcentaje);
+    }
+    public void setParametrosPMinimo(Parametro minimo){
+        Parametros_Singleton.Parametros().setMontoMinimo(minimo);
     }
     
     public ArrayList<Parametro> getParametros(){

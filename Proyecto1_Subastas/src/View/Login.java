@@ -5,9 +5,13 @@
  */
 package View;
 
+import Controller.ParametroController;
 import Controller.UsuarioController;
+import Model.Parametro;
+import Model.Parametros_Singleton;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,10 +26,12 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private UsuarioController userController;
+    private ParametroController paramController;
     
     public Login() throws SQLException {
         initComponents();
         userController = new UsuarioController();
+        paramController = new ParametroController();
     }
 
     /**
@@ -59,12 +65,12 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
 
-        txtUsuario.setText("selen");
+        txtUsuario.setText("admin1");
 
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
 
-        txtContrasennia.setText("selenpw");
+        txtContrasennia.setText("admin1pw");
         txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenniaKeyPressed(evt);
@@ -153,9 +159,10 @@ public class Login extends javax.swing.JFrame {
          */
         if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
             if(userController.getTipoUsuario()){
-                AdminPrincipal ventana = null;
+                cargarParametros(); // Cargar globalmente los parametros
+                System.out.println(Parametros_Singleton.Parametros().getMontoMinimo().getCodParameter());
                 try {
-                    ventana = new AdminPrincipal();
+                    AdminPrincipal ventana = new AdminPrincipal();
                     ventana.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,13 +176,26 @@ public class Login extends javax.swing.JFrame {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 } 
             }
+            
+            
         }
         else{
               JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }
     }
     
-    
+    public void cargarParametros(){
+        ArrayList<Parametro> param = paramController.getParametros();
+        int size = param.size();
+        for (int i=0;i<size;i++){
+            if(param.get(i).getCodParameter().equals("PERC")){
+                paramController.setParametrosPorcentaje(param.get(i));
+            }
+            if(param.get(i).getCodParameter().equals("MIN")){
+                paramController.setParametrosPMinimo(param.get(i));
+            }
+        }
+    }
     
     /**
      * @param args the command line arguments

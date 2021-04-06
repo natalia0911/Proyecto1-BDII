@@ -5,7 +5,10 @@
  */
 package View;
 
+import Controller.ParametroController;
 import Controller.UsuarioController;
+import Model.Parametro;
+import Model.Parametros_Singleton;
 import Model.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,8 +26,9 @@ public class AdminPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form AdminPrincipal
      */
-    DefaultTableModel modelo;
+    private DefaultTableModel modelo;
     private UsuarioController userController;
+    private ParametroController parametroController;
     
     public AdminPrincipal() throws SQLException {
         initComponents();
@@ -33,7 +37,9 @@ public class AdminPrincipal extends javax.swing.JFrame {
         userController = new UsuarioController();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
+        parametroController = new ParametroController();
         llenarJTable();
+        setearParametros();
     }
 
     /**
@@ -424,14 +430,16 @@ public class AdminPrincipal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cambiar parámetros del sistema", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         lblMejora.setText("Porcentaje de mejora");
 
         lblIncremento.setText("Incremento mínimo");
 
-        txtPorcentaje.setText("5");
-
-        txtIncremento.setText("5000");
         txtIncremento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIncrementoActionPerformed(evt);
@@ -515,7 +523,16 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
-
+    
+    private void setearParametros(){
+        System.out.println(Parametros_Singleton.Parametros().getMontoMinimo());
+        double perc = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
+        double min = Parametros_Singleton.Parametros().getPorcentaje().getValue();
+       
+        txtPorcentaje.setText(String.valueOf(perc));
+        txtIncremento.setText(String.valueOf(min));
+    }
+    
     private void removeAllRows(){
         /**
          * Funcion: Borrar todas las filas de un Jtable
@@ -589,6 +606,21 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private void txtIncrementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIncrementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIncrementoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Parametro p1 = new Parametro("PERC",Double.parseDouble(txtPorcentaje.getText()));
+        Parametro p2 = new Parametro("MIN",Double.parseDouble(txtIncremento.getText()));
+        if(parametroController.modificarParametro(p1) && parametroController.modificarParametro(p2)){
+            parametroController.setParametrosPorcentaje(p1);
+            parametroController.setParametrosPMinimo(p2);
+            JOptionPane.showMessageDialog(null, "Actulizado con éxito!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar");
+        }
+    
+       
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     
     private void llenarJTable(){

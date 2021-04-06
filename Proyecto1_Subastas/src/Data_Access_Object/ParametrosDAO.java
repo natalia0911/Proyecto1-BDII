@@ -22,7 +22,7 @@ public class ParametrosDAO {
     private ConnectionBD con;
 
     public ParametrosDAO() throws SQLException {
-          con = ConnectionBD.estate();
+        con = ConnectionBD.estate();
     }
     
     public void close(){

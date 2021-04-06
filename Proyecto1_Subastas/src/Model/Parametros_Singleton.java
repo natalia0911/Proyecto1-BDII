@@ -14,7 +14,7 @@ public class Parametros_Singleton {
     private static Parametros_Singleton parametros;
     private static Parametro porcentaje;
     private static Parametro montoMinimo;
-
+    // Parametros_Singleton.Parametros().setPorcentaje(Parametro porcentaje)
     public Parametros_Singleton() {}
     
     public static synchronized Parametros_Singleton Parametros(){
