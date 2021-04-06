@@ -195,7 +195,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
             .addGroup(jPanelListadoLayout.createSequentialGroup()
                 .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
-                        .addGap(159, 159, 159)
+                        .addGap(168, 168, 168)
                         .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCategoria1))
@@ -268,7 +268,12 @@ public final class ListaSubastas extends javax.swing.JFrame {
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
         double idSubasta = listaSubastas.get(selectedRow).getId();
         System.out.println();
-        VentanaPujar ventanaPujar = new VentanaPujar(idSubasta);
+        VentanaPujar ventanaPujar = null;
+        try {
+            ventanaPujar = new VentanaPujar(idSubasta);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ventanaPujar.setVisible(true);
     }//GEN-LAST:event_btnPujarActionPerformed
 
@@ -298,8 +303,10 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
     private void cbxSubcategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ItemStateChanged
         SubCategoria subcat = (SubCategoria) modeloSubcat3.getSelectedItem();
-       // System.out.println(subcat.getId());
-        llenarJTable(subcat.getId()); 
+        //System.out.println(subcat.getId());
+        if(modeloSubcat3.getSelectedItem() != null){llenarJTable(subcat.getId());}
+        else{vaciarJTable();}
+        
     }//GEN-LAST:event_cbxSubcategoria3ItemStateChanged
 
     private void cbxSubcategoria3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria3MouseClicked
@@ -341,12 +348,22 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }
     
     
+    private void vaciarJTable(){
+    
+    DefaultTableModel temp = (DefaultTableModel) jTableSubastas.getModel();
+    temp.setRowCount(0);
+    
+    }
+    
     private void llenarJTable(double idSubcat){
+        
+        vaciarJTable();
         
         listaSubastas = subastaController.listarSubastas(idSubcat);
         if(idSubcat>0){  //Validar aqui bien
         if(!listaSubastas.isEmpty()){
             for (int i = 0; i < listaSubastas.size(); i++){
+                    
                     modelo.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
                      listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
                     listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  //Poner acá los datos en orden a poner en la fila
