@@ -9,6 +9,8 @@ import Controller.PujaController;
 import Model.Puja;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,7 +57,7 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHPujas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de pujas de la subasta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -101,7 +103,7 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
                     .addGroup(jPanelListadoLayout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addComponent(btnHistorialComprador)))
-                .addGap(364, 364, 364))
+                .addGap(361, 361, 361))
         );
         jPanelListadoLayout.setVerticalGroup(
             jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +136,13 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialCompradorActionPerformed
-        double idComprador = listaPujas.get(selectedRow).getCompradorId();
-        VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
-        ventanaComprador.setVisible(true);
+        try {
+            double idComprador = listaPujas.get(selectedRow).getCompradorId();
+            VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
+            ventanaComprador.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaHistorialPujas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnHistorialCompradorActionPerformed
 
     private void jTableHPujasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHPujasMouseClicked

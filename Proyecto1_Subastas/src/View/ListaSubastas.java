@@ -157,6 +157,11 @@ public final class ListaSubastas extends javax.swing.JFrame {
                 cbxSubcategoria3MouseClicked(evt);
             }
         });
+        cbxSubcategoria3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxSubcategoria3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
         jPanelListado.setLayout(jPanelListadoLayout);
@@ -257,9 +262,13 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
-        double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
-        VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
-        ventanaVendedor.setVisible(true);
+        try {
+            double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
+            VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
+            ventanaVendedor.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnHistorialVendedorActionPerformed
 
     private void btnHistorialPujasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPujasActionPerformed
@@ -326,6 +335,10 @@ public final class ListaSubastas extends javax.swing.JFrame {
         int posicion = jTableSubastas.getSelectedRow();
         selectedRow = posicion;
     }//GEN-LAST:event_jTableSubastasMouseClicked
+
+    private void cbxSubcategoria3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxSubcategoria3ActionPerformed
 
     
     

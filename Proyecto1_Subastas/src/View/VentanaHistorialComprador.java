@@ -6,6 +6,7 @@
 package View;
 
 import Data_Access_Object.HistorialUsuarioDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -19,7 +20,7 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
     private double compradorId;
     private HistorialUsuarioDAO historialVendedor;
        
-    public VentanaHistorialComprador(double compradorId) {
+    public VentanaHistorialComprador(double compradorId) throws SQLException {
         initComponents();
         this.compradorId = compradorId;
         historialVendedor = new HistorialUsuarioDAO();
@@ -40,7 +41,7 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

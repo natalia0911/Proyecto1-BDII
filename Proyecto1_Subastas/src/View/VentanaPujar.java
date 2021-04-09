@@ -6,7 +6,11 @@
 package View;
 
 import Controller.PujaController;
+import Model.Puja;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,12 +24,18 @@ public class VentanaPujar extends javax.swing.JFrame {
     
     private PujaController pujaController;
     private double idSubasta;
+    private ArrayList<Puja> listaPuja;
+    private DefaultTableModel modelo;
     
     public VentanaPujar(double idSubasta) throws SQLException {
         initComponents();
         System.out.println(idSubasta);
         this.idSubasta = idSubasta;
         pujaController = new PujaController();
+        modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) jTablePujas.getModel();
+        llenarJTable(idSubasta);
+        
     }
 
     private VentanaPujar() {
@@ -44,7 +54,7 @@ public class VentanaPujar extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePujas = new javax.swing.JTable();
         lblTituloTiempo = new javax.swing.JLabel();
         lblTimeleft = new javax.swing.JLabel();
         lblCantPujar = new javax.swing.JLabel();
@@ -53,12 +63,9 @@ public class VentanaPujar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePujas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Cantidad", "Persona"
@@ -72,11 +79,11 @@ public class VentanaPujar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTablePujas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTablePujas);
+        if (jTablePujas.getColumnModel().getColumnCount() > 0) {
+            jTablePujas.getColumnModel().getColumn(0).setResizable(false);
+            jTablePujas.getColumnModel().getColumn(1).setResizable(false);
         }
 
         lblTituloTiempo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -105,13 +112,13 @@ public class VentanaPujar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCantPujar, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(jTxtCantPujar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -182,11 +189,29 @@ public class VentanaPujar extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    private void llenarJTable(double idSubcat){
+        
+        listaPuja = pujaController.listarPujas(idSubasta);
+        if(!listaPuja.isEmpty()){
+            for (int i = 0; i < listaPuja.size(); i++){
+                    
+                    modelo.addRow(new Object[]{listaPuja.get(i).getPrecio(),listaPuja.get(i).getNombreComprador()});  
+                    jTablePujas.setModel(modelo);
+            }       
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
+        }
+        }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPujar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePujas;
     private javax.swing.JTextField jTxtCantPujar;
     private javax.swing.JLabel lblCantPujar;
     private javax.swing.JLabel lblTimeleft;
