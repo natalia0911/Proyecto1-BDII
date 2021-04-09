@@ -7,7 +7,9 @@ package Controller;
 
 import Data_Access_Object.PujaDAO;
 import Model.Puja;
+import Model.Usuario_Singleton;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -27,8 +29,19 @@ public class PujaController {
         return pujaDAO.listarPujas(idSubcat);
     }
     
-    public boolean insertarPuja(){
-    return true;
+        public boolean insertarPuja(double subCatId, double precioInicial, String detalle,String fechaFin) throws ParseException{
+        /*double idUser = Usuario_Singleton.UsuarioSingleton().getUsuario().getId();
+        
+        Puja Puja = new Puja(idUser,subCatId,precioInicial,detalle,FormatosUtilitaria.devolverFechaSistema(),FormatosUtilitaria.convertirAFechaYHora(fechaFin));
+        if (subastaDao.InsertarSubastas(subasta)){
+            System.out.println("Se insertó la subasta");
+            return true;
+        }
+        else{
+            return false;
+        }
+*/
+        return false;
     }
     
 }

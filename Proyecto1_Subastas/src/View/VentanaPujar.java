@@ -57,9 +57,11 @@ public class VentanaPujar extends javax.swing.JFrame {
         jTablePujas = new javax.swing.JTable();
         lblTituloTiempo = new javax.swing.JLabel();
         lblTimeleft = new javax.swing.JLabel();
-        lblCantPujar = new javax.swing.JLabel();
+        lblPrecioTitulo = new javax.swing.JLabel();
         jTxtCantPujar = new javax.swing.JTextField();
         btnPujar = new javax.swing.JButton();
+        lblCantPujar1 = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,8 +93,8 @@ public class VentanaPujar extends javax.swing.JFrame {
 
         lblTimeleft.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        lblCantPujar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblCantPujar.setText("Cantidad a pujar: ");
+        lblPrecioTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblPrecioTitulo.setText("Cantidad a pujar: ");
 
         jTxtCantPujar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -104,6 +106,11 @@ public class VentanaPujar extends javax.swing.JFrame {
             }
         });
 
+        lblCantPujar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblCantPujar1.setText("Cantidad a pujar: ");
+
+        lblPrecio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,11 +120,14 @@ public class VentanaPujar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrecioTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,6 +136,11 @@ public class VentanaPujar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblTimeleft, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(47, 47, 47)
+                    .addComponent(lblCantPujar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(895, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,13 +154,20 @@ public class VentanaPujar extends javax.swing.JFrame {
                             .addComponent(lblTituloTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTimeleft, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(lblCantPujar)
-                        .addGap(18, 18, 18)
+                        .addGap(154, 154, 154)
                         .addComponent(jTxtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172)
+                        .addGap(36, 36, 36)
+                        .addComponent(lblPrecioTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
                         .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(114, 114, 114)
+                    .addComponent(lblCantPujar1)
+                    .addContainerGap(445, Short.MAX_VALUE)))
         );
 
         pack();
@@ -202,7 +224,7 @@ public class VentanaPujar extends javax.swing.JFrame {
             }       
         }
         else{
-            JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
+            JOptionPane.showMessageDialog(null, "No hay pujas en esta subasta");
         }
         }
     
@@ -213,7 +235,9 @@ public class VentanaPujar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePujas;
     private javax.swing.JTextField jTxtCantPujar;
-    private javax.swing.JLabel lblCantPujar;
+    private javax.swing.JLabel lblCantPujar1;
+    private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblPrecioTitulo;
     private javax.swing.JLabel lblTimeleft;
     private javax.swing.JLabel lblTituloTiempo;
     // End of variables declaration//GEN-END:variables
