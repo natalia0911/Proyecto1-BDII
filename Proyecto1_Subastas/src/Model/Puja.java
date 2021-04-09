@@ -14,15 +14,17 @@ import java.sql.Date;
 public class Puja {
     private double id;
     private double compradorId;
+    private String nombreComprador;
     private double subastaId;
     private double precio;
     private Date fecha;
 
     public Puja() {}
 
-    public Puja(double id, double compradorId, double subastaId, double precio, Date fecha) {
+    public Puja(double id, double compradorId,String nombreComprador,double subastaId, double precio, Date fecha) {
         this.id = id;
         this.compradorId = compradorId;
+        this.nombreComprador = nombreComprador;
         this.subastaId = subastaId;
         this.precio = precio;
         this.fecha = fecha;
@@ -67,8 +69,19 @@ public class Puja {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public String getNombreComprador() {
+        return nombreComprador;
+    }
+
+    public void setNombreComprador(String nombreComprador) {
+        this.nombreComprador = nombreComprador;
+    }
+
+    @Override
+    public String toString() {
+        return "Puja{" + "id=" + id + ", compradorId=" + compradorId + ", nombreComprador=" + nombreComprador + ", subastaId=" + subastaId + ", precio=" + precio + ", fecha=" + fecha + '}';
+    }
     
-    
-    
-    
+
 }

@@ -5,7 +5,7 @@
 --- Descripción: Listar las pujas de una determinada subasta 
 --------------------------------------------------------------------------
 
-CREATE OR REPLACE PROCEDURE SP_SelectPujas(
+create or replace NONEDITIONABLE PROCEDURE SP_SelectPujas(
        pSubastaId IN PUJAS.SUBASTAID%TYPE,
        cursor OUT SYS_REFCURSOR)
        
@@ -13,20 +13,20 @@ IS
 BEGIN
     OPEN cursor FOR
     SELECT 
-        "ID"
-       ,"COMPRADORID"
-       ,"SUBASTAID"
-       ,"PRECIO"
-       ,"FECHA"
+        P."ID"
+       ,P."COMPRADORID"
+       ,U."NOMBRE"
+       ,P."SUBASTAID"
+       ,P."PRECIO"
+       ,P."FECHA"
 
-   FROM PUJAS P
+   FROM PUJAS P INNER JOIN USUARIO U ON P.COMPRADORID = U.ID
    WHERE P.SUBASTAID = pSubastaId
    ORDER BY P.FECHA DESC;
-  
+
 COMMIT;
 
 
 END;
 /
-
 

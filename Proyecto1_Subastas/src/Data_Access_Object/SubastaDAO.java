@@ -7,23 +7,12 @@ package Data_Access_Object;
 
 import Model.FormatosUtilitaria;
 import Model.Subasta;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.CallableStatement;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
-import javax.swing.Icon;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -32,7 +21,7 @@ import oracle.jdbc.OracleTypes;
  * @author Natalia
  */
 public class SubastaDAO {
-     private ConnectionBD con;
+    private ConnectionBD con;
 
     public SubastaDAO() throws SQLException {
          con = ConnectionBD.estate();

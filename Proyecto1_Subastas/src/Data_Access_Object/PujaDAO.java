@@ -24,6 +24,40 @@ public class PujaDAO {
         con = ConnectionBD.estate();
     }
     
+    
+        public boolean InsertarSubastas(Puja puja){
+    
+        /**
+         * Funcion: Inserta una puja a la BD
+         * Entradas: Objeto subasta
+         * Salidas: booleano
+         */
+    
+        try {
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
+            /*
+            java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
+            System.out.println(sqlStartDate);
+             //se definen los parametros de entrada y salida            
+            cst.setDouble(1, auction.getUsuarioId());
+            cst.setDouble(2, auction.getSubcategoriaId());
+            cst.setDouble(3, auction.getPrecioInicial());
+            cst.setString(4, auction.getDetallesEntrega());
+            cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
+            cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
+            */
+            // Ejecuta el procedimiento almacenado
+            int respuesta = cst.executeUpdate();
+            return respuesta==1;  //t si insertó,f si no. 
+            
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());           
+        }
+        return false;
+        
+    }
+    
     public ArrayList<Puja> listarPujas(double subastaId){
         
         ArrayList<Puja> pujas = new ArrayList();
@@ -44,17 +78,16 @@ public class PujaDAO {
                 Puja puja = new Puja();
                 puja.setId(result.getDouble(1));
                 puja.setCompradorId(result.getDouble(2));
-                puja.setSubastaId(result.getDouble(3));
-                puja.setPrecio(result.getDouble(4));
-                puja.setFecha(result.getDate(5));
+                puja.setNombreComprador(result.getString(3));
+                puja.setSubastaId(result.getDouble(4));
+                puja.setPrecio(result.getDouble(5));
+                puja.setFecha(result.getDate(6));
                 pujas.add(puja);
             }
             return pujas;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-            //con.closeConnection();
-        }
+        } 
         return pujas;
     }
 }

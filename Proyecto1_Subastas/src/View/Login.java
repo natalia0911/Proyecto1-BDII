@@ -68,12 +68,12 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
 
-        txtUsuario.setText("admin1");
+        txtUsuario.setText("selen");
 
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
 
-        txtContrasennia.setText("admin1pw");
+        txtContrasennia.setText("selenpw");
         txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenniaKeyPressed(evt);

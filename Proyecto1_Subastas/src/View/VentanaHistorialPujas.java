@@ -5,6 +5,13 @@
  */
 package View;
 
+import Controller.PujaController;
+import Model.Puja;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Dell
@@ -14,8 +21,24 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     /**
      * Creates new form VentanaHistorialPujas
      */
-    public VentanaHistorialPujas() {
+    private double idSubasta;
+    private DefaultTableModel modelo;
+    private PujaController pujaController;
+    private ArrayList<Puja> listaPujas;
+    private int selectedRow;
+    
+    public VentanaHistorialPujas(double idSubasta) throws SQLException {
         initComponents();
+        System.out.println(idSubasta);
+        modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) jTableHPujas.getModel();
+        this.idSubasta = idSubasta;
+        pujaController = new PujaController();
+        llenarJTable();
+    }
+
+    private VentanaHistorialPujas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -30,7 +53,7 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
         jPanelListado = new javax.swing.JPanel();
         btnHistorialComprador = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSubastas = new javax.swing.JTable();
+        jTableHPujas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,15 +67,28 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
             }
         });
 
-        jTableSubastas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableHPujas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Producto", "Precio", "Categoría", "Subcategoría", "Vendedor"
+                "Usuario", "Precio", "Fecha"
             }
-        ));
-        jScrollPane1.setViewportView(jTableSubastas);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableHPujas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHPujasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableHPujas);
 
         javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
         jPanelListado.setLayout(jPanelListadoLayout);
@@ -98,9 +134,49 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialCompradorActionPerformed
-        // TODO add your handling code here:
+        double idComprador = listaPujas.get(selectedRow).getCompradorId();
+        VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
+        ventanaComprador.setVisible(true);
     }//GEN-LAST:event_btnHistorialCompradorActionPerformed
 
+    private void jTableHPujasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHPujasMouseClicked
+        int posicion = jTableHPujas.getSelectedRow();
+        selectedRow = posicion;
+    }//GEN-LAST:event_jTableHPujasMouseClicked
+
+    
+    private void llenarJTable(){
+        vaciarJTable();
+        listaPujas = pujaController.listarPujas(idSubasta);
+       
+        if(!listaPujas.isEmpty()){
+            for (int i = 0; i < listaPujas.size(); i++){ 
+                    modelo.addRow(new Object[]{listaPujas.get(i).getNombreComprador(),listaPujas.get(i).getPrecio(),
+                    listaPujas.get(i).getFecha()});  
+                    jTableHPujas.setModel(modelo);
+            }       
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No hay pujas para esta subasta");
+        }
+       
+    }
+    
+    private void vaciarJTable(){
+    
+        DefaultTableModel temp = (DefaultTableModel) jTableHPujas.getModel();
+        temp.setRowCount(0);
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -129,10 +205,8 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaHistorialPujas().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new VentanaHistorialPujas().setVisible(true);
         });
     }
 
@@ -140,6 +214,6 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     private javax.swing.JButton btnHistorialComprador;
     private javax.swing.JPanel jPanelListado;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableSubastas;
+    private javax.swing.JTable jTableHPujas;
     // End of variables declaration//GEN-END:variables
 }

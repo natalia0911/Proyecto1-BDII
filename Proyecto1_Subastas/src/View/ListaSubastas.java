@@ -257,24 +257,32 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
-        // TODO add your handling code here:
+        double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
+        VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
+        ventanaVendedor.setVisible(true);
     }//GEN-LAST:event_btnHistorialVendedorActionPerformed
 
     private void btnHistorialPujasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPujasActionPerformed
-        VentanaHistorialPujas ventanaHistorialPujas = new VentanaHistorialPujas();
-        ventanaHistorialPujas.setVisible(true);
+        double idSubasta = listaSubastas.get(selectedRow).getId();
+        VentanaHistorialPujas ventanaHistorialPujas;
+        try {
+            ventanaHistorialPujas = new VentanaHistorialPujas(idSubasta);
+            ventanaHistorialPujas.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnHistorialPujasActionPerformed
 
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
         double idSubasta = listaSubastas.get(selectedRow).getId();
-        System.out.println();
-        VentanaPujar ventanaPujar = null;
         try {
-            ventanaPujar = new VentanaPujar(idSubasta);
+            VentanaPujar ventanaPujar = new VentanaPujar(idSubasta);
+            ventanaPujar.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ventanaPujar.setVisible(true);
+        
     }//GEN-LAST:event_btnPujarActionPerformed
 
     private void cbxCategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoria3ItemStateChanged
@@ -350,8 +358,8 @@ public final class ListaSubastas extends javax.swing.JFrame {
     
     private void vaciarJTable(){
     
-    DefaultTableModel temp = (DefaultTableModel) jTableSubastas.getModel();
-    temp.setRowCount(0);
+        DefaultTableModel temp = (DefaultTableModel) jTableSubastas.getModel();
+        temp.setRowCount(0);
     
     }
     
@@ -366,7 +374,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
                     
                     modelo.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
                      listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
-                    listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  //Poner acá los datos en orden a poner en la fila
+                    listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  
                     jTableSubastas.setModel(modelo);
             }       
         }
@@ -435,4 +443,8 @@ public final class ListaSubastas extends javax.swing.JFrame {
     private javax.swing.JLabel lblCategoria1;
     private javax.swing.JLabel lblSubCategoria1;
     // End of variables declaration//GEN-END:variables
+
+    private VentanaHistorialVendedor VentanaHistorialVendedor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

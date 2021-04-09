@@ -27,4 +27,8 @@ public class PujaController {
         return pujaDAO.listarPujas(idSubcat);
     }
     
+    public boolean insertarPuja(){
+    return true;
+    }
+    
 }
