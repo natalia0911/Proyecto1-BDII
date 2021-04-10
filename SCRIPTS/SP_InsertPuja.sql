@@ -1,6 +1,13 @@
+
+-------------------------------------------------------------------------
+--- Creado por: Gustavo Orozco
+--- Fecha creación: 09/04/2021
+--- Descripción: Insertar puja
+--------------------------------------------------------------------------
+
 CREATE OR REPLACE PROCEDURE SP_InsertPuja(
-       pCompradorID IN pujas.compradorid%TYPE,
-       pSubastaID IN pujas.subastaid%TYPE,
+       pCompradorID IN PUJAS.COMPRADORID%TYPE,
+       pSubastaID IN PUJAS.SUBASTAID%TYPE,
        pPrecio IN PUJAS.PRECIO%TYPE)
 IS
 BEGIN

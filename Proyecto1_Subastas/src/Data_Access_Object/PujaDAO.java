@@ -35,18 +35,13 @@ public class PujaDAO {
     
         try {
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertAuction (?,?,?,?,?,?)}");
-            /*
-            java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
-            System.out.println(sqlStartDate);
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_InsertPuja (?,?,?)}");
+     
              //se definen los parametros de entrada y salida            
-            cst.setDouble(1, auction.getUsuarioId());
-            cst.setDouble(2, auction.getSubcategoriaId());
-            cst.setDouble(3, auction.getPrecioInicial());
-            cst.setString(4, auction.getDetallesEntrega());
-            cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
-            cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
-            */
+            cst.setDouble(1, puja.getCompradorId());
+            cst.setDouble(2, puja.getSubastaId());
+            cst.setDouble(3, puja.getPrecio());
+     
             // Ejecuta el procedimiento almacenado
             int respuesta = cst.executeUpdate();
             return respuesta==1;  //t si insertó,f si no. 
@@ -89,5 +84,31 @@ public class PujaDAO {
             System.out.println("Error: " + ex.getMessage());
         } 
         return pujas;
+    }
+    
+     public Puja getMejorPuja(double subastaId){
+        
+        Puja puja = new Puja();
+        try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_MejorPuja (?,?)}");
+             // Definimos los tipos de los parametros de salida del procedimiento almacenado
+            cst.setInt(1, (int) subastaId);
+            cst.registerOutParameter(2, OracleTypes.CURSOR);
+            // Ejecuta el procedimiento almacenado
+            cst.execute();
+            // Se obtienen la salida del procedimineto almacenado
+            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+         
+            while(result.next()){
+                puja.setId(result.getDouble(1));
+                puja.setPrecio(result.getDouble(2));
+            }
+            return puja;
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } 
+        return puja;
     }
 }
