@@ -36,6 +36,7 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
         modelo = (DefaultTableModel) jTableHPujas.getModel();
         this.idSubasta = idSubasta;
         pujaController = new PujaController();
+        selectedRow = -1;
         llenarJTable();
     }
 
@@ -136,12 +137,17 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialCompradorActionPerformed
-        try {
-            double idComprador = listaPujas.get(selectedRow).getCompradorId();
-            VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
-            ventanaComprador.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(VentanaHistorialPujas.class.getName()).log(Level.SEVERE, null, ex);
+        if (!(selectedRow==-1)){
+            try {
+                double idComprador = listaPujas.get(selectedRow).getCompradorId();
+                VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
+                ventanaComprador.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaHistorialPujas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione una puja para ver su comprador");
         }
     }//GEN-LAST:event_btnHistorialCompradorActionPerformed
 

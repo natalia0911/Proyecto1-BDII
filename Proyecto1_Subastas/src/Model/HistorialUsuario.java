@@ -14,14 +14,16 @@ public class HistorialUsuario {
     private double idVendedor;
     private double idSubasta;
     private int calificacion;
-    private String cpmentario;
+    private String comentario;
 
-    public HistorialUsuario(double idComprador, double idVendedor, double idSubasta, int calificacion, String cpmentario) {
+    public HistorialUsuario() {}
+    
+    public HistorialUsuario(double idComprador, double idVendedor, double idSubasta, int calificacion, String comentario) {
         this.idComprador = idComprador;
         this.idVendedor = idVendedor;
         this.idSubasta = idSubasta;
         this.calificacion = calificacion;
-        this.cpmentario = cpmentario;
+        this.comentario = comentario;
     }
 
     public double getIdComprador() {
@@ -56,17 +58,17 @@ public class HistorialUsuario {
         this.calificacion = calificacion;
     }
 
-    public String getCpmentario() {
-        return cpmentario;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setCpmentario(String cpmentario) {
-        this.cpmentario = cpmentario;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     @Override
     public String toString() {
-        return "HistorialUsuario{" + "idComprador=" + idComprador + ", idVendedor=" + idVendedor + ", idSubasta=" + idSubasta + ", calificacion=" + calificacion + ", cpmentario=" + cpmentario + '}';
+        return "HistorialUsuario{" + "idComprador=" + idComprador + ", idVendedor=" + idVendedor + ", idSubasta=" + idSubasta + ", calificacion=" + calificacion + ", cpmentario=" + comentario + '}';
     }
 
     

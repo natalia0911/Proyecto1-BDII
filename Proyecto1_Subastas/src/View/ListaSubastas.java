@@ -48,6 +48,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
         userController = new UsuarioController();
         llenarComboCategorias();
         mostrarObjetos();
+        selectedRow = -1;
     }
 
     /**
@@ -262,23 +263,33 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
-        try {
-            double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
-            VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
-            ventanaVendedor.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+        if (!(selectedRow==-1)){
+            try {
+                double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
+                VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
+                ventanaVendedor.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione una subasta para ver su vendedor");
         }
     }//GEN-LAST:event_btnHistorialVendedorActionPerformed
 
     private void btnHistorialPujasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPujasActionPerformed
-        double idSubasta = listaSubastas.get(selectedRow).getId();
-        VentanaHistorialPujas ventanaHistorialPujas;
-        try {
-            ventanaHistorialPujas = new VentanaHistorialPujas(idSubasta);
-            ventanaHistorialPujas.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (!(selectedRow==-1)){
+            try {
+                double idSubasta = listaSubastas.get(selectedRow).getId();
+                VentanaHistorialPujas ventanaHistorialPujas = new VentanaHistorialPujas(idSubasta);
+                ventanaHistorialPujas.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione una subasta");
         }
         
     }//GEN-LAST:event_btnHistorialPujasActionPerformed
@@ -320,7 +331,6 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
     private void cbxSubcategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ItemStateChanged
         SubCategoria subcat = (SubCategoria) modeloSubcat3.getSelectedItem();
-        //System.out.println(subcat.getId());
         if(modeloSubcat3.getSelectedItem() != null){llenarJTable(subcat.getId());}
         else{vaciarJTable();}
         
@@ -382,18 +392,18 @@ public final class ListaSubastas extends javax.swing.JFrame {
         
         listaSubastas = subastaController.listarSubastas(idSubcat);
         if(idSubcat>0){  //Validar aqui bien
-        if(!listaSubastas.isEmpty()){
-            for (int i = 0; i < listaSubastas.size(); i++){
-                    
-                    modelo.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
-                     listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
-                    listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  
-                    jTableSubastas.setModel(modelo);
-            }       
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
-        }
+            if(!listaSubastas.isEmpty()){
+                for (int i = 0; i < listaSubastas.size(); i++){
+
+                        modelo.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
+                         listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
+                        listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  
+                        jTableSubastas.setModel(modelo);
+                }       
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
+            }
         }
     }
     
