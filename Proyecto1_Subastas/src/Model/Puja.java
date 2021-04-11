@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Dell
  */
 public class Puja {
-    private double id;
+    private double id=-1;
     private double compradorId;
     private String nombreComprador;
     private double subastaId;
@@ -30,6 +30,12 @@ public class Puja {
         this.fecha = fecha;
     }
 
+    public Puja(double compradorId,double subastaId, double precio) {
+        this.compradorId = compradorId;
+        this.subastaId = subastaId;
+        this.precio = precio;
+    }
+    
     public double getId() {
         return id;
     }

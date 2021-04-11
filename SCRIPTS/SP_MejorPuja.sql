@@ -13,7 +13,7 @@ create or replace NONEDITIONABLE PROCEDURE SP_MejorPuja(
 IS
 BEGIN
     OPEN cursor FOR
-    SELECT "ID"
+    SELECT "ID",
            "PRECIO" 
     FROM (
        SELECT

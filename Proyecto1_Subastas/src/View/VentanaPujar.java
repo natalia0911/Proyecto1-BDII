@@ -6,9 +6,13 @@
 package View;
 
 import Controller.PujaController;
+import Controller.UsuarioController;
 import Model.Puja;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,21 +33,16 @@ public class VentanaPujar extends javax.swing.JFrame {
     
     public VentanaPujar(double idSubasta) throws SQLException {
         initComponents();
-        System.out.println(idSubasta);
         this.idSubasta = idSubasta;
         pujaController = new PujaController();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTablePujas.getModel();
         llenarJTable(idSubasta);
-        
     }
 
     private VentanaPujar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,10 +56,9 @@ public class VentanaPujar extends javax.swing.JFrame {
         jTablePujas = new javax.swing.JTable();
         lblTituloTiempo = new javax.swing.JLabel();
         lblTimeleft = new javax.swing.JLabel();
-        lblPrecioTitulo = new javax.swing.JLabel();
-        jTxtCantPujar = new javax.swing.JTextField();
+        lblCantPujar = new javax.swing.JLabel();
+        txtCantPujar = new javax.swing.JTextField();
         btnPujar = new javax.swing.JButton();
-        lblCantPujar1 = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -93,10 +91,15 @@ public class VentanaPujar extends javax.swing.JFrame {
 
         lblTimeleft.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        lblPrecioTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblPrecioTitulo.setText("Cantidad a pujar: ");
+        lblCantPujar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblCantPujar.setText("Cantidad a pujar: ");
 
-        jTxtCantPujar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCantPujar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCantPujar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantPujarActionPerformed(evt);
+            }
+        });
 
         btnPujar.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnPujar.setText("Pujar");
@@ -105,9 +108,6 @@ public class VentanaPujar extends javax.swing.JFrame {
                 btnPujarActionPerformed(evt);
             }
         });
-
-        lblCantPujar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblCantPujar1.setText("Cantidad a pujar: ");
 
         lblPrecio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -118,17 +118,17 @@ public class VentanaPujar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPrecioTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(256, 256, 256)
+                                .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -136,11 +136,6 @@ public class VentanaPujar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblTimeleft, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(47, 47, 47)
-                    .addComponent(lblCantPujar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(895, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,28 +149,41 @@ public class VentanaPujar extends javax.swing.JFrame {
                             .addComponent(lblTituloTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTimeleft, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jTxtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(lblPrecioTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(143, 143, 143)
+                        .addComponent(lblCantPujar)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtCantPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
                         .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
                         .addComponent(btnPujar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(114, 114, 114)
-                    .addComponent(lblCantPujar1)
-                    .addContainerGap(445, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
-        System.out.println(pujaController.listarPujas(idSubasta));
+
+        try {
+            UsuarioController uc = new UsuarioController();
+            double idUser = uc.getUsuario().getId();
+            double precio = Double.parseDouble(txtCantPujar.getText());
+            if(pujaController.insertarPuja(idUser,idSubasta,precio)){
+                JOptionPane.showMessageDialog(null, "Puja realizada");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "La puja debe ser de un monto mayor a "+String.valueOf(pujaController.precioNecesarioPuja(idSubasta, precio)));
+            }
+            llenarJTable(idSubasta);
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(VentanaPujar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPujarActionPerformed
+
+    private void txtCantPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantPujarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantPujarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,6 +223,7 @@ public class VentanaPujar extends javax.swing.JFrame {
     
     private void llenarJTable(double idSubcat){
         
+        vaciarJTable();
         listaPuja = pujaController.listarPujas(idSubasta);
         if(!listaPuja.isEmpty()){
             for (int i = 0; i < listaPuja.size(); i++){
@@ -226,19 +235,24 @@ public class VentanaPujar extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "No hay pujas en esta subasta");
         }
-        }
+    }
     
+    private void vaciarJTable(){
+    
+        DefaultTableModel temp = (DefaultTableModel) jTablePujas.getModel();
+        temp.setRowCount(0);
+    
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPujar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePujas;
-    private javax.swing.JTextField jTxtCantPujar;
-    private javax.swing.JLabel lblCantPujar1;
+    private javax.swing.JLabel lblCantPujar;
     private javax.swing.JLabel lblPrecio;
-    private javax.swing.JLabel lblPrecioTitulo;
     private javax.swing.JLabel lblTimeleft;
     private javax.swing.JLabel lblTituloTiempo;
+    private javax.swing.JTextField txtCantPujar;
     // End of variables declaration//GEN-END:variables
 }

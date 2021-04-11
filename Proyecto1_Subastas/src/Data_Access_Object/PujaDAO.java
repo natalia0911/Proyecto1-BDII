@@ -25,7 +25,7 @@ public class PujaDAO {
     }
     
     
-        public boolean InsertarSubastas(Puja puja){
+        public boolean insertarPuja(Puja puja){
     
         /**
          * Funcion: Inserta una puja a la BD
@@ -84,5 +84,32 @@ public class PujaDAO {
             System.out.println("Error: " + ex.getMessage());
         } 
         return pujas;
+    }
+    
+    
+     public Puja getMejorPuja(double subastaId){
+        
+        Puja puja = new Puja();
+        try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_MejorPuja (?,?)}");
+             // Definimos los tipos de los parametros de salida del procedimiento almacenado
+            cst.setDouble(1, subastaId);
+            cst.registerOutParameter(2, OracleTypes.CURSOR);
+            // Ejecuta el procedimiento almacenado
+            cst.execute();
+            // Se obtienen la salida del procedimineto almacenado
+            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+         
+            while(result.next()){
+                puja.setId(result.getDouble(1));
+                puja.setPrecio(result.getDouble(2));
+            }
+            return puja;
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } 
+        return puja;
     }
 }

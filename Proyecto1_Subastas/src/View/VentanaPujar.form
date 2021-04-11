@@ -25,23 +25,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblPrecioTitulo" min="-2" pref="220" max="-2" attributes="0"/>
-                          <Component id="jTxtCantPujar" min="-2" pref="238" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                       <Component id="btnPujar" min="-2" pref="179" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="lblPrecio" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblCantPujar" min="-2" pref="220" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
+                              <Component id="lblPrecio" min="-2" pref="127" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtCantPujar" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="294" max="32767" attributes="0"/>
+              <EmptySpace pref="130" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="544" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -51,13 +51,6 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Component id="lblCantPujar1" min="-2" pref="220" max="-2" attributes="0"/>
-                  <EmptySpace pref="895" max="32767" attributes="0"/>
-              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,24 +68,17 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="jTxtCantPujar" min="-2" pref="42" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="lblPrecioTitulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                      <Component id="lblCantPujar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txtCantPujar" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="lblPrecio" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="btnPujar" min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-                  <Component id="lblCantPujar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="445" max="32767" attributes="0"/>
-              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -149,7 +135,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPrecioTitulo">
+    <Component class="javax.swing.JLabel" name="lblCantPujar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -157,12 +143,15 @@
         <Property name="text" type="java.lang.String" value="Cantidad a pujar: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtCantPujar">
+    <Component class="javax.swing.JTextField" name="txtCantPujar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCantPujarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPujar">
       <Properties>
@@ -174,14 +163,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPujarActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCantPujar1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="24" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Cantidad a pujar: "/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPrecio">
       <Properties>

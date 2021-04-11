@@ -42,6 +42,10 @@ public class UsuarioController {
         return Usuario_Singleton.UsuarioSingleton().getUsuario().isAdmin();
     }
     
+    public Usuario getUsuario(){
+        return Usuario_Singleton.UsuarioSingleton().getUsuario();
+    }
+    
     public boolean insertarUsuario(String nombre, int cedula, String direccion,String correo, boolean esAdmin, String alias,String contrasennia){
 
         Usuario user = new Usuario(cedula,nombre,direccion,esAdmin,alias,contrasennia,correo);

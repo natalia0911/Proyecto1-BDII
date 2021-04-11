@@ -526,8 +526,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
     
     private void setearParametros(){
         System.out.println(Parametros_Singleton.Parametros().getMontoMinimo());
-        double perc = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
-        double min = Parametros_Singleton.Parametros().getPorcentaje().getValue();
+        double perc = Parametros_Singleton.Parametros().getPorcentaje().getValue();
+        double min = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
        
         txtPorcentaje.setText(String.valueOf(perc));
         txtIncremento.setText(String.valueOf(min));
