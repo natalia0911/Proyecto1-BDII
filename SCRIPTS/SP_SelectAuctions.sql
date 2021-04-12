@@ -15,7 +15,7 @@ BEGIN
      SELECT 
         S."ID"
        ,S."USUARIOID"
-       ,U."NOMBRE"
+       ,U."ALIAS"
        ,S."SUBCATEGORIAID"
        ,C."NOMBRE"
        ,S."PRECIOINICIAL"

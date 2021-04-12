@@ -15,7 +15,7 @@ BEGIN
     SELECT 
         P."ID"
        ,P."COMPRADORID"
-       ,U."NOMBRE"
+       ,U."ALIAS"
        ,P."SUBASTAID"
        ,P."PRECIO"
        ,P."FECHA"

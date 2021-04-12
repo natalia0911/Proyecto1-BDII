@@ -57,12 +57,14 @@ public class PujaController {
         System.out.println("porcentaje"+Parametros_Singleton.Parametros().getPorcentaje().getValue());
         if(getMejorPuja(subastaId).getId()>=0){
             double porcentaje = Parametros_Singleton.Parametros().getPorcentaje().getValue()/100;
+            double mejoraMinima = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
             double mejorPrecio = getMejorPuja(subastaId).getPrecio();
-            double mejora = (porcentaje*mejorPrecio)+mejorPrecio;
-            System.out.println(porcentaje);
-            System.out.println(mejorPrecio);
-            System.out.println(mejora);
-            if(precio>mejora){
+            
+            double precioConPorcentaje = (porcentaje*mejorPrecio)+mejorPrecio;
+            double precioConMejora = mejoraMinima+mejorPrecio;
+            double max = Math.max(precioConPorcentaje,precioConMejora);
+
+            if(precio>max){
                  System.out.println("True de verificar puja");
                 return true;
             }
@@ -73,8 +75,11 @@ public class PujaController {
     public double precioNecesarioPuja(double subastaId,double precio) throws ParseException{
         
         double porcentaje = Parametros_Singleton.Parametros().getPorcentaje().getValue()/100;
+        double mejoraMinima = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
         double mejorPrecio = getMejorPuja(subastaId).getPrecio();
-        double mejora = (porcentaje*mejorPrecio)+mejorPrecio;
-        return mejora;
+            
+        double precioConPorcentaje = (porcentaje*mejorPrecio)+mejorPrecio;
+        double precioConMejora = mejoraMinima+mejorPrecio;
+        return Math.max(precioConPorcentaje,precioConMejora);
     }
 }
