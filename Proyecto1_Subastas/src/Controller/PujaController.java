@@ -50,26 +50,16 @@ public class PujaController {
         return pujaDAO.getMejorPuja(subastaId);
     }
     
-    public boolean verificarPuja(double subastaId,double precio) throws ParseException{
-        
-        System.out.println("que pex en verificar puja");
-        System.out.println("ID"+String.valueOf(getMejorPuja(subastaId).getId()));
-        System.out.println("porcentaje"+Parametros_Singleton.Parametros().getPorcentaje().getValue());
-        if(getMejorPuja(subastaId).getId()>=0){
-            double porcentaje = Parametros_Singleton.Parametros().getPorcentaje().getValue()/100;
-            double mejoraMinima = Parametros_Singleton.Parametros().getMontoMinimo().getValue();
-            double mejorPrecio = getMejorPuja(subastaId).getPrecio();
-            
-            double precioConPorcentaje = (porcentaje*mejorPrecio)+mejorPrecio;
-            double precioConMejora = mejoraMinima+mejorPrecio;
-            double max = Math.max(precioConPorcentaje,precioConMejora);
-
-            if(precio>max){
-                 System.out.println("True de verificar puja");
-                return true;
+    public boolean verificarPuja(ArrayList<Puja> listaPuja, double precio) throws ParseException{
+            int i;
+            double max = 0;
+            for(i=0; i<listaPuja.size(); i++){
+                if(max <= listaPuja.get(i).getPrecio()){
+                    max = listaPuja.get(i).getPrecio();
+                }
             }
-        }
-        return false;
+            
+        return true;
     }
     
     public double precioNecesarioPuja(double subastaId,double precio) throws ParseException{
