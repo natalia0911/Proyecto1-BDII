@@ -31,11 +31,11 @@ public class PujaController {
     }
     
 
-    public boolean insertarPuja(double compradorId, double subastaId, double precio) throws ParseException{
+    public boolean insertarPuja(double compradorId, double subastaId, double precio, ArrayList<Puja> listaPuja) throws ParseException{
  
         Puja Puja = new Puja(compradorId,subastaId,precio);
         System.out.println("antes del if en puja controller");
-       if (verificarPuja(subastaId,precio)){
+       if (verificarPuja(listaPuja,precio)){
             if(pujaDAO.insertarPuja(Puja)){
                 System.out.println("Se insertó la puja");
                 return true;
@@ -59,7 +59,7 @@ public class PujaController {
                 }
             }
             
-        return true;
+        return max < precio;
     }
     
     public double precioNecesarioPuja(double subastaId,double precio) throws ParseException{

@@ -169,10 +169,7 @@ public class VentanaPujar extends javax.swing.JFrame {
             UsuarioController uc = new UsuarioController();
             double idUser = uc.getUsuario().getId();
             double precio = Double.parseDouble(txtCantPujar.getText());
-            System.out.println(idUser);
-            System.out.println(idSubasta);
-            System.out.println(precio);
-            if(pujaController.insertarPuja(idUser,idSubasta,precio)){
+            if(pujaController.insertarPuja(idUser,idSubasta,precio,listaPuja)){
                 JOptionPane.showMessageDialog(null, "Puja realizada");
             }
             else{
