@@ -3,9 +3,9 @@ IS
 BEGIN
 
     UPDATE SUBASTA S
-    
+
     SET    IDGANADOR = (SELECT COMPRADORID FROM PUJAS P WHERE S.ID = p.subastaid and rownum = 1)
-    
+
     WHERE FECHAFIN <= SYSDATE;
 
     INSERT INTO HISTORIALCOMPRADOR
@@ -15,21 +15,11 @@ BEGIN
         IDSUBASTA,
         CALIFICACION
     )
-    VALUES
-    (
-        (SELECT S.IDGANADOR
+        SELECT S.IDGANADOR, S.USUARIOID, S.ID, 5
         FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
-        (SELECT s.usuarioid
-        FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
-        (SELECT S.ID
-        FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
-        
-        5
-    );
-    
+        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1;
+
+
     INSERT INTO HISTORIALVENDEDOR
     (
         IDVENDEDOR,
@@ -37,26 +27,16 @@ BEGIN
         IDSUBASTA,
         CALIFICACION
     )
-    VALUES
-    (
-        (SELECT s.usuarioid
-        FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
-        (SELECT S.IDGANADOR
-        FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
-        (SELECT S.ID
-        FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1),
         
-        5
-    );
+        SELECT S.USUARIOID, S.IDGANADOR, S.ID, 5
+        FROM SUBASTA S
+        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 0 and rownum = 1;
 
     UPDATE SUBASTA S
-    
+
     SET     ACTIVA = 1,
             IDGANADOR = (SELECT COMPRADORID FROM PUJAS P WHERE S.ID = p.subastaid and rownum = 1)
-    
+
     WHERE FECHAFIN <= SYSDATE;
 
 
