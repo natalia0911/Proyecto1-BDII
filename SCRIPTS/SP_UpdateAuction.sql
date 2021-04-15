@@ -8,13 +8,16 @@
 
 CREATE OR REPLACE PROCEDURE SP_UpdateAuction(
        pId IN SUBASTA.ID%TYPE,
+       pIdGanador SUBASTA.IDGANADOR%TYPE,
        pPrecioFinal IN SUBASTA.PRECIOFINAL%TYPE)
 IS
 BEGIN
     UPDATE SUBASTA 
     SET
             PRECIOFINAL = pPrecioFinal
+           ,IDGANADOR = pIdGanador
            ,ACTIVA = 0
+           
     WHERE ID = pId;
 COMMIT;
 EXCEPTION

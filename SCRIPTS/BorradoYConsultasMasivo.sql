@@ -14,7 +14,7 @@ SELECT * FROM HistorialVendedor;
 SELECT * FROM IMAGENES;
 SELECT * FROM SYSTEMPARAMETERS;
 
---ELIMINAR TABLAS
+--//////////////////ELIMINAR TABLAS/////////////////////////
 DROP TABLE HistorialVendedor;
 DROP TABLE HistorialComprador;
 DROP TABLE Pujas;
@@ -23,6 +23,7 @@ DROP TABLE Telefono;
 DROP TABLE Usuario;
 DROP TABLE SubCategoria;
 DROP TABLE Categoria;
+--//////////////////ELIMINAR TABLAS/////////////////////////
 
 --Reiniciar identities y borrar datos
 DELETE FROM USUARIO;
@@ -53,8 +54,17 @@ ALTER TABLE HistorialVendedor MODIFY(ID GENERATED AS IDENTITY (START WITH 1));
 --Cambiar campo a permitir null
 alter table Subasta modify FOTOITEM null;
 
+alter table Subasta add IDGANADOR DECIMAL NULL;
+alter table Subasta
+  add constraint ID_USUARIO_POSTOR_FK
+  foreign key (IDGANADOR)
+  REFERENCES USUARIO(Id);
+  
 --Borrar campo de tabla
 alter table Subasta drop column FOTOITEM;
+alter table Subasta drop column compradorId;
+
+ALTER TABLE Subasta DROP CONSTRAINT ID_USUARIO_POSTOR_FK
 
 
 --Insertar datos prueba
