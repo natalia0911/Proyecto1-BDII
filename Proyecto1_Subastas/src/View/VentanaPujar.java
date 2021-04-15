@@ -171,11 +171,13 @@ public class VentanaPujar extends javax.swing.JFrame {
             double precio = Double.parseDouble(txtCantPujar.getText());
             if(pujaController.insertarPuja(idUser,idSubasta,precio,listaPuja)){
                 JOptionPane.showMessageDialog(null, "Puja realizada");
+                vaciarJTable();
+                llenarJTable(idSubasta);
             }
             else{
-                JOptionPane.showMessageDialog(null, "La puja debe ser de un monto mayor a "+String.valueOf(pujaController.precioNecesarioPuja(idSubasta, precio)));
+                JOptionPane.showMessageDialog(null, "La puja debe ser de un monto mayor a "+String.valueOf(pujaController.precioNecesarioPuja(listaPuja, precio)));
             }
-            llenarJTable(idSubasta);
+            
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(VentanaPujar.class.getName()).log(Level.SEVERE, null, ex);
         }
