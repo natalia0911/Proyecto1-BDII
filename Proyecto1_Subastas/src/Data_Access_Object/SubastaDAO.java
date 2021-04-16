@@ -137,5 +137,43 @@ public class SubastaDAO {
         
     }
     
+    
+    public Subasta getSubasta(double id){
+        /**
+         * Funcion: Lista las subastas que cierta subcategoria
+         * Entradas: Id de la subcategoria
+         * Salidas: lista de subastas
+         */
+        Subasta subasta = new Subasta();
+        try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuctionById (?,?)}");
+           
+             //se definen los parametros de entrada y salida
+            cst.setDouble(1, id);
+            cst.registerOutParameter(2, OracleTypes.CURSOR);
+            
+            // Ejecuta el procedimiento almacenado
+            cst.execute();
+            // Se obtienen la salida del procedimineto almacenado
+            // result contiene las filas que vienen de la BD
+            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            while(result.next()){
+                subasta.setId(result.getInt(1));
+                subasta.setUsuarioId(result.getDouble(2));
+                subasta.setSubcategoriaId(result.getInt(3));
+                subasta.setPrecioInicial(result.getDouble(4));
+            }
+            return subasta;
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } finally {
+           // con.closeConnection();
+        }
+        return subasta;
+        
+    }
+    
      
 }

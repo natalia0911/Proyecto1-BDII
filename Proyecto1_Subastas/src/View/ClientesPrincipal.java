@@ -83,7 +83,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         btnImage = new javax.swing.JButton();
         lblImage = new javax.swing.JLabel();
         btnVerSubastas = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -182,8 +181,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("No sé donde poner este boton XD");
-
         javax.swing.GroupLayout jPanelRegistrarSubastaLayout = new javax.swing.GroupLayout(jPanelRegistrarSubasta);
         jPanelRegistrarSubasta.setLayout(jPanelRegistrarSubastaLayout);
         jPanelRegistrarSubastaLayout.setHorizontalGroup(
@@ -229,10 +226,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                                 .addComponent(jDateChooserSubasta, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                                 .addComponent(txtFHora)))))
                 .addGap(86, 86, 86))
-            .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelRegistrarSubastaLayout.setVerticalGroup(
             jPanelRegistrarSubastaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,9 +261,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanelRegistrarSubastaLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(23, 23, 23)
                 .addComponent(btnVerSubastas)
                 .addGap(33, 33, 33))
         );
@@ -469,7 +460,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooserSubasta;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanelRegistrarSubasta;
     private javax.swing.JPanel jPanelSubastar;
     private javax.swing.JLabel lblCategoria;

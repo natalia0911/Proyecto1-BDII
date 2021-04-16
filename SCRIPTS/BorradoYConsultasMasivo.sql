@@ -13,6 +13,7 @@ SELECT * FROM HistorialComprador;
 SELECT * FROM HistorialVendedor;
 SELECT * FROM IMAGENES;
 SELECT * FROM SYSTEMPARAMETERS;
+SELECT * FROM PRUEBA;
 
 --//////////////////ELIMINAR TABLAS/////////////////////////
 DROP TABLE HistorialVendedor;
@@ -53,6 +54,8 @@ ALTER TABLE HistorialVendedor MODIFY(ID GENERATED AS IDENTITY (START WITH 1));
 
 --Cambiar campo a permitir null
 alter table Subasta modify FOTOITEM null;
+alter table HISTORIALCOMPRADOR modify COMENTARIO null;
+alter table HISTORIALVENDEDOR modify COMENTARIO null;
 
 alter table Subasta add IDGANADOR DECIMAL NULL;
 alter table Subasta

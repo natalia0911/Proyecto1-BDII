@@ -313,7 +313,6 @@ public final class ListaSubastas extends javax.swing.JFrame {
         * Salidas: Ninguna
         */
         Categoria cat = (Categoria) modeloCat3.getSelectedItem();
-        System.out.println(cat.getId());
         createSubCat2(cat);
     }//GEN-LAST:event_cbxCategoria3ItemStateChanged
 
@@ -402,6 +401,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
                 }       
             }
             else{
+                //No sé por qué esto sale 2 veces
                 JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
             }
         }

@@ -43,11 +43,14 @@ public class HistorialUsuarioDAO {
             while(result.next()){
                 HistorialUsuario hv = new HistorialUsuario();
                 hv.setIdVendedor(result.getDouble(1));
-                hv.setIdComprador(result.getDouble(2));
-                hv.setIdSubasta(result.getDouble(3));
-                hv.setComentario(result.getString(4));
-                hv.setCalificacion(result.getInt(5));
-      
+                hv.setNombreVendedor(result.getString(2));
+                hv.setIdComprador(result.getDouble(3));
+                hv.setNombreComprador(result.getString(4));
+                hv.setIdSubasta(result.getDouble(5));
+                hv.setPrecioBase(result.getDouble(6));
+                hv.setPrecioFinal(result.getDouble(7)); 
+                hv.setComentario(result.getString(8));
+                hv.setCalificacion(result.getInt(9));
                 hVendedor.add(hv);
             }
             return hVendedor;
@@ -77,11 +80,14 @@ public class HistorialUsuarioDAO {
             while(result.next()){
                 HistorialUsuario hc = new HistorialUsuario();
                 hc.setIdComprador(result.getDouble(1));
-                hc.setIdVendedor(result.getDouble(2));
-                hc.setIdSubasta(result.getDouble(3));
-                hc.setComentario(result.getString(4));
-                hc.setCalificacion(result.getInt(5));
-      
+                hc.setNombreComprador(result.getString(2));
+                hc.setIdVendedor(result.getDouble(3));
+                hc.setNombreVendedor(result.getString(4));
+                hc.setIdSubasta(result.getDouble(5));
+                hc.setPrecioBase(result.getDouble(6));
+                hc.setPrecioFinal(result.getDouble(7)); 
+                hc.setComentario(result.getString(8));
+                hc.setCalificacion(result.getInt(9));
                 hComprador.add(hc);
             }
             return hComprador;

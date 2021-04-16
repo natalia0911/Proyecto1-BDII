@@ -175,7 +175,7 @@ public class VentanaPujar extends javax.swing.JFrame {
                 llenarJTable(idSubasta);
             }
             else{
-                JOptionPane.showMessageDialog(null, "La puja debe ser de un monto mayor a "+String.valueOf(pujaController.precioNecesarioPuja(listaPuja, precio)));
+                JOptionPane.showMessageDialog(null, "La puja debe ser de un monto mayor a "+String.valueOf(pujaController.precioNecesarioPuja(listaPuja,precio,idSubasta)));
             }
             
         } catch (SQLException | ParseException ex) {
@@ -233,9 +233,6 @@ public class VentanaPujar extends javax.swing.JFrame {
                     modelo.addRow(new Object[]{listaPuja.get(i).getPrecio(),listaPuja.get(i).getNombreComprador()});  
                     jTablePujas.setModel(modelo);
             }       
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No hay pujas en esta subasta");
         }
     }
     

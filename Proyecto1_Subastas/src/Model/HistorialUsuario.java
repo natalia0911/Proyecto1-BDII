@@ -11,20 +11,29 @@ package Model;
  */
 public class HistorialUsuario {
     private double idComprador;
+    private String nombreComprador;
     private double idVendedor;
+    private String nombreVendedor;
     private double idSubasta;
+    private double precioBase;
+    private double precioFinal;
     private int calificacion;
     private String comentario;
+    
 
     public HistorialUsuario() {}
-    
-    public HistorialUsuario(double idComprador, double idVendedor, double idSubasta, int calificacion, String comentario) {
+
+    public HistorialUsuario(double idComprador, String nombreComprador, double idVendedor, String nombreVendedor, double idSubasta, double precioBase, double precioFinal, String comentario) {
         this.idComprador = idComprador;
+        this.nombreComprador = nombreComprador;
         this.idVendedor = idVendedor;
+        this.nombreVendedor = nombreVendedor;
         this.idSubasta = idSubasta;
-        this.calificacion = calificacion;
+        this.precioBase = precioBase;
+        this.precioFinal = precioFinal;
         this.comentario = comentario;
     }
+
 
     public double getIdComprador() {
         return idComprador;
@@ -66,6 +75,39 @@ public class HistorialUsuario {
         this.comentario = comentario;
     }
 
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
+    }
+
+    public double getPrecioFinal() {
+        return precioFinal;
+    }
+
+    public void setPrecioFinal(double precioFinal) {
+        this.precioFinal = precioFinal;
+    }
+
+    public String getNombreComprador() {
+        return nombreComprador;
+    }
+
+    public void setNombreComprador(String nombreComprador) {
+        this.nombreComprador = nombreComprador;
+    }
+
+    public String getNombreVendedor() {
+        return nombreVendedor;
+    }
+
+    public void setNombreVendedor(String nombreVendedor) {
+        this.nombreVendedor = nombreVendedor;
+    }
+
+    
     @Override
     public String toString() {
         return "HistorialUsuario{" + "idComprador=" + idComprador + ", idVendedor=" + idVendedor + ", idSubasta=" + idSubasta + ", calificacion=" + calificacion + ", cpmentario=" + comentario + '}';

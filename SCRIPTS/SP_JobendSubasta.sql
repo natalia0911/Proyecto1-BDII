@@ -9,7 +9,7 @@
 create or replace NONEDITIONABLE PROCEDURE SP_JobEndAuction
 IS
 BEGIN
-
+    -- Esta parte es para evitar ed null, pero eso lo actualiza el triger
     UPDATE SUBASTA S
 
     SET   IDGANADOR = (SELECT IDGANADOR FROM (SELECT IDGANADOR FROM PUJAS P WHERE S.ID = p.subastaid  ORDER BY P.PRECIO DESC) WHERE rownum = 1)
@@ -25,7 +25,7 @@ BEGIN
     )
         SELECT S.IDGANADOR, S.USUARIOID, S.ID, 5
         FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 1 and rownum = 1;
+        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 1 and S.IDGANADOR is not null;
 
 
     INSERT INTO HISTORIALVENDEDOR
@@ -38,7 +38,7 @@ BEGIN
         
         SELECT S.USUARIOID, S.IDGANADOR, S.ID, 5
         FROM SUBASTA S
-        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 1 and rownum = 1;
+        WHERE FECHAFIN <= SYSDATE and S.ACTIVA = 1 and S.IDGANADOR is not null;
 
     UPDATE SUBASTA S
 
