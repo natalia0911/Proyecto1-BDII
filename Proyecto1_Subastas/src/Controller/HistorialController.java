@@ -31,4 +31,15 @@ public class HistorialController {
         return hUsuarioDao.historialComprador(idComprador);
     }
     
+    public ArrayList<HistorialUsuario> getMiHistorialVendedor(double idVendedor)
+    {
+        return hUsuarioDao.mihistorialVendedor(idVendedor);
+    }
+                   
+    public ArrayList<HistorialUsuario> getMiHistorialComprador(double idComprador)
+    {
+        return hUsuarioDao.mihistorialComprador(idComprador);
+    }
+    
+    
 }

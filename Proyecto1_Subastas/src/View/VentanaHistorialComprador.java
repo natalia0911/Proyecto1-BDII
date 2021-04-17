@@ -63,7 +63,7 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Subastador", "Precio base", "Precio final", "Rating", "Comentario"
+                "Vendedor", "Precio base", "Precio final", "Rating", "Comentario"
             }
         ) {
             boolean[] canEdit = new boolean [] {

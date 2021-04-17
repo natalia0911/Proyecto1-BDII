@@ -46,15 +46,13 @@ public class MisComentarios extends javax.swing.JFrame {
     private void llenarJTable(){
         
         vaciarJTable();
-        lista = miHistorial.historialComprador(miID);
-        lista.addAll(miHistorial.historialVendedor(miID));
+        lista = miHistorial.mihistorialComprador(miID);
+        lista.addAll(miHistorial.mihistorialVendedor(miID));
         lista.sort(new DateSorter());
-        System.out.println(lista);
-        System.out.println("shittt");
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),
-                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion(), replaceNull(lista.get(i).getComentario()), lista.get(i).getFecha()});  
+                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion(), replaceNull(lista.get(i).getComentario()), lista.get(i).getFecha(),lista.get(i).getTipo()});  
                 jTableHistorial.setModel(modelo);
             }       
         }
@@ -100,11 +98,11 @@ public class MisComentarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Subastador", "Precio base", "Precio final", "Rating", "Comentario", "Fecha"
+                "Usuario", "Precio base", "Precio final", "Rating", "Comentario", "Fecha", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
