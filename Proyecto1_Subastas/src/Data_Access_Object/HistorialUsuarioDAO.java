@@ -180,5 +180,51 @@ public class HistorialUsuarioDAO {
         return hComprador;
         
     }
+    
+    
+    public void UpdateComentarioVendedor(double idVendedor, double idComprador, double idSubasta, String Comentario, double Rating) throws SQLException{
+    
+    try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateHistorialVendedor (?,?,?,?,?)}");
+           
+             //se definen los parametros de entrada y salida
+            cst.setDouble(1, idVendedor);
+            cst.setDouble(2, idComprador);
+            cst.setDouble(3, idSubasta);
+            cst.setString(4, Comentario);
+            cst.setDouble(5, Rating);
+            
+            // Ejecuta el procedimiento almacenado
+            cst.execute();
+    
+        }catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } 
+    }
+    
+    public void UpdateComentarioComprador(double idVendedor, double idComprador, double idSubasta, String Comentario, double Rating) throws SQLException{
+    
+    try {
+            
+            // Llamada al procedimiento almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateHistorialComprador (?,?,?,?,?)}");
+           
+             //se definen los parametros de entrada y salida
+            cst.setDouble(1, idVendedor);
+            cst.setDouble(2, idComprador);
+            cst.setDouble(3, idSubasta);
+            cst.setString(4, Comentario);
+            cst.setDouble(5, Rating);
+            
+            // Ejecuta el procedimiento almacenado
+            cst.execute();
+    
+        }catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } 
+    }
+    
  
 }

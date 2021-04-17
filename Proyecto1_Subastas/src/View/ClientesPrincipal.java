@@ -9,8 +9,10 @@ import Controller.CategoriaController;
 import Controller.ImageChooser;
 import Controller.SubastaController;
 import Controller.UsuarioController;
+import Data_Access_Object.HistorialUsuarioDAO;
 import Model.Categoria;
 import Model.FormatosUtilitaria;
+import Model.HistorialUsuario;
 import Model.SubCategoria;
 import Model.Subasta;
 import Model.TextPrompt;
@@ -24,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,17 +44,21 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private SubastaController subastaController;
     private Image img;
     private Usuario usuario;
+    private HistorialUsuarioDAO miHistorial;
+    private ArrayList<HistorialUsuario> lista;
 
     public ClientesPrincipal() throws SQLException {
         initComponents();
         categoriaController = new CategoriaController();
         subastaController = new SubastaController();
         modeloCat =  new DefaultComboBoxModel();
+        miHistorial = new HistorialUsuarioDAO();
         modeloCat = (DefaultComboBoxModel)cbxCategoria.getModel();
         modeloSubcat =  new DefaultComboBoxModel();
         modeloSubcat = (DefaultComboBoxModel)cbxSubcategoria.getModel();
         llenarComboCategorias();
         placeHolder();
+        
       
     }
 
@@ -348,7 +355,20 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnImageActionPerformed
 
-    public void setUsuario(Usuario usuario){this.usuario = usuario;}
+    public void setUsuario(Usuario usuario){this.usuario = usuario;
+    notifiNulls();}
+    
+    private void notifiNulls(){
+        lista = miHistorial.mihistorialComprador(usuario.getId());
+        lista.addAll(miHistorial.mihistorialVendedor(usuario.getId()));
+    
+        for(int i = 0; i < lista.size(); i++){
+            if(lista.get(i).getComentario() == null){
+                JOptionPane.showMessageDialog(null, "Tienes comentarios sin escribir desde la ultima vez que iniciaste sesion");
+                break;
+            }
+        }
+    }
     
     private void txtFHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFHoraActionPerformed
         // TODO add your handling code here:

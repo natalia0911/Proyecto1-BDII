@@ -11,6 +11,8 @@ import Model.HistorialUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,13 +37,24 @@ public class MisComentarios extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableHistorial.getModel();
         llenarJTable();
+        quitarNulos();
     }
     
     private MisComentarios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    private void quitarNulos() throws SQLException{
+        for(int i = 0; i < lista.size(); i++){
+            if(lista.get(i).getComentario() == null){
+                if(lista.get(i).getTipo().equals("Vendedor")){
+                    miHistorial.UpdateComentarioVendedor(lista.get(i).getIdVendedor(),lista.get(i).getIdComprador(),lista.get(i).getIdSubasta()," ",lista.get(i).getCalificacion());
+                }else{
+                    miHistorial.UpdateComentarioComprador(lista.get(i).getIdVendedor(),lista.get(i).getIdComprador(),lista.get(i).getIdSubasta()," ",lista.get(i).getCalificacion());
+                }
+            }
+        }
+    }
     
     private void llenarJTable(){
         
@@ -138,6 +151,11 @@ public class MisComentarios extends javax.swing.JFrame {
         lblComentario.setText("Mi comentario");
 
         btnCambiarComent.setText("Guardar");
+        btnCambiarComent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarComentActionPerformed(evt);
+            }
+        });
 
         txtAComentario.setColumns(20);
         txtAComentario.setRows(5);
@@ -224,6 +242,22 @@ public class MisComentarios extends javax.swing.JFrame {
         txtAComentario.setText(lista.get(jTableHistorial.getSelectedRow()).getComentario());
         sldCalificacion.setValue(lista.get(jTableHistorial.getSelectedRow()).getCalificacion());
     }//GEN-LAST:event_jTableHistorialMouseClicked
+
+    private void btnCambiarComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarComentActionPerformed
+        
+        int pos = jTableHistorial.getSelectedRow();
+        
+        
+            try {
+                if(lista.get(pos).getTipo().equals("Vendedor")){
+                    miHistorial.UpdateComentarioVendedor(lista.get(pos).getIdVendedor(),lista.get(pos).getIdComprador(),lista.get(pos).getIdSubasta(),txtAComentario.getText(),sldCalificacion.getValue());
+                }else{
+                    miHistorial.UpdateComentarioComprador(lista.get(pos).getIdVendedor(),lista.get(pos).getIdComprador(),lista.get(pos).getIdSubasta(),txtAComentario.getText(),sldCalificacion.getValue());
+                } 
+            }catch (SQLException ex) {
+                Logger.getLogger(MisComentarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCambiarComentActionPerformed
 
     /**
      * @param args the command line arguments

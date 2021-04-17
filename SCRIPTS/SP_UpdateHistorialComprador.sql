@@ -6,8 +6,10 @@
 --- Descripción: Actualizar historial de comprador
 --------------------------------------------------------------------------
 
-CREATE OR REPLACE PROCEDURE SP_UpdateHistorialComprador(
-       pId IN HISTORIALCOMPRADOR.IDCOMPRADOR%TYPE,
+create or replace NONEDITIONABLE PROCEDURE SP_UpdateHistorialComprador(
+       pId IN HISTORIALCOMPRADOR.IDVENDEDOR%TYPE,
+       pComprador IN HISTORIALCOMPRADOR.idcomprador%TYPE,
+       pSubasta IN HISTORIALCOMPRADOR.idsubasta%TYPE,
        pComentario IN HISTORIALCOMPRADOR.COMENTARIO%TYPE,
        pCalificacion IN HISTORIALCOMPRADOR.CALIFICACION%TYPE)
 IS
@@ -16,12 +18,12 @@ BEGIN
     SET
             COMENTARIO = pComentario
            ,CALIFICACION = pCalificacion
-           
-    WHERE IDCOMPRADOR = pId;
+
+    WHERE IDVENDEDOR = pId and IDCOMPRADOR = pComprador and IDSUBASTA = pSubasta;
 COMMIT;
 EXCEPTION
    WHEN OTHERS THEN
    ROLLBACK;
-    
+
 END;
 /
