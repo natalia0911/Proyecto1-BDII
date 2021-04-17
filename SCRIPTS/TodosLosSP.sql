@@ -619,6 +619,60 @@ END;
 
 /
 --------------------------------------------------------
+--  DDL for Procedure SP_UPDATEHISTORIALCOMPRADOR
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_UPDATEHISTORIALCOMPRADOR" (
+       pId IN HISTORIALCOMPRADOR.IDVENDEDOR%TYPE,
+       pComprador IN HISTORIALCOMPRADOR.idcomprador%TYPE,
+       pSubasta IN HISTORIALCOMPRADOR.idsubasta%TYPE,
+       pComentario IN HISTORIALCOMPRADOR.COMENTARIO%TYPE,
+       pCalificacion IN HISTORIALCOMPRADOR.CALIFICACION%TYPE)
+IS
+BEGIN
+    UPDATE HISTORIALCOMPRADOR 
+    SET
+            COMENTARIO = pComentario
+           ,CALIFICACION = pCalificacion
+
+    WHERE IDVENDEDOR = pId and IDCOMPRADOR = pComprador and IDSUBASTA = pSubasta;
+COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure SP_UPDATEHISTORIALVENDEDOR
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "NATALIA"."SP_UPDATEHISTORIALVENDEDOR" (
+       pId IN HISTORIALVENDEDOR.IDVENDEDOR%TYPE,
+       pComprador IN historialvendedor.idcomprador%TYPE,
+       pSubasta IN historialvendedor.idsubasta%TYPE,
+       pComentario IN HISTORIALVENDEDOR.COMENTARIO%TYPE,
+       pCalificacion IN HISTORIALVENDEDOR.CALIFICACION%TYPE)
+IS
+BEGIN
+    UPDATE HISTORIALCOMPRADOR 
+    SET
+            COMENTARIO = pComentario
+           ,CALIFICACION = pCalificacion
+
+    WHERE IDVENDEDOR = pId and IDCOMPRADOR = pComprador and IDSUBASTA = pSubasta;
+COMMIT;
+EXCEPTION
+   WHEN OTHERS THEN
+   ROLLBACK;
+
+END;
+
+/
+--------------------------------------------------------
 --  DDL for Procedure SP_UPDATEUSER
 --------------------------------------------------------
 set define off;
