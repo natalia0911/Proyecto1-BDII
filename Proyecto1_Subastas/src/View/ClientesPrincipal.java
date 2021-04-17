@@ -428,6 +428,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         try {
                 VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(usuario.getId());
+                ventanaComprador.addVendedor(usuario.getId());
                 ventanaComprador.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(VentanaHistorialPujas.class.getName()).log(Level.SEVERE, null, ex);

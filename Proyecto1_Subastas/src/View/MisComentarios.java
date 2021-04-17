@@ -5,10 +5,12 @@
  */
 package View;
 
+import Controller.DateSorter;
 import Data_Access_Object.HistorialUsuarioDAO;
 import Model.HistorialUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,15 +23,15 @@ public class MisComentarios extends javax.swing.JFrame {
      * Creates new form MisComentarios
      */
     
-    private double compradorId;
-    private HistorialUsuarioDAO historialComprador;
+    private double miID;
+    private HistorialUsuarioDAO miHistorial;
     private DefaultTableModel modelo;
      private ArrayList<HistorialUsuario> lista;
      
-    public MisComentarios(double compradorID) throws SQLException {
+    public MisComentarios(double miID) throws SQLException {
         initComponents();
-        this.compradorId = compradorId;
-        historialComprador = new HistorialUsuarioDAO();
+        this.miID = miID;
+        miHistorial = new HistorialUsuarioDAO();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableHistorial.getModel();
         llenarJTable();
@@ -44,17 +46,25 @@ public class MisComentarios extends javax.swing.JFrame {
     private void llenarJTable(){
         
         vaciarJTable();
-        lista = historialComprador.historialComprador(compradorId);
+        lista = miHistorial.historialComprador(miID);
+        lista.addAll(miHistorial.historialVendedor(miID));
+        lista.sort(new DateSorter());
         System.out.println(lista);
         System.out.println("shittt");
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),
-                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion()});  
+                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion(), replaceNull(lista.get(i).getComentario()), lista.get(i).getFecha()});  
                 jTableHistorial.setModel(modelo);
             }       
         }
     }
+    
+    private String replaceNull(String entrada){
+        if(entrada==null){return "Sin comentario";}
+        else return entrada;
+    }
+    
     private void vaciarJTable(){
     
         DefaultTableModel temp = (DefaultTableModel) jTableHistorial.getModel();
@@ -81,7 +91,7 @@ public class MisComentarios extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAComentario = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -90,22 +100,27 @@ public class MisComentarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Subastador", "Precio base", "Precio final", "Rating", "Comentario"
+                "Subastador", "Precio base", "Precio final", "Rating", "Comentario", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableHistorial.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+        jTableHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableHistorialMouseClicked(evt);
             }
+        });
+        jTableHistorial.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTableHistorialCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jTableHistorial);
@@ -139,24 +154,28 @@ public class MisComentarios extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblComentario)
+                                .addGap(100, 100, 100))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblCalificacion)
+                                        .addGap(83, 83, 83))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(sldCalificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(16, 16, 16))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCalificacion)
-                        .addGap(119, 119, 119))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCambiarComent)
-                        .addGap(122, 122, 122))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(sldCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblComentario)
-                        .addGap(126, 126, 126))))
+                        .addGap(105, 105, 105))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,20 +184,18 @@ public class MisComentarios extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblComentario)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(51, 51, 51)
                         .addComponent(lblCalificacion)
                         .addGap(18, 18, 18)
                         .addComponent(sldCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)
-                        .addComponent(btnCambiarComent)
-                        .addGap(59, 59, 59))))
+                        .addGap(81, 81, 81)
+                        .addComponent(btnCambiarComent)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,9 +203,9 @@ public class MisComentarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +219,13 @@ public class MisComentarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableHistorialCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTableHistorialCaretPositionChanged
-        System.out.println("Tenemos que agregar cosas aca");
+        
     }//GEN-LAST:event_jTableHistorialCaretPositionChanged
+
+    private void jTableHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHistorialMouseClicked
+        txtAComentario.setText(lista.get(jTableHistorial.getSelectedRow()).getComentario());
+        sldCalificacion.setValue(lista.get(jTableHistorial.getSelectedRow()).getCalificacion());
+    }//GEN-LAST:event_jTableHistorialMouseClicked
 
     /**
      * @param args the command line arguments

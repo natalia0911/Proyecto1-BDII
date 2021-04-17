@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author Dell
@@ -19,11 +21,13 @@ public class HistorialUsuario {
     private double precioFinal;
     private int calificacion;
     private String comentario;
+    private Date fecha;
+    private String tipo;
     
 
     public HistorialUsuario() {}
 
-    public HistorialUsuario(double idComprador, String nombreComprador, double idVendedor, String nombreVendedor, double idSubasta, double precioBase, double precioFinal, String comentario) {
+    public HistorialUsuario(double idComprador, String nombreComprador, double idVendedor, String nombreVendedor, double idSubasta, double precioBase, double precioFinal, String comentario, Date fecha, String tipo) {
         this.idComprador = idComprador;
         this.nombreComprador = nombreComprador;
         this.idVendedor = idVendedor;
@@ -32,12 +36,15 @@ public class HistorialUsuario {
         this.precioBase = precioBase;
         this.precioFinal = precioFinal;
         this.comentario = comentario;
+        this.fecha = fecha;
+        this.tipo = tipo;
     }
 
 
     public double getIdComprador() {
         return idComprador;
     }
+    
 
     public void setIdComprador(double idComprador) {
         this.idComprador = idComprador;
@@ -106,11 +113,17 @@ public class HistorialUsuario {
     public void setNombreVendedor(String nombreVendedor) {
         this.nombreVendedor = nombreVendedor;
     }
+    
+    public Date getFecha(){return fecha;}
+    public void setFecha(Date fecha){this.fecha = fecha;}
+    
+    public String getTipo(){return tipo;}
+    public void setTipo(String tipo){this.tipo = tipo;}
 
     
     @Override
     public String toString() {
-        return "HistorialUsuario{" + "idComprador=" + idComprador + ", idVendedor=" + idVendedor + ", idSubasta=" + idSubasta + ", calificacion=" + calificacion + ", cpmentario=" + comentario + '}';
+        return "HistorialUsuario{" + "idComprador=" + idComprador + ", idVendedor=" + idVendedor + ", idSubasta=" + idSubasta + ", calificacion=" + calificacion + ", comentario=" + comentario + ", fecha=" + fecha + '}'+ ", tipo="+ tipo;
     }
 
     

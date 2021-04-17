@@ -132,15 +132,33 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
         
         vaciarJTable();
         lista = historialComprador.historialComprador(compradorId);
-        System.out.println(lista);
-        System.out.println("shittt");
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),
-                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion()});  
+                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion(), replaceNull(lista.get(i).getComentario())});  
                 jTableHistorial.setModel(modelo);
             }       
         }
+    }
+    
+    public void addVendedor(double idVendedor){
+    
+           lista = historialComprador.historialVendedor(idVendedor);
+        if(!lista.isEmpty()){
+            for (int i = 0; i < lista.size(); i++){
+                modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),
+                lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion(), replaceNull(lista.get(i).getComentario())});  
+                jTableHistorial.setModel(modelo);
+            }       
+        }
+    
+    }
+    
+    private String replaceNull(String entrada){
+        
+        if(entrada==null){return "Sin comentario";}
+        else return entrada;
+        
     }
     
     
