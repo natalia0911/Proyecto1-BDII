@@ -5,6 +5,10 @@ SELECT * FROM Subcategoria order by ID;
 SELECT * FROM USUARIO;
 SELECT * FROM Telefono;
 SELECT * FROM Subasta order by ID;
+update subasta
+set activa = 1
+where activa = 0
+
 --Para tomar la fecha y hora
 select to_char(S.FECHAINICIO, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;
 select to_char(s.fechafin, 'mm/dd/yyyy hh24:mi:ss') from Subasta S;

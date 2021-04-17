@@ -33,6 +33,7 @@ public class VentanaHistorialVendedor extends javax.swing.JFrame {
         historialVendedor = new HistorialUsuarioDAO();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableHistorial.getModel();
+        llenarJTable();
     }
 
     private VentanaHistorialVendedor() {
@@ -216,6 +217,8 @@ public class VentanaHistorialVendedor extends javax.swing.JFrame {
         
         vaciarJTable();
         lista = historialVendedor.historialVendedor(idVendedor);
+        System.out.println(lista);
+        System.out.println("shittt");
 
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
@@ -223,9 +226,6 @@ public class VentanaHistorialVendedor extends javax.swing.JFrame {
                 lista.get(i).getPrecioFinal(), lista.get(i).getCalificacion()});  
                 jTableHistorial.setModel(modelo);
             }       
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "algoooo");
         }
         
     }

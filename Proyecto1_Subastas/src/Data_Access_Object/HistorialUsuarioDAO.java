@@ -49,7 +49,7 @@ public class HistorialUsuarioDAO {
                 hv.setIdSubasta(result.getDouble(5));
                 hv.setPrecioBase(result.getDouble(6));
                 hv.setPrecioFinal(result.getDouble(7)); 
-                hv.setComentario(result.getString(8));
+               //hv.setComentario(result.getString(8));
                 hv.setCalificacion(result.getInt(9));
                 hVendedor.add(hv);
             }
@@ -86,7 +86,7 @@ public class HistorialUsuarioDAO {
                 hc.setIdSubasta(result.getDouble(5));
                 hc.setPrecioBase(result.getDouble(6));
                 hc.setPrecioFinal(result.getDouble(7)); 
-                hc.setComentario(result.getString(8));
+               // hc.setComentario(result.getString(8));
                 hc.setCalificacion(result.getInt(9));
                 hComprador.add(hc);
             }

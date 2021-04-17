@@ -22,17 +22,17 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
      * Creates new form VentanaHistorialComprador
      */
     private double compradorId;
-    private HistorialUsuarioDAO historialVendedor;
+    private HistorialUsuarioDAO historialComprador;
     private DefaultTableModel modelo;
      private ArrayList<HistorialUsuario> lista;
        
     public VentanaHistorialComprador(double compradorId) throws SQLException {
         initComponents();
         this.compradorId = compradorId;
-        historialVendedor = new HistorialUsuarioDAO();
+        historialComprador = new HistorialUsuarioDAO();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableHistorial.getModel();
-
+        llenarJTable();
     }
 
     private VentanaHistorialComprador() {
@@ -214,8 +214,9 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
     private void llenarJTable(){
         
         vaciarJTable();
-        lista = historialVendedor.historialVendedor(compradorId);
-
+        lista = historialComprador.historialComprador(compradorId);
+        System.out.println(lista);
+        System.out.println("shittt");
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),
@@ -223,10 +224,6 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
                 jTableHistorial.setModel(modelo);
             }       
         }
-        else{
-            JOptionPane.showMessageDialog(null, "algoooo");
-        }
-        
     }
     
     
