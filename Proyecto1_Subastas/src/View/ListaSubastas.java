@@ -72,7 +72,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
         cbxCategoria3 = new javax.swing.JComboBox<>();
         cbxSubcategoria3 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 

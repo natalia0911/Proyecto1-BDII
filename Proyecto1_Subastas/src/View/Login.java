@@ -174,6 +174,7 @@ public class Login extends javax.swing.JFrame {
             else{
                 try {
                     ClientesPrincipal ventanaUser = new ClientesPrincipal();
+                    ventanaUser.setUsuario(userController.getUsuario());
                     ventanaUser.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
