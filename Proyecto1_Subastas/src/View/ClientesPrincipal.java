@@ -355,8 +355,10 @@ public class ClientesPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnImageActionPerformed
 
-    public void setUsuario(Usuario usuario){this.usuario = usuario;
-    notifiNulls();}
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+        notifiNulls();
+    }
     
     private void notifiNulls(){
         lista = miHistorial.mihistorialComprador(usuario.getId());

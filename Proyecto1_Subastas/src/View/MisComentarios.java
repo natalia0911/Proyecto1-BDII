@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -246,8 +247,8 @@ public class MisComentarios extends javax.swing.JFrame {
     private void btnCambiarComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarComentActionPerformed
         
         int pos = jTableHistorial.getSelectedRow();
-        
-        
+        if (pos != -1){
+
             try {
                 if(lista.get(pos).getTipo().equals("Vendedor")){
                     miHistorial.UpdateComentarioVendedor(lista.get(pos).getIdVendedor(),lista.get(pos).getIdComprador(),lista.get(pos).getIdSubasta(),txtAComentario.getText(),sldCalificacion.getValue());
@@ -256,6 +257,11 @@ public class MisComentarios extends javax.swing.JFrame {
                 } 
             }catch (SQLException ex) {
                 Logger.getLogger(MisComentarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            llenarJTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar uan subasta");
         }
     }//GEN-LAST:event_btnCambiarComentActionPerformed
 

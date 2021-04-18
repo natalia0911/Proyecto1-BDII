@@ -13,7 +13,7 @@ create or replace NONEDITIONABLE PROCEDURE SP_UpdateHistorialVendedor(
        pCalificacion IN HISTORIALVENDEDOR.CALIFICACION%TYPE)
 IS
 BEGIN
-    UPDATE HISTORIALCOMPRADOR 
+    UPDATE HISTORIALVENDEDOR 
     SET
             COMENTARIO = pComentario
            ,CALIFICACION = pCalificacion
