@@ -10,6 +10,8 @@ import Model.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -45,13 +47,12 @@ public class UsuarioDAO {
              //se definen los parametros de entrada y salida
             cst.setString(1, alias);
             cst.setString(2, contrasennia);
-            cst.registerOutParameter(3, OracleTypes.CURSOR);
-            
+            cst.registerOutParameter(3, Types.REF_CURSOR);
             // Ejecuta el procedimiento almacenado
             cst.execute();
             // Se obtienen la salida del procedimineto almacenado
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(3);  
+            ResultSet result = (ResultSet) cst.getObject(1);
             Usuario user = new Usuario();
             while(result.next()){
                 user.setId(result.getInt(1));

@@ -26,7 +26,7 @@ public class ConnectionBD {
     
     public ConnectionBD() throws SQLException{
        
-        objConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "PRUEBA", "PRUEBA"); //CONECTA LA BASE
+        objConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "Natalia", "Hola1234"); //CONECTA LA BASE
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); //CARGA EL DRIVER DE ORACLE
     }
     
