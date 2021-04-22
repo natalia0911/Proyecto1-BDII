@@ -5,24 +5,24 @@
 --- Descripción: Actualizar historial de vendedor
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_UpdateHistorialVendedor(
+CREATE FUNCTION SP_UpdateHistorialVendedor(
        pId INT,
        pComprador INT,
        pSubasta INT,
        pComentario character varying(128),
-       pCalificacion INT)
-LANGUAGE SQL
+       pCalificacion INT) returns void
 AS $$
+BEGIN 
     UPDATE public."HistorialVendedor" AS HC 
     SET
             "Comentario" = pComentario
            ,"Calificacion" = pCalificacion
 
     WHERE HC."IdVendedor" = pId and HC."IdComprador" = pComprador and HC."IdSubasta" = pSubasta;
-$$;
-  COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
+$$
+LANGUAGE plpgsql 

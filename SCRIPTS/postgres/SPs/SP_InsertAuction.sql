@@ -5,15 +5,15 @@
 --- Descripción: Inserta una nueva subasta(auction)
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_InsertAuction(
+CREATE FUNCTION SP_InsertAuction(
        pUsuarioId INT,
        pSubCatId INT,
        pPrecioInicial NUMERIC,
        pDetalle character varying,
        pFechaInicio DATE,
-       pFechaFin DATE)
-LANGUAGE SQL
+       pFechaFin DATE) returns void
 AS $$
+BEGIN 
   INSERT INTO public."Subasta" 
   (
 	"UsuarioId", 
@@ -36,12 +36,13 @@ AS $$
        ,pFechaFin
        ,TRUE                 --Empieza estando activa
   );
-$$;
-  COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
+$$
+LANGUAGE plpgsql 
 
 

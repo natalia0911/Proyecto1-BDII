@@ -8,13 +8,11 @@ package View;
 import Controller.CategoriaController;
 import Controller.ImageChooser;
 import Controller.SubastaController;
-import Controller.UsuarioController;
 import Data_Access_Object.HistorialUsuarioDAO;
 import Model.Categoria;
 import Model.FormatosUtilitaria;
 import Model.HistorialUsuario;
 import Model.SubCategoria;
-import Model.Subasta;
 import Model.TextPrompt;
 import Model.Usuario;
 import java.awt.Image;
@@ -27,7 +25,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -340,7 +337,6 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
         ImageChooser Selector = new ImageChooser();
-        //Image img;
         ImageIcon icono = new ImageIcon();
         try {
             img = Selector.elegir(lblImage.getWidth(),lblImage.getHeight());
@@ -357,7 +353,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     public void setUsuario(Usuario usuario){
         this.usuario = usuario;
-        notifiNulls();
+       // notifiNulls();
     }
     
     private void notifiNulls(){

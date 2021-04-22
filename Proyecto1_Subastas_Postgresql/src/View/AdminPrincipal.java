@@ -38,8 +38,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
         parametroController = new ParametroController();
-       // llenarJTable();
-        //setearParametros();
+        llenarJTable();
+        setearParametros();
     }
 
     /**
@@ -80,10 +80,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
         lblCorreo1 = new javax.swing.JLabel();
         lblAlias1 = new javax.swing.JLabel();
         lblContrasennia1 = new javax.swing.JLabel();
-        lblEsAdmin1 = new javax.swing.JLabel();
-        jPanelRadios1 = new javax.swing.JPanel();
-        rdbAdmiM = new javax.swing.JRadioButton();
-        rdbNormalM = new javax.swing.JRadioButton();
         txtNombreM = new javax.swing.JTextField();
         txtCedulaM = new javax.swing.JTextField();
         txtDireccionM = new javax.swing.JTextField();
@@ -152,11 +148,22 @@ public class AdminPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        txtNombre.setText("Nata");
+
+        txtCedula.setText("123456");
+
+        txtDireccion.setText("pital");
+
+        txtCorreo.setText("nata@gmail.com");
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoActionPerformed(evt);
             }
         });
+
+        txtAlias.setText("nat");
+
+        txtContrasennia.setText("nat");
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -272,35 +279,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
 
         lblContrasennia1.setText("Contraseña");
 
-        lblEsAdmin1.setText("Tipo Usuario");
-
-        jPanelRadios1.setBackground(new java.awt.Color(0, 255, 204));
-
-        rdbAdmiM.setText("Administrador");
-
-        rdbNormalM.setText("Usuario común");
-
-        javax.swing.GroupLayout jPanelRadios1Layout = new javax.swing.GroupLayout(jPanelRadios1);
-        jPanelRadios1.setLayout(jPanelRadios1Layout);
-        jPanelRadios1Layout.setHorizontalGroup(
-            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRadios1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rdbAdmiM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdbNormalM)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelRadios1Layout.setVerticalGroup(
-            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRadios1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdbAdmiM)
-                    .addComponent(rdbNormalM))
-                .addContainerGap())
-        );
-
         txtCorreoM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoMActionPerformed(evt);
@@ -342,25 +320,24 @@ public class AdminPrincipal extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAlias1)
-                            .addComponent(lblEsAdmin1)
                             .addComponent(lblNombre1)
                             .addComponent(lblCedula1)
                             .addComponent(lblCorreo1)
                             .addComponent(lblDireccion1)
                             .addComponent(lblContrasennia1))
-                        .addGap(37, 37, 37)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanelRadios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDireccionM)
+                            .addComponent(txtDireccionM, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                             .addComponent(txtCedulaM)
                             .addComponent(txtNombreM)
                             .addComponent(txtAliasM)
                             .addComponent(txtContrasenniaM)
-                            .addComponent(txtCorreoM)))
-                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(btnModificar)))
-                .addGap(74, 74, 74)
+                            .addComponent(txtCorreoM))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnModificar)
+                        .addGap(167, 167, 167)))
                 .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -368,8 +345,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
             jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre1)
                             .addComponent(txtNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -385,27 +362,18 @@ public class AdminPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCorreo1)
                             .addComponent(txtCorreoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                                .addComponent(lblEsAdmin1)
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblAlias1)
-                                    .addComponent(txtAliasM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblContrasennia1)
-                                    .addComponent(txtContrasenniaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                                .addComponent(jPanelRadios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(127, 127, 127)))
-                        .addComponent(btnModificar)
-                        .addGap(54, 54, 54))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAliasM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlias1))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtContrasenniaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblContrasennia1))
+                        .addGap(113, 113, 113)
+                        .addComponent(btnModificar))
+                    .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanelModificarLayout = new javax.swing.GroupLayout(jPanelModificar);
@@ -537,11 +505,9 @@ public class AdminPrincipal extends javax.swing.JFrame {
         /**
          * Funcion: Borrar todas las filas de un Jtable
          */
-        int filas = modelo.getRowCount();
-        System.out.println(filas);
-        for (int i=0;i<filas;i++){
-            modelo.removeRow(0);
-        }
+        DefaultTableModel temp = (DefaultTableModel) jTableModiificar.getModel();
+        temp.setRowCount(0);
+        
         
     }
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -574,17 +540,13 @@ public class AdminPrincipal extends javax.swing.JFrame {
         /**
          * Funcion: Modificar un usuario de la BD
          */
-
+        removeAllRows();
         int posicion = jTableModiificar.getSelectedRow(); 
         System.out.println(posicion);
 
-        boolean tipo = true;
-        if(rdbNormalM.isSelected()){
-           tipo = false;
-        }
+
         if(userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
                                    txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText())){
-            removeAllRows();
             JOptionPane.showMessageDialog(null, "¡Usuario modificado!");
        }
        else{
@@ -680,7 +642,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelRadios;
-    private javax.swing.JPanel jPanelRadios1;
     private javax.swing.JPanel jPanelRegistrar;
     private javax.swing.JPanel jPanelRegistrarBorde;
     private javax.swing.JPanel jPanelRegistrarBordeM;
@@ -697,15 +658,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblDireccion1;
     private javax.swing.JLabel lblEsAdmin;
-    private javax.swing.JLabel lblEsAdmin1;
     private javax.swing.JLabel lblIncremento;
     private javax.swing.JLabel lblMejora;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JRadioButton rdbAdmi;
-    private javax.swing.JRadioButton rdbAdmiM;
     private javax.swing.JRadioButton rdbNormal;
-    private javax.swing.JRadioButton rdbNormalM;
     private javax.swing.JTabbedPane tabModificar;
     private javax.swing.JTextField txtAlias;
     private javax.swing.JTextField txtAliasM;

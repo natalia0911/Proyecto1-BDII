@@ -1,12 +1,11 @@
 
-CREATE PROCEDURE SP_InsertHistoComp(
+CREATE FUNCTION SP_InsertHistoComp(
     pIdComprador INT,
     pIdVendedor INT,
     pIdSubasta INT
-    )
-LANGUAGE SQL
+    ) returns void
 AS $$
-
+BEGIN 
   INSERT INTO public."HistorialComprador"
   (
        "IdComprador",
@@ -19,13 +18,12 @@ AS $$
         pIdComprador,
         pIdVendedor,
         pIdSubasta,
-        5        --Empieza estando activa
+        5        
   );
-
-$$;
-  COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
+$$
+LANGUAGE plpgsql 

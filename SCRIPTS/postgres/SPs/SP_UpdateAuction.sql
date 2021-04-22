@@ -5,13 +5,13 @@
 --- Descripción: Actualiza una subasta que se inactiva
 --------------------------------------------------------------------------
 
-CREATE OR REPLACE PROCEDURE SP_UpdateAuction(
+CREATE FUNCTION SP_UpdateAuction(
        pId INT,
        pIdGanador INT,
-       pPrecioFinal NUMERIC)
-	   
-LANGUAGE SQL
+       pPrecioFinal NUMERIC)returns void
+
 AS $$
+BEGIN 
 
     UPDATE public."Subasta" AS S
     SET
@@ -21,10 +21,10 @@ AS $$
            
     WHERE S."ID" = pId;
 
-$$;
-  COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
+$$
+LANGUAGE plpgsql 

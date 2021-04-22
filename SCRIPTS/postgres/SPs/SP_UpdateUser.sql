@@ -5,15 +5,15 @@
 --- Descripción: Actualiza un usuario
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_UpdateUser(
+CREATE FUNCTION SP_UpdateUser(
        pNombre character varying(128),
        pCedula INT,
        pDireccion character varying(128),
        pCorreo character varying(128),
        pAlias character varying(20),
-       pContrasennia character varying(16))
-LANGUAGE SQL
+       pContrasennia character varying(16)) returns void
 AS $$
+BEGIN 
     UPDATE public."Usuario" AS U
     SET
             "Nombre" = pNombre
@@ -23,10 +23,10 @@ AS $$
            ,"contraseña" = pContrasennia
     WHERE U."Cedula" = pCedula;
 
-$$;
-COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
+$$
+LANGUAGE plpgsql 

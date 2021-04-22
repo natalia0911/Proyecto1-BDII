@@ -11,8 +11,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
+
 
 /**
  *
@@ -39,16 +38,9 @@ public class CategoriaDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectCategories (?)}");
-           
-             //se definen los parametros de entrada y salida
-            cst.registerOutParameter(1, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectCategories ()}");
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(1);  
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 Categoria categoria = new Categoria();
                 categoria.setId(result.getDouble(1));
@@ -59,9 +51,7 @@ public class CategoriaDAO {
             return categorias;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-           // con.closeConnection();
-        }
+        } 
         return categorias;
         
     }
@@ -76,17 +66,11 @@ public class CategoriaDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectSubcategories (?,?)}");
-           
-             //se definen los parametros de entrada y salida
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectSubcategories (?)}");
             cst.setDouble(1,categoriaId);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
+ 
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 SubCategoria subcat = new SubCategoria();
                 subcat.setId(result.getDouble(1));
@@ -96,9 +80,7 @@ public class CategoriaDAO {
             return subcategorias;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-           // con.closeConnection();
-        }
+        } 
         return subcategorias;
         
     }

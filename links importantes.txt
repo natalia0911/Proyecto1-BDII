@@ -24,3 +24,4 @@ https://docs.oracle.com/cd/B28359_01/java.111/b31224/oraoot.htm   GUIA PARA JDBC
 https://youtu.be/n_VZxHQ-MbY TR en oracle
 
 https://dba.stackexchange.com/questions/185670/how-to-write-a-normal-select-procedure-in-postgresql  SELECT EN FUNCIONES DE POSTGRESQL
+https://blog.knoldus.com/an-overview-of-the-stored-procedures-in-postgresql/

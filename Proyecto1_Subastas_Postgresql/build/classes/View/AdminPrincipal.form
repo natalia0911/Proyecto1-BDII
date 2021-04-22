@@ -259,19 +259,37 @@
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JTextField" name="txtNombre">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nata"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCedula">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="123456"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDireccion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="pital"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCorreo">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="nata@gmail.com"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtAlias">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="nat"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtContrasennia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="nat"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnRegistrar">
                   <Properties>
@@ -332,34 +350,33 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblAlias1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblEsAdmin1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblNombre1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCedula1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCorreo1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblDireccion1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblContrasennia1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPanelRadios1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDireccionM" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtDireccionM" alignment="0" pref="249" max="32767" attributes="0"/>
                                       <Component id="txtCedulaM" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtNombreM" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtAliasM" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtContrasenniaM" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtCorreoM" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                           <Component id="jScrollPaneModificar" min="-2" pref="589" max="-2" attributes="0"/>
                           <EmptySpace pref="25" max="32767" attributes="0"/>
                       </Group>
@@ -369,8 +386,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace pref="23" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtNombreM" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -390,35 +407,22 @@
                                       <Component id="lblCorreo1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtCorreoM" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblEsAdmin1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lblAlias1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtAliasM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lblContrasennia1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtContrasenniaM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jPanelRadios1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtAliasM" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAlias1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="txtContrasenniaM" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblContrasennia1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                                   <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jScrollPaneModificar" min="-2" pref="532" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jScrollPaneModificar" min="-2" pref="532" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -454,56 +458,6 @@
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblEsAdmin1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tipo Usuario"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JPanel" name="jPanelRadios1">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="ff" red="0" type="rgb"/>
-                    </Property>
-                  </Properties>
-
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdbAdmiM" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdbNormalM" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="rdbAdmiM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdbNormalM" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
-                  <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdbAdmiM">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Administrador"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdbNormalM">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Usuario com&#xfa;n"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
                 <Component class="javax.swing.JTextField" name="txtNombreM">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCedulaM">

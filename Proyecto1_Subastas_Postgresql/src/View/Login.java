@@ -68,12 +68,12 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
 
-        txtUsuario.setText("admin1");
+        txtUsuario.setText("nat");
 
         lblContrasennia.setForeground(new java.awt.Color(0, 0, 0));
         lblContrasennia.setText("Contraseña");
 
-        txtContrasennia.setText("admin1pw");
+        txtContrasennia.setText("nat");
         txtContrasennia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenniaKeyPressed(evt);
@@ -161,9 +161,11 @@ public class Login extends javax.swing.JFrame {
          * Funcion: Verificar si existe el usuario y abrir la ventana correspondiente
          */
         if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
-            // cargarParametros(); // Cargar globalmente los parametros
+            cargarParametros(); // Cargar globalmente los parametros
+            System.out.println(Parametros_Singleton.Parametros().getMontoMinimo().getCodParameter());
+            System.out.println(Parametros_Singleton.Parametros().getPorcentaje().getCodParameter());
             if(userController.getTipoUsuario()){
-                //System.out.println(Parametros_Singleton.Parametros().getMontoMinimo().getCodParameter());
+                
                 try {
                     AdminPrincipal ventana = new AdminPrincipal();
                     ventana.setVisible(true);

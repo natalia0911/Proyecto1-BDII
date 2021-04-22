@@ -1,11 +1,10 @@
 
-CREATE PROCEDURE SP_InsertPuja(
+CREATE FUNCTION SP_InsertPuja(
        pCompradorID INT,
        pSubastaID INT,
-       pPrecio INT)
-LANGUAGE SQL
+       pPrecio INT) returns void
 AS $$
-
+BEGIN 
   INSERT INTO PUBLIC."Pujas" 
   (
        "CompradorId"
@@ -20,15 +19,13 @@ AS $$
        ,pPrecio
        ,now()
   );
-
-$$;
-  COMMIT;
---  END;
---	  EXCEPTION WHEN OTHERS THEN
---  	   ROLLBACK;
+--COMMIT;
+EXCEPTION WHEN OTHERS THEN
+	ROLLBACK;
 
 END;
-
+$$
+LANGUAGE plpgsql 
 
 
 

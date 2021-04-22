@@ -10,11 +10,8 @@ import Model.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
+
 
 
 /**
@@ -77,16 +74,9 @@ public class UsuarioDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAllUsers (?)}");
-           
-             //se definen los parametros de entrada y salida
-            cst.registerOutParameter(1, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAllUsers ()}");
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(1);  
+             ResultSet result = cst.executeQuery();
             while(result.next()){
                 Usuario user = new Usuario();
                 user.setId(result.getInt(1));
@@ -122,7 +112,7 @@ public class UsuarioDAO {
            
              //se definen los parametros de entrada y salida            
             cst.setString(1, user.getNombre());
-            cst.setDouble(2, user.getCedula());
+            cst.setInt(2, user.getCedula());
             cst.setString(3, user.getDireccion());
             cst.setString(4, user.getCorreo());
             cst.setBoolean(5,user.isAdmin());
@@ -130,8 +120,7 @@ public class UsuarioDAO {
             cst.setString(7, user.getContrasennia());
             
             // Ejecuta el procedimiento almacenado
-            int respuesta = cst.executeUpdate();
-            return respuesta==1;  //t si insertó,f si no. 
+            return cst.execute();
             
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());           
@@ -154,20 +143,16 @@ public class UsuarioDAO {
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateUser (?,?,?,?,?,?)}");
            
-             //se definen los parametros de entrada y salida
-             
+             //se definen los parametros de entrada 
             cst.setString(1, user.getNombre());
-            cst.setDouble(2, user.getCedula());
+            cst.setInt(2, user.getCedula());
             cst.setString(3, user.getDireccion());
             cst.setString(4, user.getCorreo());
-            //cst.setBoolean(5,user.isAdmin());
             cst.setString(5, user.getAlias());
             cst.setString(6, user.getContrasennia());
             
             // Ejecuta el procedimiento almacenado
-            int respuesta = cst.executeUpdate();
-            return respuesta==1;  //t si insertó,f si no. 
-           
+            return cst.execute();//t si insertó,f si no. 
             
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
