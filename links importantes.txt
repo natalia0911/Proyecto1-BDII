@@ -22,3 +22,5 @@ https://stackoverflow.com/questions/20961065/converting-image-in-memory-to-a-blo
 https://docs.oracle.com/cd/B28359_01/java.111/b31224/oraoot.htm   GUIA PARA JDBC-ORACLE
 
 https://youtu.be/n_VZxHQ-MbY TR en oracle
+
+https://dba.stackexchange.com/questions/185670/how-to-write-a-normal-select-procedure-in-postgresql  SELECT EN FUNCIONES DE POSTGRESQL

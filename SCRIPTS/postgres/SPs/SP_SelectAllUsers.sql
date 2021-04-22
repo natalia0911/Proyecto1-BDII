@@ -3,11 +3,12 @@
 --- Fecha creación: 21/03/2021
 --- Descripción: Devolver usuarios
 --------------------------------------------------------------------------
-CREATE PROCEDURE SP_SelectAllUsers ()  
+CREATE FUNCTION SP_SelectAllUsers ()  
+returns setof public."Usuario"
 
-LANGUAGE SQL
 AS $$
-
+BEGIN
+	RETURN QUERY
     SELECT 
         "Id"
        ,"Nombre"
@@ -18,7 +19,7 @@ AS $$
        ,"Alias"
        ,"contraseña"
     FROM public."Usuario" U;
-$$;
-  COMMIT;
 END;
+$$
+LANGUAGE plpgsql
 

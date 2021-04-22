@@ -6,12 +6,12 @@
 --- Descripción: Listar el historial de un vendedor
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_SelectHistorialVendedor(
-       pVendedorId INT)
-	   
-LANGUAGE SQL
+CREATE FUNCTION SP_SelectHistorialVendedor(
+    pVendedorId INT)
+    returns setof public."HistorialVendedor"  -- NO SE QUE VA A PASAR ACÁ
 AS $$
-
+BEGIN 
+	RETURN QUERY
     SELECT 
         HV."IdVendedor"
        ,UV."Nombre"
@@ -28,6 +28,6 @@ AS $$
    INNER JOIN public."Subasta" AS S ON HV."IdSubasta" = S."ID"
 
    WHERE HV."IdVendedor" = pVendedorId;
-$$;
-  COMMIT;
 END;
+$$
+LANGUAGE plpgsql

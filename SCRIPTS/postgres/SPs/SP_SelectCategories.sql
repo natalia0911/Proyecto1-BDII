@@ -3,16 +3,17 @@
 --- Fecha creación: 30/03/2021
 --- Descripción: Devolver todas las categorias
 --------------------------------------------------------------------------
-CREATE PROCEDURE SP_SelectCategories ()
-LANGUAGE SQL
+CREATE FUNCTION SP_SelectCategories ()
+	returns setof public."Categoria"
+	
 AS $$
-
+BEGIN 
+	RETURN QUERY
     SELECT 
         "Id"
        ,"Nombre"
 
-    FROM "Categoria";
-$$;
-  COMMIT;
-
+    FROM public."Categoria";
 END;
+$$
+LANGUAGE plpgsql

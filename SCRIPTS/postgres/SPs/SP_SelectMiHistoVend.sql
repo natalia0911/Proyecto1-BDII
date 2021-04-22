@@ -1,8 +1,9 @@
-CREATE PROCEDURE SP_SelectMiHistoVend(
-       miID INT)
-       
-LANGUAGE SQL
+CREATE FUNCTION SP_SelectMiHistoVend(
+    miID INT)
+	returns setof public."HistorialVendedor"
 AS $$
+BEGIN 
+	RETURN QUERY
     SELECT 
         HV."IdVendedor"
        ,UV."Nombre"
@@ -20,7 +21,6 @@ AS $$
    INNER JOIN public."Subasta" AS S ON HV."IdSubasta" = S."ID"
 
    WHERE HV."IdComprador" = miID;
-$$;
-  COMMIT;
-
 END;
+$$
+LANGUAGE plpgsql

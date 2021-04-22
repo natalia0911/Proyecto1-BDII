@@ -5,13 +5,15 @@
 --- Descripción: Listar parametros
 --------------------------------------------------------------------------
 
-CREATE OR REPLACE PROCEDURE SP_SelectParameters()
-LANGUAGE SQL
+CREATE FUNCTION SP_SelectParameters()
+	returns setof public."SystemParameters"
 AS $$
-     SELECT 
+BEGIN 
+	RETURN QUERY
+    SELECT 
         "CodParameter"
        ,"Valor"
     FROM public."SystemParameters";
-$$;
-  COMMIT;
 END;
+$$
+LANGUAGE plpgsql

@@ -5,12 +5,12 @@
 --- Descripción: Listar el historial de un Comprador
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_SelectHistorialComprador(
-       pcompradorId INT)
-       
-LANGUAGE SQL
+CREATE FUNCTION SP_SelectHistorialComprador(
+    pcompradorId INT)
+    returns setof public."HistorialComprador"   -- NO SE QUE VA A PASAR ACÁ
 AS $$
-
+BEGIN 
+	RETURN QUERY
     SELECT 
         HC."IdComprador"
        ,UV."Nombre"
@@ -22,12 +22,12 @@ AS $$
        ,HC."Comentario"
        ,HC."Calificacion"
 
-   FROM public."HistorialComprador" AS HC INNER JOIN public."Usuario" AS UC ON HC."IdComprador" = UC."Id" 
+   FROM (public."HistorialComprador" AS HC INNER JOIN public."Usuario" AS UC ON HC."IdComprador" = UC."Id" 
    INNER JOIN public."Usuario" AS UV ON HC."IdVendedor" = UV."Id"
-   INNER JOIN public."Subasta" AS S ON HC."IdSubasta" = S."ID"
+   INNER JOIN public."Subasta" AS S ON HC."IdSubasta" = S."ID") AS Tabla
    
    WHERE HC."IdComprador" = pcompradorId;
 
-$$;
-  COMMIT;
 END;
+$$
+LANGUAGE plpgsql

@@ -5,11 +5,12 @@
 --- Descripción: Listar subastas
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE SP_SelectAuctionById(
+CREATE FUNCTION SP_SelectAuctionById(
        pId INT)
-
-LANGUAGE SQL
+	   returns setof public."Subasta"
 AS $$
+BEGIN 
+	RETURN QUERY
      SELECT 
         "ID"
        ,"UsuarioId"
@@ -18,6 +19,6 @@ AS $$
 
     FROM  public."Subasta" AS S
     WHERE S."ID" = pId;
-$$;
-  COMMIT;
 END;
+$$
+LANGUAGE plpgsql

@@ -161,9 +161,9 @@ public class Login extends javax.swing.JFrame {
          * Funcion: Verificar si existe el usuario y abrir la ventana correspondiente
          */
         if(userController.validarUsuario(txtUsuario.getText(), txtContrasennia.getText())){
-             cargarParametros(); // Cargar globalmente los parametros
+            // cargarParametros(); // Cargar globalmente los parametros
             if(userController.getTipoUsuario()){
-                System.out.println(Parametros_Singleton.Parametros().getMontoMinimo().getCodParameter());
+                //System.out.println(Parametros_Singleton.Parametros().getMontoMinimo().getCodParameter());
                 try {
                     AdminPrincipal ventana = new AdminPrincipal();
                     ventana.setVisible(true);

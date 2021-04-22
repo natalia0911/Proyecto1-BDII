@@ -38,8 +38,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
         parametroController = new ParametroController();
-        llenarJTable();
-        setearParametros();
+       // llenarJTable();
+        //setearParametros();
     }
 
     /**

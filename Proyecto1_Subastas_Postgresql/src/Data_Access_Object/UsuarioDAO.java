@@ -42,17 +42,11 @@ public class UsuarioDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectUsers (?,?,?)}");
-           
-             //se definen los parametros de entrada y salida
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectUsers (?,?)}");
             cst.setString(1, alias);
             cst.setString(2, contrasennia);
-            cst.registerOutParameter(3, Types.REF_CURSOR);
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
-            // result contiene las filas que vienen de la BD
-            ResultSet result = (ResultSet) cst.getObject(1);
+    
+            ResultSet result = cst.executeQuery();
             Usuario user = new Usuario();
             while(result.next()){
                 user.setId(result.getInt(1));
@@ -68,8 +62,6 @@ public class UsuarioDAO {
             return user;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-            //con.closeConnection();
         }
         return null;
         
