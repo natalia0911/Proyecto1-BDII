@@ -12,11 +12,11 @@ import java.util.Date;
  * @author Dell
  */
 public class HistorialUsuario {
-    private double idComprador;
+    private int idComprador;
     private String nombreComprador;
-    private double idVendedor;
+    private int idVendedor;
     private String nombreVendedor;
-    private double idSubasta;
+    private int idSubasta;
     private double precioBase;
     private double precioFinal;
     private int calificacion;
@@ -27,7 +27,7 @@ public class HistorialUsuario {
 
     public HistorialUsuario() {}
 
-    public HistorialUsuario(double idComprador, String nombreComprador, double idVendedor, String nombreVendedor, double idSubasta, double precioBase, double precioFinal, String comentario, Date fecha, String tipo) {
+    public HistorialUsuario(int idComprador, String nombreComprador, int idVendedor, String nombreVendedor, int idSubasta, double precioBase, double precioFinal, String comentario, Date fecha, String tipo) {
         this.idComprador = idComprador;
         this.nombreComprador = nombreComprador;
         this.idVendedor = idVendedor;
@@ -41,30 +41,6 @@ public class HistorialUsuario {
     }
 
 
-    public double getIdComprador() {
-        return idComprador;
-    }
-    
-
-    public void setIdComprador(double idComprador) {
-        this.idComprador = idComprador;
-    }
-
-    public double getIdVendedor() {
-        return idVendedor;
-    }
-
-    public void setIdVendedor(double idVendedor) {
-        this.idVendedor = idVendedor;
-    }
-
-    public double getIdSubasta() {
-        return idSubasta;
-    }
-
-    public void setIdSubasta(double idSubasta) {
-        this.idSubasta = idSubasta;
-    }
 
     public int getCalificacion() {
         return calificacion;
@@ -76,6 +52,30 @@ public class HistorialUsuario {
 
     public String getComentario() {
         return comentario;
+    }
+
+    public int getIdComprador() {
+        return idComprador;
+    }
+
+    public void setIdComprador(int idComprador) {
+        this.idComprador = idComprador;
+    }
+
+    public int getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(int idVendedor) {
+        this.idVendedor = idVendedor;
+    }
+
+    public int getIdSubasta() {
+        return idSubasta;
+    }
+
+    public void setIdSubasta(int idSubasta) {
+        this.idSubasta = idSubasta;
     }
 
     public void setComentario(String comentario) {
@@ -115,9 +115,11 @@ public class HistorialUsuario {
     }
     
     public Date getFecha(){return fecha;}
+    
     public void setFecha(Date fecha){this.fecha = fecha;}
     
     public String getTipo(){return tipo;}
+    
     public void setTipo(String tipo){this.tipo = tipo;}
 
     

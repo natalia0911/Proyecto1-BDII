@@ -1,4 +1,4 @@
-Tipo;Nombre y apellidos;Dirección;correo;usuario(alias);contraseña;Cedula
+EsAdmin;Nombre;Direccion;Correo;alias;contraseña;Cedula
 1;Anatolio Ruvalcaba Quesada;San Ramón;arq@ic43.com;admin1;admin1pw;11769800
 1;Betina Guardado Samaniego;Liberia;bgs@ic43.com;admin2;admin2pw;47480966
 1;Wenceslao Treviño Carrasco;Sarapiquí;wtc@ic43.com;admin3;admin3pw;11812030

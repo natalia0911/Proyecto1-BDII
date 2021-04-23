@@ -5,8 +5,6 @@
  */
 package Data_Access_Object;
 
-
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,9 +23,8 @@ public class ConnectionBD {
    
     
     public ConnectionBD() throws SQLException{
-       
-        objConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "Natalia", "Hola1234"); //CONECTA LA BASE
-        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); //CARGA EL DRIVER DE ORACLE
+        objConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Casa_Subastas",  "postgres", "asd");
+        System.out.println("Conexion exitosa");
     }
     
     

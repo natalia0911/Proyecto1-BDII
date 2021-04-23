@@ -5,21 +5,15 @@
  */
 package View;
 
-import Controller.CategoriaController;
 import Controller.ParametroController;
-import Controller.SubastaController;
 import Controller.UsuarioController;
-import Model.Categoria;
 import Model.Parametro;
 import Model.Parametros_Singleton;
-import Model.SubCategoria;
-import Model.Subasta;
 import Model.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,34 +26,18 @@ public class AdminPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form AdminPrincipal
      */
-    private DefaultComboBoxModel modeloCat3;
-    private DefaultComboBoxModel modeloSubcat3;
     private DefaultTableModel modelo;
-    private DefaultTableModel modeloSubastas;
     private UsuarioController userController;
     private ParametroController parametroController;
-    private ArrayList<Subasta> listaSubastas;
-    private SubastaController subastaController;
-    private CategoriaController categoriaController;
-    private int selectedRow;
     
     public AdminPrincipal() throws SQLException {
         initComponents();
-        categoriaController = new CategoriaController();
-        subastaController = new SubastaController();
-        modeloCat3 =  new DefaultComboBoxModel();
-        modeloCat3 = (DefaultComboBoxModel)cbxCategoria3.getModel();
-        modeloSubcat3 =  new DefaultComboBoxModel();
-        modeloSubcat3 = (DefaultComboBoxModel)cbxSubcategoria3.getModel();
         buttonGroupEsAdmin.add(rdbAdmi);
         buttonGroupEsAdmin.add(rdbNormal);
         userController = new UsuarioController();
         modelo = new DefaultTableModel();
         modelo = (DefaultTableModel) jTableModiificar.getModel();
-        modeloSubastas = new DefaultTableModel();
-        modeloSubastas = (DefaultTableModel) jTableSubastas.getModel();
         parametroController = new ParametroController();
-        llenarComboCategorias();
         llenarJTable();
         setearParametros();
     }
@@ -102,10 +80,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
         lblCorreo1 = new javax.swing.JLabel();
         lblAlias1 = new javax.swing.JLabel();
         lblContrasennia1 = new javax.swing.JLabel();
-        lblEsAdmin1 = new javax.swing.JLabel();
-        jPanelRadios1 = new javax.swing.JPanel();
-        rdbAdmiM = new javax.swing.JRadioButton();
-        rdbNormalM = new javax.swing.JRadioButton();
         txtNombreM = new javax.swing.JTextField();
         txtCedulaM = new javax.swing.JTextField();
         txtDireccionM = new javax.swing.JTextField();
@@ -122,16 +96,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
         lblIncremento = new javax.swing.JLabel();
         txtPorcentaje = new javax.swing.JTextField();
         txtIncremento = new javax.swing.JTextField();
-        Subastas = new javax.swing.JPanel();
-        jPanelListado = new javax.swing.JPanel();
-        btnHistorialVendedor = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSubastas = new javax.swing.JTable();
-        btnHistorialPujas = new javax.swing.JButton();
-        lblCategoria1 = new javax.swing.JLabel();
-        lblSubCategoria1 = new javax.swing.JLabel();
-        cbxCategoria3 = new javax.swing.JComboBox<>();
-        cbxSubcategoria3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,11 +148,22 @@ public class AdminPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        txtNombre.setText("Nata");
+
+        txtCedula.setText("123456");
+
+        txtDireccion.setText("pital");
+
+        txtCorreo.setText("nata@gmail.com");
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoActionPerformed(evt);
             }
         });
+
+        txtAlias.setText("nat");
+
+        txtContrasennia.setText("nat");
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -304,35 +279,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
 
         lblContrasennia1.setText("Contraseña");
 
-        lblEsAdmin1.setText("Tipo Usuario");
-
-        jPanelRadios1.setBackground(new java.awt.Color(0, 255, 204));
-
-        rdbAdmiM.setText("Administrador");
-
-        rdbNormalM.setText("Usuario común");
-
-        javax.swing.GroupLayout jPanelRadios1Layout = new javax.swing.GroupLayout(jPanelRadios1);
-        jPanelRadios1.setLayout(jPanelRadios1Layout);
-        jPanelRadios1Layout.setHorizontalGroup(
-            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRadios1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rdbAdmiM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdbNormalM)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelRadios1Layout.setVerticalGroup(
-            jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRadios1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanelRadios1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdbAdmiM)
-                    .addComponent(rdbNormalM))
-                .addContainerGap())
-        );
-
         txtCorreoM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoMActionPerformed(evt);
@@ -374,25 +320,24 @@ public class AdminPrincipal extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAlias1)
-                            .addComponent(lblEsAdmin1)
                             .addComponent(lblNombre1)
                             .addComponent(lblCedula1)
                             .addComponent(lblCorreo1)
                             .addComponent(lblDireccion1)
                             .addComponent(lblContrasennia1))
-                        .addGap(37, 37, 37)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanelRadios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDireccionM)
+                            .addComponent(txtDireccionM, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                             .addComponent(txtCedulaM)
                             .addComponent(txtNombreM)
                             .addComponent(txtAliasM)
                             .addComponent(txtContrasenniaM)
-                            .addComponent(txtCorreoM)))
-                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(btnModificar)))
-                .addGap(74, 74, 74)
+                            .addComponent(txtCorreoM))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnModificar)
+                        .addGap(167, 167, 167)))
                 .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -400,8 +345,8 @@ public class AdminPrincipal extends javax.swing.JFrame {
             jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
+                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelRegistrarBordeMLayout.createSequentialGroup()
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre1)
                             .addComponent(txtNombreM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -417,27 +362,18 @@ public class AdminPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCorreo1)
                             .addComponent(txtCorreoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                                .addComponent(lblEsAdmin1)
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblAlias1)
-                                    .addComponent(txtAliasM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblContrasennia1)
-                                    .addComponent(txtContrasenniaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                                .addComponent(jPanelRadios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(127, 127, 127)))
-                        .addComponent(btnModificar)
-                        .addGap(54, 54, 54))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarBordeMLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAliasM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlias1))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanelRegistrarBordeMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtContrasenniaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblContrasennia1))
+                        .addGap(113, 113, 113)
+                        .addComponent(btnModificar))
+                    .addComponent(jScrollPaneModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanelModificarLayout = new javax.swing.GroupLayout(jPanelModificar);
@@ -532,156 +468,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
 
         tabModificar.addTab("Cambiar parametros", jPanel1);
 
-        jPanelListado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de subastas activas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        btnHistorialVendedor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnHistorialVendedor.setText("Ver historial del vendedor");
-        btnHistorialVendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialVendedorActionPerformed(evt);
-            }
-        });
-
-        jTableSubastas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Subcategoria", "Precio Inicial", "Precio final", "Detalles", "Fecha inicio", "Fecha fin"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableSubastas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableSubastasMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableSubastas);
-
-        btnHistorialPujas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnHistorialPujas.setText("Ver historial pujas");
-        btnHistorialPujas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialPujasActionPerformed(evt);
-            }
-        });
-
-        lblCategoria1.setText("Categoria");
-
-        lblSubCategoria1.setText("SubCategoria");
-
-        cbxCategoria3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxCategoria3ItemStateChanged(evt);
-            }
-        });
-        cbxCategoria3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbxCategoria3FocusLost(evt);
-            }
-        });
-        cbxCategoria3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbxCategoria3MouseClicked(evt);
-            }
-        });
-        cbxCategoria3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCategoria3ActionPerformed(evt);
-            }
-        });
-
-        cbxSubcategoria3.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxSubcategoria3ItemStateChanged(evt);
-            }
-        });
-        cbxSubcategoria3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbxSubcategoria3MouseClicked(evt);
-            }
-        });
-        cbxSubcategoria3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxSubcategoria3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelListadoLayout = new javax.swing.GroupLayout(jPanelListado);
-        jPanelListado.setLayout(jPanelListadoLayout);
-        jPanelListadoLayout.setHorizontalGroup(
-            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSubCategoria1)
-                    .addComponent(lblCategoria1))
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelListadoLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(btnHistorialVendedor)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnHistorialPujas))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
-        );
-        jPanelListadoLayout.setVerticalGroup(
-            jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListadoLayout.createSequentialGroup()
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxCategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCategoria1))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxSubcategoria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSubCategoria1))
-                        .addGap(183, 183, 183))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelListadoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHistorialPujas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistorialVendedor))
-                .addGap(27, 27, 27))
-        );
-
-        javax.swing.GroupLayout SubastasLayout = new javax.swing.GroupLayout(Subastas);
-        Subastas.setLayout(SubastasLayout);
-        SubastasLayout.setHorizontalGroup(
-            SubastasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SubastasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        SubastasLayout.setVerticalGroup(
-            SubastasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SubastasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanelListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
-
-        tabModificar.addTab("Registrar", Subastas);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -719,27 +505,10 @@ public class AdminPrincipal extends javax.swing.JFrame {
         /**
          * Funcion: Borrar todas las filas de un Jtable
          */
-        int filas = modelo.getRowCount();
-        System.out.println(filas);
-        for (int i=0;i<filas;i++){
-            modelo.removeRow(0);
-        }
+        DefaultTableModel temp = (DefaultTableModel) jTableModiificar.getModel();
+        temp.setRowCount(0);
         
-    }
-    
-    public void llenarComboCategorias(){
-        /**
-         * Funcion: Llenar el cbx con objetos de tipo categoria
-         * Entradas: Ninguna
-         * Salidas: Ninguna
-         */
-        ArrayList<Categoria> lista = categoriaController.devolverCategorias();
-
-        for (int i = 0; i < lista.size(); i++){
-            modeloCat3.addElement(lista.get(i));
-            cbxCategoria3.setModel(modeloCat3);
-        }
-       
+        
     }
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         /**
@@ -771,17 +540,13 @@ public class AdminPrincipal extends javax.swing.JFrame {
         /**
          * Funcion: Modificar un usuario de la BD
          */
-
+        removeAllRows();
         int posicion = jTableModiificar.getSelectedRow(); 
         System.out.println(posicion);
 
-        boolean tipo = true;
-        if(rdbNormalM.isSelected()){
-           tipo = false;
-        }
+
         if(userController.modificarUsuario(txtNombreM.getText(),Integer.valueOf(txtCedulaM.getText()),txtDireccionM.getText(),
                                    txtCorreoM.getText(), true, txtAliasM.getText(),txtContrasenniaM.getText())){
-            removeAllRows();
             JOptionPane.showMessageDialog(null, "¡Usuario modificado!");
        }
        else{
@@ -819,120 +584,6 @@ public class AdminPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
-        if (!(selectedRow==-1)){
-            try {
-                double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
-                VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
-                ventanaVendedor.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Seleccione una subasta para ver su vendedor");
-        }
-    }//GEN-LAST:event_btnHistorialVendedorActionPerformed
-
-    private void jTableSubastasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSubastasMouseClicked
-
-        int posicion = jTableSubastas.getSelectedRow();
-        selectedRow = posicion;
-    }//GEN-LAST:event_jTableSubastasMouseClicked
-
-    private void btnHistorialPujasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPujasActionPerformed
-
-        if (!(selectedRow==-1)){
-            try {
-                double idSubasta = listaSubastas.get(selectedRow).getId();
-                VentanaHistorialPujas ventanaHistorialPujas = new VentanaHistorialPujas(idSubasta);
-                ventanaHistorialPujas.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Seleccione una subasta");
-        }
-
-    }//GEN-LAST:event_btnHistorialPujasActionPerformed
-
-    private void cbxCategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCategoria3ItemStateChanged
-        /**
-        * Funcion: Refresca el cbx con los objetos subcategoria correspondientes segun la categoria seleccionada al
-        * hacer click en el cbx de categorias.
-        * Entradas: Ninguna
-        * Salidas: Ninguna
-        */
-        Categoria cat = (Categoria) modeloCat3.getSelectedItem();
-        createSubCat2(cat);
-    }//GEN-LAST:event_cbxCategoria3ItemStateChanged
-
-    public void createSubCat2(Categoria cat){
-        
-        ArrayList<SubCategoria> lista = cat.getSubcategorias();
-        modeloSubcat3.removeAllElements();
-        for (int i = 0; i < lista.size(); i++){
-                modeloSubcat3.addElement(lista.get(i));
-            }
-        cbxSubcategoria3.setModel(modeloSubcat3);
-    }
-    
-    private void cbxCategoria3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxCategoria3FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria3FocusLost
-
-    private void cbxCategoria3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxCategoria3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria3MouseClicked
-
-    private void cbxCategoria3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoria3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCategoria3ActionPerformed
-
-    private void cbxSubcategoria3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ItemStateChanged
-        SubCategoria subcat = (SubCategoria) modeloSubcat3.getSelectedItem();
-        if(modeloSubcat3.getSelectedItem() != null){llenarJTableSubastas(subcat.getId());}
-        else{vaciarJTable();}
-
-    }//GEN-LAST:event_cbxSubcategoria3ItemStateChanged
-
-    private void cbxSubcategoria3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxSubcategoria3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxSubcategoria3MouseClicked
-
-    private void cbxSubcategoria3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSubcategoria3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxSubcategoria3ActionPerformed
-    
-    private void llenarJTableSubastas(double idSubcat){
-        
-        vaciarJTable();
-        
-        listaSubastas = subastaController.listarSubastas(idSubcat);
-        if(idSubcat>0){  //Validar aqui bien
-            if(!listaSubastas.isEmpty()){
-                for (int i = 0; i < listaSubastas.size(); i++){
-
-                        modeloSubastas.addRow(new Object[]{listaSubastas.get(i).getNombreUsuario(),listaSubastas.get(i).getNombreSubcat(),
-                         listaSubastas.get(i).getPrecioInicial(),listaSubastas.get(i).getPrecioFinal(),listaSubastas.get(i).getDetallesEntrega(),
-                        listaSubastas.get(i).getFechaInicio(),listaSubastas.get(i).getFechaFin()});  
-                        jTableSubastas.setModel(modeloSubastas);
-                }       
-            }
-            else{
-                //No sé por qué esto sale 2 veces
-                JOptionPane.showMessageDialog(null, "No hay subastas con esa categoría");
-            }
-        }
-    }
-    
-    private void vaciarJTable(){
-    
-        DefaultTableModel temp = (DefaultTableModel) jTableSubastas.getModel();
-        temp.setRowCount(0);
-    
-    }
     
     private void llenarJTable(){
         ArrayList<Usuario> lista = userController.getAllUser();
@@ -983,31 +634,21 @@ public class AdminPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Subastas;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnHistorialPujas;
-    private javax.swing.JButton btnHistorialVendedor;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.ButtonGroup buttonGroupEsAdmin;
-    private javax.swing.JComboBox<String> cbxCategoria3;
-    private javax.swing.JComboBox<String> cbxSubcategoria3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanelListado;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelRadios;
-    private javax.swing.JPanel jPanelRadios1;
     private javax.swing.JPanel jPanelRegistrar;
     private javax.swing.JPanel jPanelRegistrarBorde;
     private javax.swing.JPanel jPanelRegistrarBordeM;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneModificar;
     private javax.swing.JTable jTableModiificar;
-    private javax.swing.JTable jTableSubastas;
     private javax.swing.JLabel lblAlias;
     private javax.swing.JLabel lblAlias1;
-    private javax.swing.JLabel lblCategoria1;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblCedula1;
     private javax.swing.JLabel lblContrasennia;
@@ -1017,16 +658,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblDireccion1;
     private javax.swing.JLabel lblEsAdmin;
-    private javax.swing.JLabel lblEsAdmin1;
     private javax.swing.JLabel lblIncremento;
     private javax.swing.JLabel lblMejora;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblSubCategoria1;
     private javax.swing.JRadioButton rdbAdmi;
-    private javax.swing.JRadioButton rdbAdmiM;
     private javax.swing.JRadioButton rdbNormal;
-    private javax.swing.JRadioButton rdbNormalM;
     private javax.swing.JTabbedPane tabModificar;
     private javax.swing.JTextField txtAlias;
     private javax.swing.JTextField txtAliasM;

@@ -336,14 +336,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
-        ImageChooser Selector;
-        Selector = null;
-        try {
-            Selector = new ImageChooser();
-        } catch (SQLException ex) {
-            Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Image img;
+        ImageChooser Selector = new ImageChooser();
         ImageIcon icono = new ImageIcon();
         try {
             img = Selector.elegir(lblImage.getWidth(),lblImage.getHeight());
@@ -360,7 +353,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     public void setUsuario(Usuario usuario){
         this.usuario = usuario;
-        notifiNulls();
+       // notifiNulls();
     }
     
     private void notifiNulls(){
@@ -442,7 +435,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     private void btnComentariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentariosActionPerformed
         try {
-                double idVendedor = usuario.getId();
+                int idVendedor = usuario.getId();
                 MisComentarios ventanaVendedor = new MisComentarios(idVendedor);
                 ventanaVendedor.setVisible(true);
             } catch (SQLException ex) {

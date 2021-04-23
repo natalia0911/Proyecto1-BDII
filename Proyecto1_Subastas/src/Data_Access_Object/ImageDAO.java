@@ -16,8 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
+
 
 /**
  *
@@ -34,35 +33,35 @@ public class ImageDAO {
         con.closeConnection();
     }
     
-    public Image getImagen(double imageID) throws IOException{
-        /**
-         * Funcion: Listar los parametros
-         * Entradas: Ninguna 
-         * Salidas: lista de objetos categoria
-         */
-        Image graphics = null;
-        try {
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectImagen (?,?)}");
-             //se definen los parametros de entrada y salida
-            cst.setDouble(1, imageID);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            cst.execute();
-            
-            
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);
-            while(result.next()){
-                java.sql.Blob blob = result.getBlob(1);  
-                InputStream in = blob.getBinaryStream();
-                BufferedImage temp = ImageIO.read(in);
-                graphics = (Image) temp;
-
-            }
-            return graphics;
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        } finally {
-           // con.closeConnection();
-        }
-        return null;
-    }
+//    public Image getImagen(double imageID) throws IOException{
+//        /**
+//         * Funcion: Listar los parametros
+//         * Entradas: Ninguna 
+//         * Salidas: lista de objetos categoria
+//         */
+//        Image graphics = null;
+//        try {
+//            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectImagen (?,?)}");
+//             //se definen los parametros de entrada y salida
+//            cst.setDouble(1, imageID);
+//            cst.registerOutParameter(2, OracleTypes.CURSOR);
+//            cst.execute();
+//            
+//            
+//            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);
+//            while(result.next()){
+//                java.sql.Blob blob = result.getBlob(1);  
+//                InputStream in = blob.getBinaryStream();
+//                BufferedImage temp = ImageIO.read(in);
+//                graphics = (Image) temp;
+//
+//            }
+//            return graphics;
+//        } catch (SQLException ex) {
+//            System.out.println("Error: " + ex.getMessage());
+//        } finally {
+//           // con.closeConnection();
+//        }
+//        return null;
+//    }
 }

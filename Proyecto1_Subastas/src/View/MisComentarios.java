@@ -10,7 +10,6 @@ import Data_Access_Object.HistorialUsuarioDAO;
 import Model.HistorialUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,12 +25,12 @@ public class MisComentarios extends javax.swing.JFrame {
      * Creates new form MisComentarios
      */
     
-    private double miID;
+    private int miID;
     private HistorialUsuarioDAO miHistorial;
     private DefaultTableModel modelo;
      private ArrayList<HistorialUsuario> lista;
      
-    public MisComentarios(double miID) throws SQLException {
+    public MisComentarios(int miID) throws SQLException {
         initComponents();
         this.miID = miID;
         miHistorial = new HistorialUsuarioDAO();
@@ -62,7 +61,7 @@ public class MisComentarios extends javax.swing.JFrame {
         vaciarJTable();
         lista = miHistorial.mihistorialComprador(miID);
         lista.addAll(miHistorial.mihistorialVendedor(miID));
-        lista.sort(new DateSorter());
+        //lista.sort(new DateSorter());
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),

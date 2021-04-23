@@ -21,22 +21,22 @@ public class HistorialController {
          hUsuarioDao = new HistorialUsuarioDAO();
     }
     
-    public ArrayList<HistorialUsuario> getHistorialVendedor(double idVendedor)
+    public ArrayList<HistorialUsuario> getHistorialVendedor(int idVendedor)
     {
         return hUsuarioDao.historialVendedor(idVendedor);
     }
                    
-    public ArrayList<HistorialUsuario> getHistorialComprador(double idComprador)
+    public ArrayList<HistorialUsuario> getHistorialComprador(int idComprador)
     {
         return hUsuarioDao.historialComprador(idComprador);
     }
     
-    public ArrayList<HistorialUsuario> getMiHistorialVendedor(double idVendedor)
+    public ArrayList<HistorialUsuario> getMiHistorialVendedor(int idVendedor)
     {
         return hUsuarioDao.mihistorialVendedor(idVendedor);
     }
                    
-    public ArrayList<HistorialUsuario> getMiHistorialComprador(double idComprador)
+    public ArrayList<HistorialUsuario> getMiHistorialComprador(int idComprador)
     {
         return hUsuarioDao.mihistorialComprador(idComprador);
     }

@@ -9,7 +9,6 @@ import Data_Access_Object.PujaDAO;
 import Data_Access_Object.SubastaDAO;
 import Model.Parametros_Singleton;
 import Model.Puja;
-import Model.Usuario_Singleton;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class PujaController {
     }
     
 
-    public boolean insertarPuja(double compradorId, double subastaId, double precio, ArrayList<Puja> listaPuja) throws ParseException, SQLException{
+    public boolean insertarPuja(int compradorId, int subastaId, double precio, ArrayList<Puja> listaPuja) throws ParseException, SQLException{
  
        Puja Puja = new Puja(compradorId,subastaId,precio);
        System.out.println("antes del if en puja controller");

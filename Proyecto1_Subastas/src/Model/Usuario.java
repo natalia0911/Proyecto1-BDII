@@ -10,7 +10,7 @@ package Model;
  * @author Natalia
  */
 public class Usuario {
-    private double id;
+    private int id;
     private int cedula;
     private String nombre;
     private String direccion;
@@ -21,7 +21,7 @@ public class Usuario {
     
     public Usuario() {}
 
-    public Usuario(double id, int cedula, String nombre, String direccion, boolean esAdmin, String alias, String contrasennia, String correo) {
+    public Usuario(int id, int cedula, String nombre, String direccion, boolean esAdmin, String alias, String contrasennia, String correo) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -42,11 +42,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -29,8 +29,8 @@ public class SubastaController {
     }
    
 
-    public boolean insertarSubasta(double subCatId, double precioInicial, String detalle,String fechaFin) throws ParseException{
-        double idUser = Usuario_Singleton.UsuarioSingleton().getUsuario().getId();
+    public boolean insertarSubasta(int subCatId, double precioInicial, String detalle,String fechaFin) throws ParseException{
+        int idUser = Usuario_Singleton.UsuarioSingleton().getUsuario().getId();
         System.out.println(FormatosUtilitaria.devolverFechaSistema());
         System.out.println(fechaFin);
         System.out.println(FormatosUtilitaria.convertirAFecha(fechaFin));  
@@ -58,7 +58,7 @@ public class SubastaController {
         }
      }
     
-    public ArrayList<Subasta> listarSubastas(double idSubcat){
+    public ArrayList<Subasta> listarSubastas(int idSubcat){
         return subastaDao.getSubastas(idSubcat);
     }
     
