@@ -43,9 +43,9 @@ public class CategoriaDAO {
             ResultSet result = cst.executeQuery();
             while(result.next()){
                 Categoria categoria = new Categoria();
-                categoria.setId(result.getDouble(1));
+                categoria.setId(result.getInt(1));
                 categoria.setNombreCategoria(result.getString(2));
-                categoria.setSubcategorias(getSubCategorias(result.getDouble(1)));
+                categoria.setSubcategorias(getSubCategorias(result.getInt(1)));
                 categorias.add(categoria);
             }
             return categorias;
@@ -56,7 +56,7 @@ public class CategoriaDAO {
         
     }
      
-    public ArrayList<SubCategoria> getSubCategorias(double categoriaId){
+    public ArrayList<SubCategoria> getSubCategorias(int categoriaId){
         /**
          * Funcion: Listar las subcategorias
          * Entradas: El id de la categoria 
@@ -67,13 +67,13 @@ public class CategoriaDAO {
             
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectSubcategories (?)}");
-            cst.setDouble(1,categoriaId);
+            cst.setInt(1,categoriaId);
  
             // result contiene las filas que vienen de la BD
             ResultSet result = cst.executeQuery();
             while(result.next()){
                 SubCategoria subcat = new SubCategoria();
-                subcat.setId(result.getDouble(1));
+                subcat.setId(result.getInt(1));
                 subcat.setNombreSubCat(result.getString(2));
                 subcategorias.add(subcat);
             }

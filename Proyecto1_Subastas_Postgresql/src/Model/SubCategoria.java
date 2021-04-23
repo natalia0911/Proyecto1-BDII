@@ -11,22 +11,22 @@ package Model;
  */
 public class SubCategoria {
     
-    private double id;
+    private int id;
     private String nombreSubCat;
 
     public SubCategoria() {
     }
 
-    public SubCategoria(double id, String nombreSubCat) {
+    public SubCategoria(int id, String nombreSubCat) {
         this.id = id;
         this.nombreSubCat = nombreSubCat;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 

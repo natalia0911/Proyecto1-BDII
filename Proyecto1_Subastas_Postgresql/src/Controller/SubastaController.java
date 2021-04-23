@@ -58,7 +58,7 @@ public class SubastaController {
         }
      }
     
-    public ArrayList<Subasta> listarSubastas(double idSubcat){
+    public ArrayList<Subasta> listarSubastas(int idSubcat){
         return subastaDao.getSubastas(idSubcat);
     }
     

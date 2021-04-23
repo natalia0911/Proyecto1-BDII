@@ -7,7 +7,18 @@
 
 CREATE FUNCTION SP_SelectAuction(
 	pSubCat INT)
-	returns setof public.""Subasta""
+	returns TABLE
+	(   ID INT
+       ,UsuarioId INT
+       ,Alias character varying(20)
+       ,SubCategoriaId INT
+       ,Nombre character varying(128)
+       ,PrecioInicial NUMERIC
+       ,PrecioFinal NUMERIC
+       ,DetallesEntrega character varying(128)
+       ,FechaInicio DATE
+       ,FechaFin DATE
+	)
 AS $$
 BEGIN
 	RETURN QUERY

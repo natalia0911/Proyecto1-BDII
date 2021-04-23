@@ -385,7 +385,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
     
     }
     
-    private void llenarJTable(double idSubcat){
+    private void llenarJTable(int idSubcat){
         
         vaciarJTable();
         

@@ -77,8 +77,7 @@ public class SubastaDAO {
              //se definen los parametros de entrada y salida            
             cst.setBlob(1, FormatosUtilitaria.convertirImagenABlob(img));
             // Ejecuta el procedimiento almacenado
-            int respuesta = cst.executeUpdate();
-            return respuesta==1;  //t si insertó,f si no. 
+            return cst.execute(); 
             
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());           
@@ -92,7 +91,7 @@ public class SubastaDAO {
     
     
     
-    public ArrayList<Subasta> getSubastas(double idSubCat){
+    public ArrayList<Subasta> getSubastas(int idSubCat){
         /**
          * Funcion: Lista las subastas que cierta subcategoria
          * Entradas: Id de la subcategoria
@@ -102,17 +101,11 @@ public class SubastaDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuction (?,?)}");
-           
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuction (?)}");         
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idSubCat);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
+            cst.setInt(1, idSubCat);
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 Subasta subasta = new Subasta();
                 subasta.setId(result.getInt(1));
@@ -130,9 +123,7 @@ public class SubastaDAO {
             return subastas;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-           // con.closeConnection();
-        }
+        } 
         return subastas;
         
     }
@@ -148,17 +139,11 @@ public class SubastaDAO {
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuctionById (?,?)}");
-           
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuctionById (?)}");
              //se definen los parametros de entrada y salida
             cst.setDouble(1, id);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // Se obtienen la salida del procedimineto almacenado
             // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            ResultSet result = cst.executeQuery(); 
             while(result.next()){
                 subasta.setId(result.getInt(1));
                 subasta.setUsuarioId(result.getDouble(2));
@@ -168,9 +153,7 @@ public class SubastaDAO {
             return subasta;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        } finally {
-           // con.closeConnection();
-        }
+        } 
         return subasta;
         
     }

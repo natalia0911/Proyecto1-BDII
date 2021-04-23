@@ -118,7 +118,6 @@ public class UsuarioDAO {
             cst.setBoolean(5,user.isAdmin());
             cst.setString(6, user.getAlias());
             cst.setString(7, user.getContrasennia());
-            
             // Ejecuta el procedimiento almacenado
             return cst.execute();
             
