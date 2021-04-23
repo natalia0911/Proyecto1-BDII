@@ -336,7 +336,13 @@ public class ClientesPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
-        ImageChooser Selector = new ImageChooser();
+        ImageChooser Selector;
+        Selector = null;
+        try {
+            Selector = new ImageChooser();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Image img;
         ImageIcon icono = new ImageIcon();
         try {

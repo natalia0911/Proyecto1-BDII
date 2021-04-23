@@ -5,9 +5,11 @@
  */
 package Controller;
 
+import Data_Access_Object.ImageDAO;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
@@ -17,6 +19,13 @@ import javax.swing.JFileChooser;
  * @author Admin
  */
 public class ImageChooser {
+    
+    private ImageDAO Imagenes;
+    
+    public ImageChooser () throws SQLException{
+    
+        Imagenes = new ImageDAO();
+    }
     
     public Image elegir(int X,int Y) throws IOException{
         JFileChooser selector = new JFileChooser();
@@ -32,7 +41,14 @@ public class ImageChooser {
             return null;
         }
         
-    };
+    }
+    
+    public Image getImage(double ID) throws IOException{
+        
+       return  Imagenes.getImagen(ID);
+        
+        
+    }
     
     
 }
