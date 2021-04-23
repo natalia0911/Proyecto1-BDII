@@ -43,16 +43,14 @@ public class SubastaDAO {
             java.sql.Date sqlStartDate = new java.sql.Date(auction.getFechaInicio().getTime());
             System.out.println(sqlStartDate);
              //se definen los parametros de entrada y salida            
-            cst.setDouble(1, auction.getUsuarioId());
-            cst.setDouble(2, auction.getSubcategoriaId());
+            cst.setInt(1, auction.getUsuarioId());
+            cst.setInt(2, auction.getSubcategoriaId());
             cst.setDouble(3, auction.getPrecioInicial());
             cst.setString(4, auction.getDetallesEntrega());
             cst.setDate(5, new java.sql.Date(auction.getFechaInicio().getTime()));
             cst.setDate(6, new java.sql.Date(auction.getFechaFin().getTime()));
             
-            // Ejecuta el procedimiento almacenado
-            int respuesta = cst.executeUpdate();
-            return respuesta==1;  //t si insertó,f si no. 
+            return cst.execute();
             
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());           
@@ -99,7 +97,6 @@ public class SubastaDAO {
          */
         ArrayList<Subasta> subastas = new ArrayList();
         try {
-            
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuction (?)}");         
              //se definen los parametros de entrada y salida
@@ -109,7 +106,7 @@ public class SubastaDAO {
             while(result.next()){
                 Subasta subasta = new Subasta();
                 subasta.setId(result.getInt(1));
-                subasta.setUsuarioId(result.getDouble(2));
+                subasta.setUsuarioId(result.getInt(2));
                 subasta.setNombreUsuario(result.getString(3));
                 subasta.setSubcategoriaId(result.getInt(4));
                 subasta.setNombreSubcat(result.getString(5));
@@ -146,7 +143,7 @@ public class SubastaDAO {
             ResultSet result = cst.executeQuery(); 
             while(result.next()){
                 subasta.setId(result.getInt(1));
-                subasta.setUsuarioId(result.getDouble(2));
+                subasta.setUsuarioId(result.getInt(2));
                 subasta.setSubcategoriaId(result.getInt(3));
                 subasta.setPrecioInicial(result.getDouble(4));
             }

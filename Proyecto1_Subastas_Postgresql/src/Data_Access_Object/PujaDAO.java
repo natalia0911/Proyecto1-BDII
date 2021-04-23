@@ -71,10 +71,10 @@ public class PujaDAO {
          
             while(result.next()){
                 Puja puja = new Puja();
-                puja.setId(result.getDouble(1));
-                puja.setCompradorId(result.getDouble(2));
+                puja.setId(result.getInt(1));
+                puja.setCompradorId(result.getInt(2));
                 puja.setNombreComprador(result.getString(3));
-                puja.setSubastaId(result.getDouble(4));
+                puja.setSubastaId(result.getInt(4));
                 puja.setPrecio(result.getDouble(5));
                 puja.setFecha(result.getDate(6));
                 pujas.add(puja);
@@ -103,7 +103,7 @@ public class PujaDAO {
             ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
          
             while(result.next()){
-                puja.setId(result.getDouble(1));
+                puja.setId(result.getInt(1));
                 puja.setPrecio(result.getDouble(2));
             }
             return puja;

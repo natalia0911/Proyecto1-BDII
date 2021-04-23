@@ -265,7 +265,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
     private void btnHistorialVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialVendedorActionPerformed
         if (!(selectedRow==-1)){
             try {
-                double idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
+                int idVendedor = listaSubastas.get(selectedRow).getUsuarioId();
                 VentanaHistorialVendedor ventanaVendedor = new VentanaHistorialVendedor(idVendedor);
                 ventanaVendedor.setVisible(true);
             } catch (SQLException ex) {
@@ -281,7 +281,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
 
         if (!(selectedRow==-1)){
             try {
-                double idSubasta = listaSubastas.get(selectedRow).getId();
+                int idSubasta = (int) listaSubastas.get(selectedRow).getId();
                 VentanaHistorialPujas ventanaHistorialPujas = new VentanaHistorialPujas(idSubasta);
                 ventanaHistorialPujas.setVisible(true);
             } catch (SQLException ex) {
@@ -295,7 +295,7 @@ public final class ListaSubastas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistorialPujasActionPerformed
 
     private void btnPujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPujarActionPerformed
-        double idSubasta = listaSubastas.get(selectedRow).getId();
+        int idSubasta = listaSubastas.get(selectedRow).getId();
         try {
             VentanaPujar ventanaPujar = new VentanaPujar(idSubasta);
             ventanaPujar.setVisible(true);

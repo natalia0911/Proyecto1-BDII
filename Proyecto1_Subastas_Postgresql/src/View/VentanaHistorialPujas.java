@@ -23,13 +23,13 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     /**
      * Creates new form VentanaHistorialPujas
      */
-    private double idSubasta;
+    private int idSubasta;
     private DefaultTableModel modelo;
     private PujaController pujaController;
     private ArrayList<Puja> listaPujas;
     private int selectedRow;
     
-    public VentanaHistorialPujas(double idSubasta) throws SQLException {
+    public VentanaHistorialPujas(int idSubasta) throws SQLException {
         initComponents();
         System.out.println(idSubasta);
         modelo = new DefaultTableModel();
@@ -139,7 +139,7 @@ public class VentanaHistorialPujas extends javax.swing.JFrame {
     private void btnHistorialCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialCompradorActionPerformed
         if (!(selectedRow==-1)){
             try {
-                double idComprador = listaPujas.get(selectedRow).getCompradorId();
+                int idComprador = listaPujas.get(selectedRow).getCompradorId();
                 VentanaHistorialComprador ventanaComprador = new VentanaHistorialComprador(idComprador);
                 ventanaComprador.setVisible(true);
             } catch (SQLException ex) {

@@ -7,7 +7,18 @@
 
 CREATE FUNCTION SP_SelectHistorialComprador(
     pcompradorId INT)
-    returns setof public."HistorialComprador"   -- NO SE QUE VA A PASAR ACÁ
+    returns TABLE
+	(  
+	    IdComprador INT
+       ,NombreV character varying
+       ,IdVendedor INT
+       ,NombreC character varying
+       ,IdSubasta INT
+       ,PrecioInicial NUMERIC
+       ,PrecioFinal NUMERIC
+       ,Comentario character varying
+       ,Calificacion INT
+	)
 AS $$
 BEGIN 
 	RETURN QUERY

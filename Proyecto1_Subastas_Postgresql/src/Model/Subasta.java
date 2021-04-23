@@ -7,21 +7,15 @@ package Model;
 
 import java.util.Date;
 
-
-
-
-
-
-
 /**
  *
  * @author Natalia
  */
 public class Subasta {
-    private double id;
-    private double usuarioId;
+    private int id;
+    private int usuarioId;
     private String nombreUsuario;
-    private double subcategoriaId;
+    private int subcategoriaId;
     private String nombreSubcat;
     private String foto;
     private double precioInicial;
@@ -33,7 +27,7 @@ public class Subasta {
     
     public Subasta() {}
     
-    public Subasta(double id, double usuarioId, double subcategoriaId, String foto, double precioInicial, double precioFinal, String detallesEntrega, Date fechaInicio, Date fechaFin, boolean activa) {
+    public Subasta(int id, int usuarioId, int subcategoriaId, String foto, double precioInicial, double precioFinal, String detallesEntrega, Date fechaInicio, Date fechaFin, boolean activa) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.subcategoriaId = subcategoriaId;
@@ -47,7 +41,7 @@ public class Subasta {
     }
 
 
-    public Subasta(double usuarioId, double subcategoriaId,double precioInicial,String detallesEntrega,Date fechaInicio, Date fechaFin) {
+    public Subasta(int usuarioId, int subcategoriaId,double precioInicial,String detallesEntrega,Date fechaInicio, Date fechaFin) {
         this.usuarioId = usuarioId;
         this.subcategoriaId = subcategoriaId;
         this.precioInicial = precioInicial;
@@ -56,27 +50,27 @@ public class Subasta {
         this.fechaFin = fechaFin;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public double getUsuarioId() {
+    public int getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(double usuarioId) {
+    public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
     }
 
-    public double getSubcategoriaId() {
+    public int getSubcategoriaId() {
         return subcategoriaId;
     }
 
-    public void setSubcategoriaId(double subcategoriaId) {
+    public void setSubcategoriaId(int subcategoriaId) {
         this.subcategoriaId = subcategoriaId;
     }
 

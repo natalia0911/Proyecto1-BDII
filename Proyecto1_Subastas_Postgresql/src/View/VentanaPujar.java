@@ -27,11 +27,11 @@ public class VentanaPujar extends javax.swing.JFrame {
      */
     
     private PujaController pujaController;
-    private double idSubasta;
+    private int idSubasta;
     private ArrayList<Puja> listaPuja;
     private DefaultTableModel modelo;
     
-    public VentanaPujar(double idSubasta) throws SQLException {
+    public VentanaPujar(int idSubasta) throws SQLException {
         initComponents();
         this.idSubasta = idSubasta;
         pujaController = new PujaController();
@@ -167,7 +167,7 @@ public class VentanaPujar extends javax.swing.JFrame {
 
         try {
             UsuarioController uc = new UsuarioController();
-            double idUser = uc.getUsuario().getId();
+            int idUser = uc.getUsuario().getId();
             double precio = Double.parseDouble(txtCantPujar.getText());
             if(pujaController.insertarPuja(idUser,idSubasta,precio,listaPuja)){
                 JOptionPane.showMessageDialog(null, "Puja realizada");

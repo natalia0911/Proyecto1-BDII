@@ -1,6 +1,18 @@
 CREATE FUNCTION SP_SelectMiHistoVend(
     miID INT)
-	returns setof public."HistorialVendedor"
+	returns TABLE
+	(
+	    IdVendedor INT
+       ,NombreV  character varying(128)
+       ,IdComprador INT
+       ,NombreC character varying(128)
+       ,IdSubasta INT
+       ,PrecioInicial NUMERIC
+       ,PrecioFinal NUMERIC
+       ,Comentario character varying(128)
+       ,Calificacion INT
+       ,FechaFin DATE
+	   )
 AS $$
 BEGIN 
 	RETURN QUERY

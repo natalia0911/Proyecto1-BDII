@@ -10,8 +10,6 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -24,29 +22,24 @@ public class HistorialUsuarioDAO {
          con = ConnectionBD.estate();
     }
      
-    public ArrayList<HistorialUsuario> historialVendedor(double idVendedor){
+    public ArrayList<HistorialUsuario> historialVendedor(int idVendedor){
         
        ArrayList<HistorialUsuario> hVendedor = new ArrayList();
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectHistorialVendedor (?,?)}");
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectHistorialVendedor(?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idVendedor);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            cst.setInt(1, idVendedor);
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 HistorialUsuario hv = new HistorialUsuario();
-                hv.setIdVendedor(result.getDouble(1));
+                hv.setIdVendedor(result.getInt(1));
                 hv.setNombreVendedor(result.getString(2));
-                hv.setIdComprador(result.getDouble(3));
+                hv.setIdComprador(result.getInt(3));
                 hv.setNombreComprador(result.getString(4));
-                hv.setIdSubasta(result.getDouble(5));
+                hv.setIdSubasta(result.getInt(5));
                 hv.setPrecioBase(result.getDouble(6));
                 hv.setPrecioFinal(result.getDouble(7)); 
                 hv.setComentario(result.getString(8));
@@ -63,29 +56,24 @@ public class HistorialUsuarioDAO {
         
     }
     
-    public ArrayList<HistorialUsuario> mihistorialVendedor(double idVendedor){
+    public ArrayList<HistorialUsuario> mihistorialVendedor(int idVendedor){
         
        ArrayList<HistorialUsuario> hVendedor = new ArrayList();
         try {
-            
+            System.out.println("que pasa aca");
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectMiHistoVend(?,?)}");
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectMiHistoVend(?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idVendedor);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            cst.setInt(1, idVendedor);
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 HistorialUsuario hv = new HistorialUsuario();
-                hv.setIdVendedor(result.getDouble(1));
+                hv.setIdVendedor(result.getInt(1));
                 hv.setNombreVendedor(result.getString(2));
-                hv.setIdComprador(result.getDouble(3));
+                hv.setIdComprador(result.getInt(3));
                 hv.setNombreComprador(result.getString(4));
-                hv.setIdSubasta(result.getDouble(5));
+                hv.setIdSubasta(result.getInt(5));
                 hv.setPrecioBase(result.getDouble(6));
                 hv.setPrecioFinal(result.getDouble(7)); 
                 hv.setComentario(result.getString(8));
@@ -94,6 +82,7 @@ public class HistorialUsuarioDAO {
                 hv.setTipo("Vendedor");
                 hVendedor.add(hv);
             }
+            System.out.println("que pasa al final");
             return hVendedor;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -103,29 +92,24 @@ public class HistorialUsuarioDAO {
     }
     
     
-    public ArrayList<HistorialUsuario> historialComprador(double idComprador){
+    public ArrayList<HistorialUsuario> historialComprador(int idComprador){
         
        ArrayList<HistorialUsuario> hComprador = new ArrayList();
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectHistorialComprador (?,?)}");
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectHistorialComprador (?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idComprador);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            cst.setInt(1, idComprador);
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 HistorialUsuario hc = new HistorialUsuario();
-                hc.setIdComprador(result.getDouble(1));
+                hc.setIdComprador(result.getInt(1));
                 hc.setNombreComprador(result.getString(2));
-                hc.setIdVendedor(result.getDouble(3));
+                hc.setIdVendedor(result.getInt(3));
                 hc.setNombreVendedor(result.getString(4));
-                hc.setIdSubasta(result.getDouble(5));
+                hc.setIdSubasta(result.getInt(5));
                 hc.setPrecioBase(result.getDouble(6));
                 hc.setPrecioFinal(result.getDouble(7)); 
                 hc.setComentario(result.getString(8));
@@ -142,29 +126,24 @@ public class HistorialUsuarioDAO {
         
     }
     
-    public ArrayList<HistorialUsuario> mihistorialComprador(double idComprador){
+    public ArrayList<HistorialUsuario> mihistorialComprador(int idComprador){
         
        ArrayList<HistorialUsuario> hComprador = new ArrayList();
         try {
             
             // Llamada al procedimiento almacenado
-            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectMiHistoComp (?,?)}");
+            CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectMiHistoComp (?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idComprador);
-            cst.registerOutParameter(2, OracleTypes.CURSOR);
-            
-            // Ejecuta el procedimiento almacenado
-            cst.execute();
-            // result contiene las filas que vienen de la BD
-            ResultSet result = ((OracleCallableStatement)cst).getCursor(2);  
+            cst.setInt(1, idComprador);
+            ResultSet result = cst.executeQuery();
             while(result.next()){
                 HistorialUsuario hc = new HistorialUsuario();
-                hc.setIdComprador(result.getDouble(1));
+                hc.setIdComprador(result.getInt(1));
                 hc.setNombreComprador(result.getString(2));
-                hc.setIdVendedor(result.getDouble(3));
+                hc.setIdVendedor(result.getInt(3));
                 hc.setNombreVendedor(result.getString(4));
-                hc.setIdSubasta(result.getDouble(5));
+                hc.setIdSubasta(result.getInt(5));
                 hc.setPrecioBase(result.getDouble(6));
                 hc.setPrecioFinal(result.getDouble(7)); 
                 hc.setComentario(result.getString(8));
@@ -182,7 +161,7 @@ public class HistorialUsuarioDAO {
     }
     
     
-    public void UpdateComentarioVendedor(double idVendedor, double idComprador, double idSubasta, String Comentario, double Rating) throws SQLException{
+    public void UpdateComentarioVendedor(int idVendedor, int idComprador, int idSubasta, String Comentario, int Rating) throws SQLException{
     
     try {
             
@@ -190,9 +169,9 @@ public class HistorialUsuarioDAO {
             CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateHistorialVendedor (?,?,?,?,?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idVendedor);
-            cst.setDouble(2, idComprador);
-            cst.setDouble(3, idSubasta);
+            cst.setInt(1, idVendedor);
+            cst.setInt(2, idComprador);
+            cst.setInt(3, idSubasta);
             cst.setString(4, Comentario);
             cst.setDouble(5, Rating);
             
@@ -204,7 +183,7 @@ public class HistorialUsuarioDAO {
         } 
     }
     
-    public void UpdateComentarioComprador(double idVendedor, double idComprador, double idSubasta, String Comentario, double Rating) throws SQLException{
+    public void UpdateComentarioComprador(int idVendedor, int idComprador, int idSubasta, String Comentario, int Rating) throws SQLException{
     
     try {
             
@@ -212,14 +191,15 @@ public class HistorialUsuarioDAO {
             CallableStatement cst = con.getConnection().prepareCall("{call SP_UpdateHistorialComprador (?,?,?,?,?)}");
            
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, idVendedor);
-            cst.setDouble(2, idComprador);
-            cst.setDouble(3, idSubasta);
+            cst.setInt(1, idVendedor);
+            cst.setInt(2, idComprador);
+            cst.setInt(3, idSubasta);
             cst.setString(4, Comentario);
-            cst.setDouble(5, Rating);
+            cst.setInt(5, Rating);
             
             // Ejecuta el procedimiento almacenado
             cst.execute();
+            //return cst.execute();//t si insertó,f si no.  
     
         }catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());

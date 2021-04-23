@@ -21,12 +21,12 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
     /**
      * Creates new form VentanaHistorialComprador
      */
-    private double compradorId;
+    private int compradorId;
     private HistorialUsuarioDAO historialComprador;
     private DefaultTableModel modelo;
      private ArrayList<HistorialUsuario> lista;
        
-    public VentanaHistorialComprador(double compradorId) throws SQLException {
+    public VentanaHistorialComprador(int compradorId) throws SQLException {
         initComponents();
         this.compradorId = compradorId;
         historialComprador = new HistorialUsuarioDAO();
@@ -141,7 +141,7 @@ public class VentanaHistorialComprador extends javax.swing.JFrame {
         }
     }
     
-    public void addVendedor(double idVendedor){
+    public void addVendedor(int idVendedor){
     
            lista = historialComprador.historialVendedor(idVendedor);
         if(!lista.isEmpty()){

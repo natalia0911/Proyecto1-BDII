@@ -435,7 +435,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     private void btnComentariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentariosActionPerformed
         try {
-                double idVendedor = usuario.getId();
+                int idVendedor = usuario.getId();
                 MisComentarios ventanaVendedor = new MisComentarios(idVendedor);
                 ventanaVendedor.setVisible(true);
             } catch (SQLException ex) {
