@@ -13,8 +13,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import oracle.jdbc.OracleCallableStatement;
-import oracle.jdbc.OracleTypes;
+
 
 /**
  *
@@ -73,7 +72,8 @@ public class SubastaDAO {
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_INSERTIMAGE (?)}");
              //se definen los parametros de entrada y salida            
-            cst.setBlob(1, FormatosUtilitaria.convertirImagenABlob(img));
+            //cst.setBlob(1, );
+            cst.setBinaryStream(1, FormatosUtilitaria.convertirImagenABlob(img));
             // Ejecuta el procedimiento almacenado
             return cst.execute(); 
             
@@ -126,7 +126,7 @@ public class SubastaDAO {
     }
     
     
-    public Subasta getSubasta(double id){
+    public Subasta getSubasta(int id){
         /**
          * Funcion: Lista las subastas que cierta subcategoria
          * Entradas: Id de la subcategoria
@@ -138,7 +138,7 @@ public class SubastaDAO {
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectAuctionById (?)}");
              //se definen los parametros de entrada y salida
-            cst.setDouble(1, id);
+            cst.setInt(1, id);
             // result contiene las filas que vienen de la BD
             ResultSet result = cst.executeQuery(); 
             while(result.next()){

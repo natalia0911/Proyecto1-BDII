@@ -2,7 +2,8 @@
 CREATE FUNCTION SP_InsertPuja(
        pCompradorID INT,
        pSubastaID INT,
-       pPrecio INT) returns void
+       pPrecio double precision
+	   ) returns void
 AS $$
 BEGIN 
   INSERT INTO PUBLIC."Pujas" 

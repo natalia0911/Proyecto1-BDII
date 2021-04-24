@@ -60,7 +60,7 @@ public class HistorialUsuarioDAO {
         
        ArrayList<HistorialUsuario> hVendedor = new ArrayList();
         try {
-            System.out.println("que pasa aca");
+         
             // Llamada al procedimiento almacenado
             CallableStatement cst = con.getConnection().prepareCall("{call SP_SelectMiHistoVend(?)}");
            
@@ -82,7 +82,7 @@ public class HistorialUsuarioDAO {
                 hv.setTipo("Vendedor");
                 hVendedor.add(hv);
             }
-            System.out.println("que pasa al final");
+
             return hVendedor;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());

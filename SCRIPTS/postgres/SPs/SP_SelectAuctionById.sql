@@ -5,9 +5,15 @@
 --- Descripción: Listar subastas
 --------------------------------------------------------------------------
 
-CREATE FUNCTION SP_SelectAuctionById(
+CREATE OR REPLACE FUNCTION SP_SelectAuctionById(
        pId INT)
-	   returns setof public."Subasta"
+	   returns table
+	   (
+	    ID INT
+       ,UsuarioId INT
+       ,SubCategoriaId INT 
+       ,PrecioInicial double precision
+	   )
 AS $$
 BEGIN 
 	RETURN QUERY

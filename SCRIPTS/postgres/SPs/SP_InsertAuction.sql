@@ -5,10 +5,10 @@
 --- Descripción: Inserta una nueva subasta(auction)
 --------------------------------------------------------------------------
 
-CREATE FUNCTION SP_InsertAuction(
+CREATE OR REPLACE FUNCTION SP_InsertAuction(
        pUsuarioId INT,
        pSubCatId INT,
-       pPrecioInicial NUMERIC,
+       pPrecioInicial double precision,
        pDetalle character varying,
        pFechaInicio DATE,
        pFechaFin DATE) returns void
@@ -36,10 +36,6 @@ BEGIN
        ,pFechaFin
        ,TRUE                 --Empieza estando activa
   );
-
---COMMIT;
-EXCEPTION WHEN OTHERS THEN
-	ROLLBACK;
 
 END;
 $$

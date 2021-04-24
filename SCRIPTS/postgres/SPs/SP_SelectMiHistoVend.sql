@@ -1,3 +1,5 @@
+
+
 CREATE FUNCTION SP_SelectMiHistoVend(
     miID INT)
 	returns TABLE
@@ -7,8 +9,8 @@ CREATE FUNCTION SP_SelectMiHistoVend(
        ,IdComprador INT
        ,NombreC character varying(128)
        ,IdSubasta INT
-       ,PrecioInicial NUMERIC
-       ,PrecioFinal NUMERIC
+       ,PrecioInicial double precision
+       ,PrecioFinal double precision
        ,Comentario character varying(128)
        ,Calificacion INT
        ,FechaFin DATE

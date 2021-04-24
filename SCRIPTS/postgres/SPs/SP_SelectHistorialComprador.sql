@@ -10,13 +10,13 @@ CREATE FUNCTION SP_SelectHistorialComprador(
     returns TABLE
 	(  
 	    IdComprador INT
-       ,NombreV character varying
+       ,NombreC character varying(128)
        ,IdVendedor INT
-       ,NombreC character varying
+       ,NombreV character varying(128)
        ,IdSubasta INT
-       ,PrecioInicial NUMERIC
-       ,PrecioFinal NUMERIC
-       ,Comentario character varying
+       ,PrecioInicial double precision
+       ,PrecioFinal double precision
+       ,Comentario character varying(128)
        ,Calificacion INT
 	)
 AS $$
@@ -24,21 +24,24 @@ BEGIN
 	RETURN QUERY
     SELECT 
         HC."IdComprador"
-       ,UV."Nombre"
-       ,HC."IdVendedor"
        ,UC."Nombre"
+       ,HC."IdVendedor"
+       ,UV."Nombre"
        ,HC."IdSubasta"
        ,S."PrecioInicial"
        ,S."PrecioFinal"
        ,HC."Comentario"
        ,HC."Calificacion"
 
-   FROM (public."HistorialComprador" AS HC INNER JOIN public."Usuario" AS UC ON HC."IdComprador" = UC."Id" 
+   FROM public."HistorialComprador" AS HC INNER JOIN public."Usuario" AS UC ON HC."IdComprador" = UC."Id" 
    INNER JOIN public."Usuario" AS UV ON HC."IdVendedor" = UV."Id"
-   INNER JOIN public."Subasta" AS S ON HC."IdSubasta" = S."ID") AS Tabla
+   INNER JOIN public."Subasta" AS S ON HC."IdSubasta" = S."ID"
    
    WHERE HC."IdComprador" = pcompradorId;
 
 END;
 $$
 LANGUAGE plpgsql
+
+
+

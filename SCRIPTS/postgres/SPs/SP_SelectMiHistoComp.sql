@@ -1,7 +1,19 @@
 
-CREATE FUNCTION SP_SelectMiHistoComp(
+CREATE OR REPLACE FUNCTION SP_SelectMiHistoComp(
     miID INT)
-	returns setof public."HistorialComprador"
+	returns TABLE
+	(
+	    IdComprador INT
+       ,NombreV  character varying(128)
+       ,IdVendedor INT
+       ,NombreC character varying(128)
+       ,IdSubasta INT
+       ,PrecioInicial double precision
+       ,PrecioFinal double precision
+       ,Comentario character varying(128)
+       ,Calificacion INT
+       ,FechaFin DATE
+	   )
 AS $$
 BEGIN 
 	RETURN QUERY

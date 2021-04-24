@@ -1,4 +1,5 @@
 
+
 ---------------------------------------------------------------------------------------------------------
 --- Creado por: Gustavo
 --- Fecha creación: 14/04/2021
@@ -6,7 +7,7 @@
 ----------------------------------------------------------------------------------------------------------
 
 
-CREATE FUNCTION SP_INSERTIMAGE(
+CREATE OR REPLACE FUNCTION SP_INSERTIMAGE(
        pIMAGE bytea) returns void
 AS $$
 BEGIN 
@@ -23,8 +24,8 @@ BEGIN
   );
 
 --COMMIT;
-EXCEPTION WHEN OTHERS THEN
-	ROLLBACK;
+--EXCEPTION WHEN OTHERS THEN
+--	ROLLBACK;
 
 END;
 $$

@@ -61,7 +61,7 @@ public class MisComentarios extends javax.swing.JFrame {
         vaciarJTable();
         lista = miHistorial.mihistorialComprador(miID);
         lista.addAll(miHistorial.mihistorialVendedor(miID));
-        //lista.sort(new DateSorter());
+        lista.sort(new DateSorter());
         if(!lista.isEmpty()){
             for (int i = 0; i < lista.size(); i++){
                 modelo.addRow(new Object[]{lista.get(i).getNombreComprador(), lista.get(i).getPrecioBase(),

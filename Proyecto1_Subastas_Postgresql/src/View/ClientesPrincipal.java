@@ -353,7 +353,7 @@ public class ClientesPrincipal extends javax.swing.JFrame {
 
     public void setUsuario(Usuario usuario){
         this.usuario = usuario;
-       // notifiNulls();
+     //   notifiNulls();
     }
     
     private void notifiNulls(){

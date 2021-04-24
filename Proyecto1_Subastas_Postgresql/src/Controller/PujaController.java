@@ -27,7 +27,7 @@ public class PujaController {
     }
     
     
-    public ArrayList<Puja> listarPujas(double idSubcat){
+    public ArrayList<Puja> listarPujas(int idSubcat){
         return pujaDAO.listarPujas(idSubcat);
     }
     
@@ -46,7 +46,7 @@ public class PujaController {
 
     }
 
-    public boolean verificarPuja(ArrayList<Puja> listaPuja, double precio, double subastaId) throws ParseException, SQLException{
+    public boolean verificarPuja(ArrayList<Puja> listaPuja, double precio, int subastaId) throws ParseException, SQLException{
         /**
          * Funcion: Verifica si la puja es aceptable segun los parametros y si es la primer puja
          * toma como base el precio inicial y no la mejor pues no existe.
@@ -74,7 +74,7 @@ public class PujaController {
         return false;
     }
     
-    public double precioNecesarioPuja( ArrayList<Puja> listaPuja,double precio,double subastaId) throws ParseException, SQLException{
+    public double precioNecesarioPuja( ArrayList<Puja> listaPuja,double precio,int subastaId) throws ParseException, SQLException{
         
         SubastaDAO subastaObj =  new SubastaDAO();
         double porcentaje = Parametros_Singleton.Parametros().getPorcentaje().getValue()/100;

@@ -4,9 +4,17 @@
 --- Descripción: Listar las pujas de una determinada subasta 
 --------------------------------------------------------------------------
 
-CREATE FUNCTION SP_SelectPujas(
+CREATE OR REPLACE FUNCTION SP_SelectPujas(
     pSubastaId INT)
-	returns setof public."Pujas"
+	returns table
+	(
+	 Id INT
+    ,CompradorId INT
+    ,Alias character varying(20)
+    ,SubastaId INT
+    ,Precio double precision
+    ,Fecha DATE 
+	)
 AS $$
 BEGIN 
 	RETURN QUERY

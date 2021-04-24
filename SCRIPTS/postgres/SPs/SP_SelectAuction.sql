@@ -5,7 +5,7 @@
 --- Descripción: Listar subastas
 --------------------------------------------------------------------------
 
-CREATE FUNCTION SP_SelectAuction(
+CREATE OR REPLACE FUNCTION SP_SelectAuction(
 	pSubCat INT)
 	returns TABLE
 	(   ID INT
@@ -13,8 +13,8 @@ CREATE FUNCTION SP_SelectAuction(
        ,Alias character varying(20)
        ,SubCategoriaId INT
        ,Nombre character varying(128)
-       ,PrecioInicial NUMERIC
-       ,PrecioFinal NUMERIC
+       ,PrecioInicial double precision
+       ,PrecioFinal double precision
        ,DetallesEntrega character varying(128)
        ,FechaInicio DATE
        ,FechaFin DATE
