@@ -12,6 +12,7 @@ import Controller.ImageChooser;
 import Model.Categoria;
 import Model.SubCategoria;
 import Model.Subasta;
+import java.awt.Image;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -360,8 +361,16 @@ public final class ListaSubastas extends javax.swing.JFrame {
         try {
             BuscaImagen = new ImageChooser();
             ImageIcon icono = new ImageIcon();
-            icono.setImage(BuscaImagen.getImage(listaSubastas.get(selectedRow).getId()));
+            Image temp = BuscaImagen.getImage(listaSubastas.get(selectedRow).getId());
+            if (temp != null){
+            icono.setImage(temp);
             lblImage.setIcon(icono);
+            lblImage.setText("");
+            }
+            else{   
+                lblImage.setIcon(null);
+                lblImage.setText("No posee imagen");
+                }
         } catch (IOException ex) {
             Logger.getLogger(ListaSubastas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
